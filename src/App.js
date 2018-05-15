@@ -5,8 +5,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import TaskBoardPage from './pages/task-boards-page';
+import UserLogin from './pages/user-login';
 
-// This replaces the textColor value on the palette
+// This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.
 const muiTheme = getMuiTheme({
   palette: {
@@ -22,7 +23,7 @@ class App extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="c-main-wrapper">
           <img className="c-logo" alt="communly-logo" src={logo} />
-          <TaskBoardPage />
+          <UserLogin />
         </div>
       </MuiThemeProvider>
     );
