@@ -30,16 +30,12 @@ const muiTheme = getMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
+    //TODO: outsource the routes in a separate file, cause it's too messy here
     this.state = {
       routes: [
         {
           component: UserLogin,
-          path: '/login',
-          exact: true
-        },
-        {
-          component: Announcements,
-          path: '/announcements'
+          path: '/login'
         },
         {
           component: UserRegistration,
@@ -48,13 +44,22 @@ class App extends Component {
         {
           render: props => {
             if (UserService.isAuthenticated()) {
-              console.log('route', props);
               return <TaskBoardPage />;
             } else {
               return <Redirect to={'/login'} />;
             }
           },
           path: '/task-boards'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <Announcements />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/announcements'
         }
       ]
     };
