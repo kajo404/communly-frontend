@@ -4,7 +4,7 @@ import TodoComponent from './../components/todo-list';
 class TaskBoardPage extends Component {
   render() {
     return (
-      <div class="p-task-boards">
+      <div className="p-task-boards">
         <TodoComponent />
         <TodoComponent />
         <TodoComponent />

@@ -12,13 +12,17 @@ import {
 import TaskBoardPage from './pages/task-boards-page';
 import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
+import UserRegistration from './pages/user-registration';
+import Announcements from './pages/announcements';
+
+import UserService from './services/user-service';
 
 // This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: '#597ec0',
-    primary1Color: '#9ab1d9',
+    textColor: '#314f81',
+    primary1Color: '#314f81',
     primary2Color: '#9ab1d9'
   }
 });
@@ -30,11 +34,26 @@ class App extends Component {
       routes: [
         {
           component: UserLogin,
-          path: '/',
+          path: '/login',
           exact: true
         },
         {
-          component: TaskBoardPage,
+          component: Announcements,
+          path: '/announcements'
+        },
+        {
+          component: UserRegistration,
+          path: '/registration'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              console.log('route', props);
+              return <TaskBoardPage />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
           path: '/task-boards'
         }
       ]
@@ -43,15 +62,15 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <PageLayout>
-          <Router>
+        <Router>
+          <PageLayout>
             <Switch>
               {this.state.routes.map((route, i) => (
                 <Route key={i} {...route} />
               ))}
             </Switch>
-          </Router>
-        </PageLayout>
+          </PageLayout>
+        </Router>
       </MuiThemeProvider>
     );
   }

@@ -19,22 +19,6 @@
 }
 
 
-// App Top Bar
-.c-logo {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 30px;
-  padding-left: 10px;
-}
-
-.c-app-bar {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-
 //Task Board Styles
 .c-list-item {
   list-style: none;
@@ -77,4 +61,18 @@
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+}
+
+.p-user-login__content {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-login__button {
+  display: block;
+  margin-top: 30px;
 }

@@ -3,14 +3,16 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import { RaisedButton } from 'material-ui';
 
-class UserLogin extends React.Component {
+class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      passwordTouched: false,
+      usernameTouched: false
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -30,11 +32,11 @@ class UserLogin extends React.Component {
       username: this.state.username,
       password: this.state.password
     };
-    this.login(user);
+    this.register(user);
   }
 
-  login(user) {
-    UserService.login(user.username, user.password).then(result =>
+  register(user) {
+    UserService.register(user.username, user.password).then(result =>
       console.log(result)
     );
     // TODO error handling
@@ -54,6 +56,10 @@ class UserLogin extends React.Component {
 
   get getUsernameErrorText() {
     return this.state.username === '' ? 'This field is required' : '';
+  }
+
+  get isButtonDisabled() {
+    return this.state.username === '' || this.state.password === '';
   }
 
   render() {
@@ -77,11 +83,12 @@ class UserLogin extends React.Component {
             errorText={this.getPassErrorText}
           />
           <RaisedButton
-            label="LOGIN"
+            label="REGISTER"
             labelStyle={this.buttonStyles}
             primary={true}
             className="c-login__button"
             onClick={this.onSubmit}
+            disabled={this.isButtonDisabled}
           />
         </div>
       </div>
@@ -89,4 +96,4 @@ class UserLogin extends React.Component {
   }
 }
 
-export default withRouter(UserLogin);
+export default withRouter(UserRegistration);
