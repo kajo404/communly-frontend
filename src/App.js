@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import logo from './assets/logo.png';
 import './App.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import TaskBoardPage from './pages/task-boards-page';
 import UserLogin from './pages/user-login';
+import PageLayout from './components/page-layout';
 
 // This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.
@@ -18,13 +24,34 @@ const muiTheme = getMuiTheme({
 });
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      routes: [
+        {
+          component: UserLogin,
+          path: '/',
+          exact: true
+        },
+        {
+          component: TaskBoardPage,
+          path: '/task-boards'
+        }
+      ]
+    };
+  }
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className="c-main-wrapper">
-          <img className="c-logo" alt="communly-logo" src={logo} />
-          <UserLogin />
-        </div>
+        <PageLayout>
+          <Router>
+            <Switch>
+              {this.state.routes.map((route, i) => (
+                <Route key={i} {...route} />
+              ))}
+            </Switch>
+          </Router>
+        </PageLayout>
       </MuiThemeProvider>
     );
   }

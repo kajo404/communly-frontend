@@ -1,4 +1,6 @@
+import UserService from '../services/user-service';
 import React from 'react';
+
 import TextField from 'material-ui/TextField';
 import { FlatButton } from 'material-ui';
 
@@ -17,10 +19,19 @@ class UserLogin extends React.Component {
 
   onSubmit(event) {
     event.preventDefault();
+
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    this.login(user);
   }
 
-  login() {
-    //TODO call login from the API
+  login(user) {
+    UserService.login(user.username, user.password).then(result =>
+      console.log(result)
+    );
+    // TODO error handling
   }
 
   onUserNameChange(event) {
@@ -44,7 +55,7 @@ class UserLogin extends React.Component {
           value={this.state.username}
           onChange={this.onUserNameChange}
           errorText="Password is required"
-        />{' '}
+        />
         <br />
         <TextField
           floatingLabelText="Password"
