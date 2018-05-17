@@ -1,4 +1,4 @@
-/* Suggestion: Each Component has css style file and we import them all here. 
+/* Suggestion: Each Component has css style file and we import them all here.
    Otherwise it is gonna be really overcrowded */
 
 .c-main-wrapper {
@@ -16,13 +16,6 @@
         padding-right: 30px;
         padding-left: 30px;
     }
-}
-
-.c-logo {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 200px;
 }
 
 
@@ -61,11 +54,25 @@
   margin-right: 10px;
 }
 
-.p-task-board {
+.p-task-boards {
  // height: 100vh;
   padding-top: 50px;
   display: flex;
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+}
+
+.p-user-login__content {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-login__button {
+  display: block;
+  margin-top: 30px;
 }

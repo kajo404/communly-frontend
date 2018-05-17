@@ -1,29 +1,93 @@
 import React, { Component } from 'react';
-import logo from './assets/logo.png';
 import './App.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 
 import TaskBoardPage from './pages/task-boards-page';
+import UserLogin from './pages/user-login';
+import PageLayout from './components/page-layout';
+import UserRegistration from './pages/user-registration';
+import Announcements from './pages/announcements';
 
-// This replaces the textColor value on the palette
+import UserService from './services/user-service';
+
+// This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.
 const muiTheme = getMuiTheme({
   palette: {
-    textColor: '#597ec0',
-    primary1Color: '#9ab1d9',
+    textColor: '#314f81',
+    primary1Color: '#314f81',
     primary2Color: '#9ab1d9'
   }
 });
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      routes: [
+        {
+          //If the user is authenticated set announcements as the defalut page
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <Redirect to={'/announcements'} />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/',
+          exact: true
+        },
+        {
+          component: UserLogin,
+          path: '/login'
+        },
+        {
+          component: UserRegistration,
+          path: '/registration'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <TaskBoardPage />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/task-boards'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <Announcements />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/announcements'
+        }
+      ]
+    };
+  }
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div className="c-main-wrapper">
-          <img className="c-logo" alt="communly-logo" src={logo} />
-          <TaskBoardPage />
-        </div>
+        <Router>
+          <PageLayout>
+            <Switch>
+              {this.state.routes.map((route, i) => (
+                <Route key={i} {...route} />
+              ))}
+            </Switch>
+          </PageLayout>
+        </Router>
       </MuiThemeProvider>
     );
   }
