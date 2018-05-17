@@ -29,6 +29,10 @@ class PageLayout extends React.Component {
     return UserService.getCurrentUser().username;
   }
 
+  logout() {
+    UserService.logout();
+  }
+
   render() {
     return (
       <div className="c-layout">
@@ -40,7 +44,6 @@ class PageLayout extends React.Component {
               disabled={true}
               leftAvatar={<Avatar src={avatar} size={30} />}
             >
-              {' '}
               {this.username}
             </ListItem>
           }
@@ -50,13 +53,12 @@ class PageLayout extends React.Component {
         />
         <div className="c-side-bar">
           <Link to="/announcements">
-            {' '}
             <MenuItem> Announcements </MenuItem>{' '}
           </Link>
           <Link to="/task-boards">
-            {' '}
             <MenuItem> Task Boards </MenuItem>{' '}
           </Link>
+          <MenuItem onClick={this.logout}> Logout </MenuItem>{' '}
         </div>
         <div className="c-layout__content">{this.props.children}</div>
       </div>

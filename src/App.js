@@ -30,9 +30,21 @@ const muiTheme = getMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-    //TODO: outsource the routes in a separate file, cause it's too messy here
+
     this.state = {
       routes: [
+        {
+          //If the user is authenticated set announcements as the defalut page
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <Redirect to={'/announcements'} />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/',
+          exact: true
+        },
         {
           component: UserLogin,
           path: '/login'
