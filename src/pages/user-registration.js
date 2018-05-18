@@ -57,36 +57,53 @@ class UserRegistration extends React.Component {
         this.setState({
           error: e
         });
+        this.onRegistrationError();
       });
+    //TODO: Set error string (e) according to chached error
   }
 
   onNameChange(event) {
     this.setState({ name: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
   onEmailChange(event) {
     this.setState({ email: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
   onBirthDateChange(event, date) {
     console.log(date);
     this.setState({ dateOfBirth: date });
-  }
-
-  get getPassErrorText() {
-    return this.state.password === '' ? 'This field is required' : '';
-  }
-
-  get getUsernameErrorText() {
-    return this.state.username === '' ? 'This field is required' : '';
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
   get isButtonDisabled() {
-    return this.state.username === '' || this.state.password === '';
+    return (
+      this.state.username === '' ||
+      this.state.name === '' ||
+      this.state.email === '' ||
+      this.state.password === ''
+    );
+  }
+
+  onRegistrationError() {
+    this.setState({
+      displayError: 'display'
+    });
   }
 
   render() {
@@ -120,7 +137,6 @@ class UserRegistration extends React.Component {
             required={true}
             value={this.state.password}
             onChange={this.onPasswordChange}
-            errorText={this.getPassErrorText}
           />
           <RaisedButton
             label="REGISTER"
@@ -135,6 +151,14 @@ class UserRegistration extends React.Component {
           <Link to={'/login'} className="jumpLink">
             Just login?
           </Link>
+        </div>
+        <br />
+        <br />
+        <div
+          className="c-loginError"
+          style={{ display: this.state.displayError }}
+        >
+          {this.state.error}
         </div>
       </div>
     );
