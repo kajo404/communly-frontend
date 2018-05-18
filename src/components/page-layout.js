@@ -34,35 +34,58 @@ class PageLayout extends React.Component {
   }
 
   render() {
-    return (
-      <div className="c-layout">
-        <AppBar
-          className="c-app-bar"
-          iconElementRight={
-            <ListItem
-              style={style}
-              disabled={true}
-              leftAvatar={<Avatar src={avatar} size={30} />}
-            >
-              {this.name}
-            </ListItem>
-          }
-          iconElementLeft={
-            <img className="c-logo" src={logo} alt="communly logo" />
-          }
-        />
-        <div className="c-side-bar">
-          <Link to="/announcements">
-            <MenuItem> Announcements </MenuItem>{' '}
-          </Link>
-          <Link to="/task-boards">
-            <MenuItem> Task Boards </MenuItem>{' '}
-          </Link>
-          <MenuItem onClick={this.logout}> Logout </MenuItem>{' '}
+    if (UserService.isAuthenticated()) {
+      return (
+        <div className="c-layout">
+          <AppBar
+            className="c-app-bar"
+            iconElementRight={
+              <ListItem
+                style={style}
+                disabled={true}
+                leftAvatar={<Avatar src={avatar} size={30} />}
+              >
+                {this.name}
+              </ListItem>
+            }
+            iconElementLeft={
+              <img className="c-logo" src={logo} alt="communly logo" />
+            }
+          />
+          <div className="c-side-bar">
+            <Link to="/announcements">
+              <MenuItem> Announcements </MenuItem>{' '}
+            </Link>
+            <Link to="/task-boards">
+              <MenuItem> Task Boards </MenuItem>{' '}
+            </Link>
+            <MenuItem onClick={this.logout}> Logout </MenuItem>{' '}
+          </div>
+          <div className="c-layout__content">{this.props.children}</div>
         </div>
-        <div className="c-layout__content">{this.props.children}</div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="c-layout">
+          <AppBar
+            className="c-app-bar"
+            iconElementRight={
+              <ListItem
+                style={style}
+                disabled={true}
+                leftAvatar={<Avatar src={avatar} size={30} />}
+              >
+                {this.name}
+              </ListItem>
+            }
+            iconElementLeft={
+              <img className="c-logo" src={logo} alt="communly logo" />
+            }
+          />
+          <div className="c-layout__content">{this.props.children}</div>
+        </div>
+      );
+    }
   }
 }
 

@@ -35,6 +35,7 @@ export default class UserService {
         },
         function(data) {
           resolve(data);
+          console.log(data);
         },
         function(textStatus) {
           reject(textStatus);
@@ -45,6 +46,7 @@ export default class UserService {
 
   static logout() {
     window.localStorage.removeItem('jwtToken');
+    window.location = 'login';
   }
 
   static getCurrentUser() {

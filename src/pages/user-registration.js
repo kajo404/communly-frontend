@@ -1,6 +1,6 @@
 import UserService from '../services/user-service';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
@@ -47,8 +47,17 @@ class UserRegistration extends React.Component {
       user.email,
       user.password,
       user.dateOfBirth.toISOString()
-    ).then(result => console.log(result));
-    // TODO error handling
+    )
+      .then(result => result => {
+        console.log(result);
+        this.props.history.push('/announcements');
+      })
+      .catch(e => {
+        console.error(e);
+        this.setState({
+          error: e
+        });
+      });
   }
 
   onNameChange(event) {
@@ -121,6 +130,11 @@ class UserRegistration extends React.Component {
             onClick={this.onSubmit}
             disabled={this.isButtonDisabled}
           />
+          <br />
+          <br />
+          <Link to={'/login'} className="jumpLink">
+            Just login?
+          </Link>
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import UserService from '../services/user-service';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -34,9 +34,17 @@ class UserLogin extends React.Component {
   }
 
   login(user) {
-    UserService.login(user.username, user.password).then(result =>
-      console.log(result)
-    );
+    UserService.login(user.username, user.password)
+      .then(result => {
+        console.log(result);
+        this.props.history.push('/announcements');
+      })
+      .catch(e => {
+        console.error(e);
+        this.setState({
+          error: e
+        });
+      });
     // TODO error handling
   }
 
@@ -83,6 +91,11 @@ class UserLogin extends React.Component {
             className="c-login__button"
             onClick={this.onSubmit}
           />
+          <br />
+          <br />
+          <Link to={'/registration'} className="jumpLink">
+            Not registered yet?
+          </Link>
         </div>
       </div>
     );
