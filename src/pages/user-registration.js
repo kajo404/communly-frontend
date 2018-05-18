@@ -48,7 +48,7 @@ class UserRegistration extends React.Component {
       user.password,
       user.dateOfBirth.toISOString()
     )
-      .then(result => result => {
+      .then(result => {
         console.log(result);
         this.props.history.push('/announcements');
       })
