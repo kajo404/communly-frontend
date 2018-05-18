@@ -30,7 +30,7 @@ export default class CreateTaskModal extends React.Component {
       <div className="c-create-task-modal">
         <RaisedButton label="Create new task board" onClick={this.handleOpen} />
         <Dialog
-          title="Dialog With Custom Width"
+          title="Create a new task. WIP"
           actions={actions}
           modal={true}
           contentStyle={customModalStyle}
