@@ -41,32 +41,46 @@ class UserLogin extends React.Component {
       })
       .catch(e => {
         console.error(e);
-        this.setState({
-          error: e
-        });
+        if (e === 'User Not Found') {
+          this.setState({
+            error: 'Username or password is wrong!'
+          });
+        } else {
+          this.setState({
+            error: e
+          });
+        }
+        this.onLoginError();
       });
-    // TODO error handling
   }
 
   onUserNameChange(event) {
     this.setState({ username: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
   }
 
-  get getPassErrorText() {
-    return this.state.password === '' ? 'This field is required' : '';
+  get isButtonDisabled() {
+    return this.state.username === '' || this.state.password === '';
   }
 
-  get getUsernameErrorText() {
-    return this.state.username === '' ? 'This field is required' : '';
+  onLoginError() {
+    this.setState({
+      displayError: 'display'
+    });
   }
 
   render() {
     return (
-      <div className="c-main-wrapper">
+      <div className="c-main-wrapper ">
         <div className="p-user-login__content">
           <TextField
             floatingLabelText="User name"
@@ -90,12 +104,21 @@ class UserLogin extends React.Component {
             primary={true}
             className="c-login__button"
             onClick={this.onSubmit}
+            disabled={this.isButtonDisabled}
           />
           <br />
           <br />
           <Link to={'/registration'} className="jumpLink">
             Not registered yet?
           </Link>
+          <br />
+          <br />
+          <div
+            className="c-loginError"
+            style={{ display: this.state.displayError }}
+          >
+            {this.state.error}
+          </div>
         </div>
       </div>
     );
