@@ -80,45 +80,43 @@ class UserLogin extends React.Component {
 
   render() {
     return (
-      <div className="c-main-wrapper ">
-        <div className="p-user-login__content">
-          <TextField
-            floatingLabelText="User name"
-            required={true}
-            value={this.state.username}
-            onChange={this.onUserNameChange}
-            errorText={this.getUsernameErrorText}
-          />
-          <br />
-          <TextField
-            type="password"
-            floatingLabelText="Password"
-            required={true}
-            value={this.state.password}
-            onChange={this.onPasswordChange}
-            errorText={this.getPassErrorText}
-          />
-          <RaisedButton
-            label="LOGIN"
-            labelStyle={this.buttonStyles}
-            primary={true}
-            className="c-login__button"
-            onClick={this.onSubmit}
-            disabled={this.isButtonDisabled}
-          />
-          <br />
-          <br />
-          <Link to={'/registration'} className="jumpLink">
-            Not registered yet?
-          </Link>
-          <br />
-          <br />
-          <div
-            className="c-loginError"
-            style={{ display: this.state.displayError }}
-          >
-            {this.state.error}
-          </div>
+      <div className="p-user-login__content">
+        <TextField
+          floatingLabelText="User name"
+          required={true}
+          value={this.state.username}
+          onChange={this.onUserNameChange}
+          errorText={this.getUsernameErrorText}
+        />
+        <br />
+        <TextField
+          type="password"
+          floatingLabelText="Password"
+          required={true}
+          value={this.state.password}
+          onChange={this.onPasswordChange}
+          errorText={this.getPassErrorText}
+        />
+        <RaisedButton
+          label="LOGIN"
+          labelStyle={this.buttonStyles}
+          primary={true}
+          className="c-login__button"
+          onClick={this.onSubmit}
+          disabled={this.isButtonDisabled}
+        />
+        <br />
+        <br />
+        <Link to={'/registration'} className="p-login__reg-link">
+          Not registered yet?
+        </Link>
+        <br />
+        <br />
+        <div
+          className="c-loginError"
+          style={{ display: this.state.displayError }}
+        >
+          {this.state.error}
         </div>
       </div>
     );

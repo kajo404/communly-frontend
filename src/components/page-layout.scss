@@ -14,11 +14,12 @@
     width: 200px;
     position: absolute;
     top: 0;
-    margin-top: 64px;
+    box-sizing: border-box;
+    padding-top: 64px;
     left: 0;
     background: white;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    height: 100vh;
+    height: 100%;
 }
 
 a {
@@ -29,14 +30,25 @@ a {
     margin-left: 220px;
 }
 
-.c-layout__content.loginRegister{
+.c-layout--login-register {
     margin-left: 0px;
 }
 
-.jumpLink{
+.p-login__reg-link,
+.p-reg__login-link {
     text-align: center;
     color: rgb(49, 79, 129);
 }
-.jumpLink:hover{
+.p-login__reg-link:hover,
+.p-reg__login-link:hover {
     color: white;
+}
+
+.p-user-login__content {
+    margin: 0 auto;
+}
+
+.c-layout {
+    height: 100%;
+    display: block;
 }

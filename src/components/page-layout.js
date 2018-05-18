@@ -82,7 +82,7 @@ class PageLayout extends React.Component {
               <img className="c-logo" src={logo} alt="communly logo" />
             }
           />
-          <div className="c-layout__content loginRegister">
+          <div className="c-layout__content c-layout--login-register">
             {this.props.children}
           </div>
         </div>

@@ -3,6 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import Paper from 'material-ui/Paper';
+import { RaisedButton } from 'material-ui';
 
 //TODO: integrate material-ui card, checkbox, button and input field
 
@@ -79,7 +80,7 @@ class TodoComponent extends Component {
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      this.onClick();
+      this.onClick(event);
     }
   }
 
@@ -93,8 +94,9 @@ class TodoComponent extends Component {
           onChange={this.updateTask}
           onKeyPress={this.handleKeyPress}
         />
-        <FlatButton
+        <RaisedButton
           label="Add task"
+          primary={true}
           className="c-add-button"
           onClick={this.onClick}
         />
