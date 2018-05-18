@@ -5,13 +5,15 @@ export default class UserService {
     return 'http://localhost:3000/auth';
   }
 
-  static register(user, pass) {
+  static register(name, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.baseURL()}/register`,
         {
-          username: user,
-          password: pass
+          name: name,
+          email: email,
+          password: pass,
+          dateOfBirth: dateOfBirth
         },
         function(data) {
           resolve(data);
@@ -23,12 +25,12 @@ export default class UserService {
     });
   }
 
-  static login(user, pass) {
+  static login(email, pass) {
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.baseURL()}/login`,
         {
-          username: user,
+          email: email,
           password: pass
         },
         function(data) {
@@ -53,7 +55,7 @@ export default class UserService {
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return {
       id: JSON.parse(window.atob(base64)).id,
-      username: JSON.parse(window.atob(base64)).username
+      name: JSON.parse(window.atob(base64)).name
     };
   }
 
