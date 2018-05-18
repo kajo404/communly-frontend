@@ -25,8 +25,8 @@ class PageLayout extends React.Component {
     };
   }
 
-  get username() {
-    return UserService.getCurrentUser().username;
+  get name() {
+    return UserService.getCurrentUser().name;
   }
 
   logout() {
@@ -44,7 +44,7 @@ class PageLayout extends React.Component {
               disabled={true}
               leftAvatar={<Avatar src={avatar} size={30} />}
             >
-              {this.username}
+              {this.name}
             </ListItem>
           }
           iconElementLeft={

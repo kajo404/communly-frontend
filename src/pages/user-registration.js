@@ -3,21 +3,24 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import TextField from 'material-ui/TextField';
-import { RaisedButton } from 'material-ui';
+import DatePicker from 'material-ui/DatePicker';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      passwordTouched: false,
-      usernameTouched: false
+      name: '',
+      email: '',
+      dateOfBirth: null,
+      password: ''
     };
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.onUserNameChange = this.onUserNameChange.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
+    this.onBirthDateChange = this.onBirthDateChange.bind(this);
 
     this.buttonStyles = {
       position: 'relative',
@@ -29,25 +32,40 @@ class UserRegistration extends React.Component {
     event.preventDefault();
 
     const user = {
-      username: this.state.username,
+      name: this.state.name,
+      email: this.state.email,
+      dateOfBirth: this.state.dateOfBirth,
       password: this.state.password
     };
+
     this.register(user);
   }
 
   register(user) {
-    UserService.register(user.username, user.password).then(result =>
-      console.log(result)
-    );
+    UserService.register(
+      user.name,
+      user.email,
+      user.password,
+      user.dateOfBirth.toISOString()
+    ).then(result => console.log(result));
     // TODO error handling
   }
 
-  onUserNameChange(event) {
-    this.setState({ username: event.target.value.trim() });
+  onNameChange(event) {
+    this.setState({ name: event.target.value.trim() });
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value.trim() });
+  }
+
+  onEmailChange(event) {
+    this.setState({ email: event.target.value.trim() });
+  }
+
+  onBirthDateChange(event, date) {
+    console.log(date);
+    this.setState({ dateOfBirth: date });
   }
 
   get getPassErrorText() {
@@ -67,13 +85,26 @@ class UserRegistration extends React.Component {
       <div className="c-main-wrapper">
         <div className="p-user-login__content">
           <TextField
-            floatingLabelText="User name"
+            floatingLabelText="Name"
             required={true}
-            value={this.state.username}
-            onChange={this.onUserNameChange}
-            errorText={this.getUsernameErrorText}
+            value={this.state.name}
+            onChange={this.onNameChange}
+            // errorText={this.getNameErrorText}
           />
-          <br />
+          <DatePicker
+            value={this.state.dateOfBirth}
+            onChange={this.onBirthDateChange}
+            floatingLabelText="Birth Date"
+            hintText="e.g 13.07.1995"
+          />
+          <TextField
+            type="email"
+            floatingLabelText="Email (Future username)"
+            required={true}
+            value={this.state.email}
+            onChange={this.onEmailChange}
+            // errorText={this.getEmailErrorText}
+          />
           <TextField
             type="password"
             floatingLabelText="Password"
