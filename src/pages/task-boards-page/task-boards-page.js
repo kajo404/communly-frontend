@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import TodoComponent from './../components/todo-list';
+import TodoComponent from './todo-list';
+import CreateTaskModal from './create-task-modal';
 
 class TaskBoardPage extends Component {
   render() {
@@ -8,6 +9,7 @@ class TaskBoardPage extends Component {
         <TodoComponent />
         <TodoComponent />
         <TodoComponent />
+        <CreateTaskModal />
       </div>
     );
   }
