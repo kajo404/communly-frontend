@@ -86,7 +86,7 @@ class UserRegistration extends React.Component {
   onBirthDateChange(event, date) {
     console.log(date);
     this.setState({ dateOfBirth: date });
-    if (event.target.value.trim() === '') {
+    if (date === '') {
       this.setState({ displayError: 'none' });
     }
   }
@@ -108,50 +108,48 @@ class UserRegistration extends React.Component {
 
   render() {
     return (
-      <div className="c-main-wrapper">
-        <div className="p-user-login__content">
-          <TextField
-            floatingLabelText="Name"
-            required={true}
-            value={this.state.name}
-            onChange={this.onNameChange}
-            // errorText={this.getNameErrorText}
-          />
-          <DatePicker
-            value={this.state.dateOfBirth}
-            onChange={this.onBirthDateChange}
-            floatingLabelText="Birth Date"
-            hintText="e.g 13.07.1995"
-          />
-          <TextField
-            type="email"
-            floatingLabelText="Email (Future username)"
-            required={true}
-            value={this.state.email}
-            onChange={this.onEmailChange}
-            // errorText={this.getEmailErrorText}
-          />
-          <TextField
-            type="password"
-            floatingLabelText="Password"
-            required={true}
-            value={this.state.password}
-            onChange={this.onPasswordChange}
-          />
-          <RaisedButton
-            label="REGISTER"
-            labelStyle={this.buttonStyles}
-            primary={true}
-            className="c-login__button"
-            onClick={this.onSubmit}
-            disabled={this.isButtonDisabled}
-          />
-          <br />
-          <br />
-          <Link to={'/login'} className="jumpLink">
-            Just login?
-          </Link>
-        </div>
+      <div className="p-user-login__content">
+        <TextField
+          floatingLabelText="Name"
+          required={true}
+          value={this.state.name}
+          onChange={this.onNameChange}
+          // errorText={this.getNameErrorText}
+        />
+        <DatePicker
+          value={this.state.dateOfBirth}
+          onChange={this.onBirthDateChange}
+          floatingLabelText="Birth Date"
+          hintText="e.g 13.07.1995"
+        />
+        <TextField
+          type="email"
+          floatingLabelText="Email (Future username)"
+          required={true}
+          value={this.state.email}
+          onChange={this.onEmailChange}
+          // errorText={this.getEmailErrorText}
+        />
+        <TextField
+          type="password"
+          floatingLabelText="Password"
+          required={true}
+          value={this.state.password}
+          onChange={this.onPasswordChange}
+        />
+        <RaisedButton
+          label="REGISTER"
+          labelStyle={this.buttonStyles}
+          primary={true}
+          className="c-login__button"
+          onClick={this.onSubmit}
+          disabled={this.isButtonDisabled}
+        />
+        <br />
+        <br />
+        <Link to={'/login'} className="p-reg__login-link">
+          Just login?
+        </Link>
         <br />
         <br />
         <div

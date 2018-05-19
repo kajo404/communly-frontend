@@ -9,13 +9,14 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import TaskBoardPage from './pages/task-boards-page';
+import TaskBoardPage from './pages/task-boards-page/task-boards-page';
 import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
 import Announcements from './pages/announcements-page';
 
 import UserService from './services/user-service';
+import { grey400 } from 'material-ui/styles/colors';
 
 // This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.
@@ -23,7 +24,8 @@ const muiTheme = getMuiTheme({
   palette: {
     textColor: '#314f81',
     primary1Color: '#314f81',
-    primary2Color: '#9ab1d9'
+    primary2Color: '#9ab1d9',
+    borderColor: grey400
   }
 });
 
