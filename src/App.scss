@@ -80,3 +80,27 @@
 .c-loginError {
   color: red;
 }
+
+.c-announcement {
+  padding: 20px;
+  max-height: calc(100vh - 200px);
+  max-width: 360px;
+  width: 100%;
+  min-height: 100px;
+}
+
+.p-announcement {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.c-announcement-author {
+  margin-top: 30px;
+  padding-bottom: -80px;
+  text-align: right;
+  font-size: 13px;
+  color: #c8d4ea;
+}

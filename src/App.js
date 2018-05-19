@@ -13,7 +13,7 @@ import TaskBoardPage from './pages/task-boards-page';
 import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
-import Announcements from './pages/announcements';
+import Announcements from './pages/announcements-page';
 
 import UserService from './services/user-service';
 
@@ -37,7 +37,7 @@ class App extends Component {
           //If the user is authenticated set announcements as the defalut page
           render: props => {
             if (UserService.isAuthenticated()) {
-              return <Redirect to={'/announcements'} />;
+              return <Redirect to={'/announcements-page'} />;
             } else {
               return <Redirect to={'/login'} />;
             }
@@ -71,7 +71,7 @@ class App extends Component {
               return <Redirect to={'/login'} />;
             }
           },
-          path: '/announcements'
+          path: '/announcements-page'
         }
       ]
     };

@@ -1,10 +1,11 @@
 import React from 'react';
+import AnnouncementComponent from './../components/announcement';
 
 class Announcements extends React.Component {
   render() {
     return (
-      <div>
-        <h3> 404, the page still does not have content, work your ass out! </h3>
+      <div className="p-task-boards">
+        <AnnouncementComponent />
       </div>
     );
   }

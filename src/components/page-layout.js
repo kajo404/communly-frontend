@@ -53,7 +53,7 @@ class PageLayout extends React.Component {
             }
           />
           <div className="c-side-bar">
-            <Link to="/announcements">
+            <Link to="/announcements-page">
               <MenuItem> Announcements </MenuItem>{' '}
             </Link>
             <Link to="/task-boards">
