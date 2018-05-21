@@ -44,7 +44,7 @@ export default class APIService {
   }
 
   static get$(url) {
-    return Observable.create(observer => {
+    return new Promise(resolve => {
       fetch(url, {
         method: 'GET',
         headers: APIService.header()
@@ -64,7 +64,7 @@ export default class APIService {
           if (resp.hasOwnProperty('token')) {
             window.localStorage['jwtToken'] = resp.token;
           }
-          observer.next(resp);
+          resolve(resp);
         })
         .catch(e => {
           console.error(e);
