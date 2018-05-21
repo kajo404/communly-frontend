@@ -1,18 +1,25 @@
+import { Observable } from 'rxjs/Observable';
+
 export default class APIService {
   static apiURL() {
     return 'http://localhost:3000';
   }
 
-  static get(url, onSuccess, onError) {
+  static header() {
     let token = window.localStorage['jwtToken'];
     let header = new Headers();
     if (token) {
       header.append('Authorization', `JWT ${token}`);
     }
+    header.append('Content-Type', 'application/json');
 
+    return header;
+  }
+
+  static get(url, onSuccess, onError) {
     fetch(url, {
       method: 'GET',
-      headers: header
+      headers: APIService.header()
     })
       .then(resp => {
         if (resp.ok) {
@@ -36,17 +43,39 @@ export default class APIService {
       });
   }
 
-  static put(url, data, onSuccess, onError) {
-    let token = window.localStorage['jwtToken'];
-    let header = new Headers();
-    if (token) {
-      header.append('Authorization', `JWT ${token}`);
-    }
-    header.append('Content-Type', 'application/json');
+  static get$(url) {
+    return Observable.create(observer => {
+      fetch(url, {
+        method: 'GET',
+        headers: APIService.header()
+      })
+        .then(resp => {
+          if (resp.ok) {
+            return resp.json();
+          } else if (this.checkIfUnauthorized(resp)) {
+            window.location = '/#login';
+          } else {
+            resp.json().then(json => {
+              console.error(json);
+            });
+          }
+        })
+        .then(resp => {
+          if (resp.hasOwnProperty('token')) {
+            window.localStorage['jwtToken'] = resp.token;
+          }
+          observer.next(resp);
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    });
+  }
 
+  static put(url, data, onSuccess, onError) {
     fetch(url, {
       method: 'PUT',
-      headers: header,
+      headers: APIService.header(),
       body: JSON.stringify(data)
     })
       .then(resp => {
@@ -72,16 +101,9 @@ export default class APIService {
   }
 
   static post(url, data, onSuccess, onError) {
-    let token = window.localStorage['jwtToken'];
-    let header = new Headers();
-    if (token) {
-      header.append('Authorization', `JWT ${token}`);
-    }
-    header.append('Content-Type', 'application/json');
-
     fetch(url, {
       method: 'POST',
-      headers: header,
+      headers: APIService.header(),
       body: JSON.stringify(data)
     })
       .then(resp => {
@@ -107,15 +129,9 @@ export default class APIService {
   }
 
   static remove(url, onSuccess, onError) {
-    let token = window.localStorage['jwtToken'];
-    let header = new Headers();
-    if (token) {
-      header.append('Authorization', `JWT ${token}`);
-    }
-
     fetch(url, {
       method: 'DELETE',
-      headers: header
+      headers: APIService.header()
     })
       .then(resp => {
         if (resp.ok) {
