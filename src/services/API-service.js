@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs/Observable';
-
 export default class APIService {
   static apiURL() {
     return 'http://localhost:3000';
@@ -43,6 +41,7 @@ export default class APIService {
       });
   }
 
+  //Async get method
   static get$(url) {
     return new Promise(resolve => {
       fetch(url, {

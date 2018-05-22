@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import Paper from 'material-ui/Paper';
 import { RaisedButton } from 'material-ui';
-
-//TODO: integrate material-ui card, checkbox, button and input field
 
 class ListItem extends Component {
   constructor(props) {
@@ -87,6 +84,8 @@ class TodoComponent extends Component {
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
+        <span>{this.props.title}</span>
+        <List tasks={this.state.tasks} />
         <TextField
           className="c-input-field"
           hintText="What needs to be done?"
@@ -100,7 +99,6 @@ class TodoComponent extends Component {
           className="c-add-button"
           onClick={this.onClick}
         />
-        <List tasks={this.state.tasks} />
       </Paper>
     );
   }

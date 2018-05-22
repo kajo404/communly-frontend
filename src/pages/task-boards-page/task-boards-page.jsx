@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import TodoComponent from './todo-list';
 import CreateTaskModal from './create-task-modal';
 import TaskBoard from './task-board';
 
@@ -8,7 +7,6 @@ import APIService from '../../services/API-service';
 import TaskBoardService from '../../services/task-board-service';
 
 class TaskBoardPage extends Component {
-  // boards = [];
   taskBoardsSubscription;
   state = {
     modalOpen: false,
@@ -27,20 +25,20 @@ class TaskBoardPage extends Component {
   }
 
   createTask(listId) {
-    // const newTask = {
-    //   title: 'Test task',
-    //   taskList: listId
-    // };
-    // APIService.post(
-    //   'http://localhost:3000/tasklists/create',
-    //   newTask,
-    //   res => {
-    //     console.log('TASK ADDED');
-    //   },
-    //   err => {
-    //     console.error(err);
-    //   }
-    // );
+    const newTask = {
+      title: 'Test task',
+      taskList: listId
+    };
+    APIService.post(
+      'http://localhost:3000/tasklists/create',
+      newTask,
+      res => {
+        console.log('TASK ADDED');
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   handleOpen = () => {
@@ -55,9 +53,11 @@ class TaskBoardPage extends Component {
   render() {
     return (
       <div className="p-task-boards">
-        {this.state.boards.map((item, index) => (
-          <TaskBoard board={item} key={index} />
-        ))}
+        <div className="p-task-baords__boards-wrapper">
+          {this.state.boards.map((item, index) => (
+            <TaskBoard board={item} key={index} />
+          ))}
+        </div>
         <RaisedButton label="Create new task board" onClick={this.handleOpen} />
         <CreateTaskModal
           open={this.state.modalOpen}
