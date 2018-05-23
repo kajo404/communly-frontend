@@ -66,7 +66,7 @@ class TaskBoard extends Component {
             <ListItem key={index} value={task.name} />
           ))}
         </div>
-        <div class="c-task-board__actions">
+        <div className="c-task-board__actions">
           <TextField
             className="c-input-field"
             hintText="What needs to be done?"

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import CreateTaskModal from './create-task-modal';
 import TaskBoard from './task-board';
-
-import APIService from '../../services/API-service';
 import TaskBoardService from '../../services/task-board-service';
 
 class TaskBoardPage extends Component {
