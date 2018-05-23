@@ -13,7 +13,7 @@ import TaskBoardPage from './pages/task-boards-page/task-boards-page';
 import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
-import Announcements from './pages/announcements-page';
+import Announcements from './pages/announcements-page/announcements-page';
 
 import UserService from './services/user-service';
 import { grey400 } from 'material-ui/styles/colors';

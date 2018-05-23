@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 
 class AnnouncementComponent extends Component {
+  date;
+
   constructor(props) {
     super(props);
-    this.state = {
-      title: 'Hello World',
-      content: 'abcde',
-      author: 'Lara Marie Reimer',
-      createdAt: '19/05/2018'
-    };
+
+    this.date = new Date(this.props.announcement.creationDate);
 
     this.updateTask = this.updateTask.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -32,14 +30,17 @@ class AnnouncementComponent extends Component {
 
   render() {
     return (
-      <Paper className="c-announcement" zDepth={1}>
-        <div class="p-announcement">
-          <h3>{this.state.title}</h3>
+      <Paper className="c-announcement-paper" zDepth={1}>
+        <div className="c-announcement-content">
+          <h3>{this.props.announcement.title}</h3>
         </div>
         <hr />
-        <div class="p-announcement">{this.state.content}</div>
-        <div class="c-announcement-author">
-          {this.state.author}, {this.state.createdAt}
+        <div className="c-announcement-content">
+          {this.props.announcement.content}
+        </div>
+        <div className="c-announcement-author">
+          {this.props.announcement.author.name},{' '}
+          {this.date.toLocaleDateString()}
         </div>
       </Paper>
     );
