@@ -28,7 +28,10 @@ export default class CreateTaskModal extends React.Component {
 
   createTaskBoard = () => {
     TaskBoardService.create(this.state.modal.title)
-      .then(response => this.props.handleClose())
+      .then(response => {
+        this.props.handleClose();
+        this.setState({ modal: { title: '' } });
+      })
       .catch(error => console.error(error));
   };
 

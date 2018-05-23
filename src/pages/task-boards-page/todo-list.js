@@ -63,6 +63,9 @@ class TodoComponent extends Component {
   onClick(event) {
     event.preventDefault();
 
+    this.props.createTask(this.state.newTask);
+    // this.props.createTask(this.state.newTask);
+
     if (this.state.newTask.trim()) {
       this.setState({
         newTask: '',
@@ -81,11 +84,16 @@ class TodoComponent extends Component {
     }
   }
 
+  //TODO: Das in task board packen
+  // {this.props.tasks.map((task, index) => (
+  //   <ListItem key={index} value={task} />
+  // ))}
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
         <span>{this.props.title}</span>
-        <List tasks={this.state.tasks} />
+
         <TextField
           className="c-input-field"
           hintText="What needs to be done?"

@@ -24,23 +24,6 @@ class TaskBoardPage extends Component {
       .catch(error => console.error(error));
   }
 
-  createTask(listId) {
-    const newTask = {
-      title: 'Test task',
-      taskList: listId
-    };
-    APIService.post(
-      'http://localhost:3000/tasklists/create',
-      newTask,
-      res => {
-        console.log('TASK ADDED');
-      },
-      err => {
-        console.error(err);
-      }
-    );
-  }
-
   handleOpen = () => {
     this.setState({ modalOpen: true });
   };
@@ -53,7 +36,7 @@ class TaskBoardPage extends Component {
   render() {
     return (
       <div className="p-task-boards">
-        <div className="p-task-baords__boards-wrapper">
+        <div className="p-task-boards__boards-wrapper">
           {this.state.boards.map((item, index) => (
             <TaskBoard board={item} key={index} />
           ))}
