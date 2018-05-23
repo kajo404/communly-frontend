@@ -11,7 +11,6 @@ const customModalStyle = {
 };
 
 export default class NewAnnouncementModal extends React.Component {
-  announcementsSubscription;
   state = {
     open: false,
     title: '',
@@ -22,7 +21,9 @@ export default class NewAnnouncementModal extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   handleOpen = () => {
@@ -40,9 +41,11 @@ export default class NewAnnouncementModal extends React.Component {
       isVotable: this.state.isVotable
     };
 
+    console.log(this.props);
+
     AnnouncementsService.createAnnouncement(newAnnouncement)
       .then(data => {
-        this.props.savedNewAnnouncement(data.announcement);
+        this.props.savedNewAnnouncement();
 
         this.handleClose();
       })
@@ -59,13 +62,13 @@ export default class NewAnnouncementModal extends React.Component {
     console.log(this.state.content);
   };
 
-  updateVotable() {
+  updateVotable = () => {
     this.setState(oldState => {
       return {
         isVotable: !oldState.checked
       };
     });
-  }
+  };
 
   render() {
     const actions = [
@@ -100,7 +103,7 @@ export default class NewAnnouncementModal extends React.Component {
           <Checkbox
             label="Add vote option"
             checked={this.state.isVotable}
-            onCheck={this.updateVotable.bind(this)}
+            onCheck={this.updateVotable}
           />
         </Dialog>
       </div>

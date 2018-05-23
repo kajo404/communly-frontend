@@ -13,6 +13,8 @@ class Announcements extends React.Component {
   constructor(props) {
     super(props);
     this.updateAnnouncements();
+
+    this.savedNewAnnouncement = this.savedNewAnnouncement.bind(this);
   }
 
   updateAnnouncements() {
@@ -21,7 +23,7 @@ class Announcements extends React.Component {
       .catch(error => console.error(error));
   }
 
-  savedNewAnnouncement(announcement) {
+  savedNewAnnouncement() {
     this.updateAnnouncements();
   }
 

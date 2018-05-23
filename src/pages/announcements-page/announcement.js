@@ -8,24 +8,6 @@ class AnnouncementComponent extends Component {
     super(props);
 
     this.date = new Date(this.props.announcement.creationDate);
-
-    this.updateTask = this.updateTask.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(event) {
-    event.preventDefault();
-
-    if (this.state.newTask.trim()) {
-      this.setState({
-        newTask: '',
-        tasks: [...this.state.tasks, this.state.newTask]
-      });
-    }
-  }
-
-  updateTask(event) {
-    this.setState({ newTask: event.target.value });
   }
 
   render() {
