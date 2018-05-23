@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
-import Paper from 'material-ui/Paper';
-import { RaisedButton } from 'material-ui';
 
 class ListItem extends Component {
   constructor(props) {
@@ -39,77 +36,4 @@ class ListItem extends Component {
   }
 }
 
-function List(props) {
-  return (
-    <div>
-      {props.tasks.map((item, index) => <ListItem key={index} value={item} />)}
-    </div>
-  );
-}
-
-class TodoComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: [],
-      newTask: ''
-    };
-
-    this.updateTask = this.updateTask.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-  onClick(event) {
-    event.preventDefault();
-
-    this.props.createTask(this.state.newTask);
-    // this.props.createTask(this.state.newTask);
-
-    if (this.state.newTask.trim()) {
-      this.setState({
-        newTask: '',
-        tasks: [...this.state.tasks, this.state.newTask]
-      });
-    }
-  }
-
-  updateTask(event) {
-    this.setState({ newTask: event.target.value });
-  }
-
-  handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      this.onClick(event);
-    }
-  }
-
-  //TODO: Das in task board packen
-  // {this.props.tasks.map((task, index) => (
-  //   <ListItem key={index} value={task} />
-  // ))}
-
-  render() {
-    return (
-      <Paper className="c-task-board" zDepth={1}>
-        <span>{this.props.title}</span>
-
-        <TextField
-          className="c-input-field"
-          hintText="What needs to be done?"
-          value={this.state.newTask}
-          onChange={this.updateTask}
-          onKeyPress={this.handleKeyPress}
-        />
-        <RaisedButton
-          label="Add task"
-          primary={true}
-          className="c-add-button"
-          onClick={this.onClick}
-        />
-      </Paper>
-    );
-  }
-}
-
-export default TodoComponent;
+export default ListItem;
