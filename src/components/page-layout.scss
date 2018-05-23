@@ -20,6 +20,53 @@
     background: white;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     height: 100%;
+    
+}
+
+.c-profile-bar{
+    
+    width: 200px;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+    padding-top: 64px;
+    right: 0;
+    background: white;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    height: fit-content;
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+.c-profile-bar-slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+
+.c-profile-bar-slide-out {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+
+@keyframes slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+    100% { -webkit-transform: translateX(0%); }
+}
+    
+@keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+@-webkit-keyframes slide-out {
+    0% { -webkit-transform: translateX(0%); }
+    100% { -webkit-transform: translateX(100%); }
 }
 
 a {

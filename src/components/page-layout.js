@@ -30,7 +30,21 @@ class PageLayout extends React.Component {
   }
 
   logout() {
+    this.showHideProfile;
     UserService.logout();
+  }
+
+  showHideProfile() {
+    var $slider = document.getElementById('profileMenuSlider');
+    var isOpen = $slider.classList.contains('c-profile-bar-slide-in');
+
+    if (isOpen) {
+      $slider.classList.remove('c-profile-bar-slide-in');
+      $slider.classList.add('c-profile-bar-slide-out');
+    } else {
+      $slider.classList.remove('c-profile-bar-slide-out');
+      $slider.classList.add('c-profile-bar-slide-in');
+    }
   }
 
   render() {
@@ -38,6 +52,7 @@ class PageLayout extends React.Component {
       return (
         <div className="c-layout">
           <AppBar
+            onClick={this.showHideProfile}
             className="c-app-bar"
             iconElementRight={
               <ListItem
@@ -58,6 +73,11 @@ class PageLayout extends React.Component {
             </Link>
             <Link to="/task-boards">
               <MenuItem> Task Boards </MenuItem>{' '}
+            </Link>
+          </div>
+          <div className="c-profile-bar" id="profileMenuSlider">
+            <Link to="/profile" onClick={this.showHideProfile}>
+              <MenuItem> Profile </MenuItem>{' '}
             </Link>
             <MenuItem onClick={this.logout}> Logout </MenuItem>{' '}
           </div>
