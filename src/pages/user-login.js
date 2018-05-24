@@ -36,7 +36,6 @@ class UserLogin extends React.Component {
   login(user) {
     UserService.login(user.username, user.password)
       .then(result => {
-        console.log(result);
         this.props.history.push('/announcements');
       })
       .catch(e => {

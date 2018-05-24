@@ -49,7 +49,6 @@ class UserRegistration extends React.Component {
       user.dateOfBirth.toISOString()
     )
       .then(result => {
-        console.log(result);
         this.props.history.push('/announcements');
       })
       .catch(e => {
@@ -84,7 +83,6 @@ class UserRegistration extends React.Component {
   }
 
   onBirthDateChange(event, date) {
-    console.log(date);
     this.setState({ dateOfBirth: date });
     if (date === '') {
       this.setState({ displayError: 'none' });
