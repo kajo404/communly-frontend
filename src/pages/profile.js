@@ -8,17 +8,17 @@ class Profile extends React.Component {
     var user = UserService.getCurrentUser();
     this.state = {
       userId: user.id,
-      email: user.email
+      name: user.name
     };
     this.getProfile();
   }
 
   getProfile() {
-    ProfileService.getFullUserInformation(this.state.email)
+    ProfileService.getFullUserInformation(this.state.userId)
       .then(result => {
         console.log(result);
         this.setState({
-          name: result.name,
+          email: result.email,
           dateOfBirth: result.dateOfBirth,
           role: result.roles[0]
         });
@@ -55,7 +55,7 @@ class Profile extends React.Component {
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
 
-    return day + '.' + monthNames[monthIndex] + '.' + year;
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
   render() {

@@ -5,12 +5,12 @@ export default class ProfileService {
     return 'http://localhost:3000/profile';
   }
 
-  static getFullUserInformation(email) {
+  static getFullUserInformation(id) {
     return new Promise((resolve, reject) => {
       APIService.post(
         `${ProfileService.baseURL()}/fullProfile`,
         {
-          email: email
+          id: id
         },
         function(data) {
           console.log(data);
