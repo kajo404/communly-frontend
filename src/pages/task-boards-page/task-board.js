@@ -3,6 +3,8 @@ import ListItem from './todo-list';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+
 import TaskService from '../../services/task-service';
 class TaskBoard extends Component {
   constructor(props) {

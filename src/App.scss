@@ -4,6 +4,7 @@
 //Task Board Styles
 .c-list-item {
   list-style: none;
+  position: relative;
 }
 
 .c-checkbox--checked {
@@ -122,4 +123,33 @@
 .p-announcements {
   width: 100%;
   align-content: center;
+}
+
+.c-close-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    opacity: 0;
+    transition: 0.1 opacity;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.c-list-item:hover .c-close-icon,
+.c-list-item:hover .c-face-icon {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.c-face-icon {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  width: 30px;
+  opacity: 0;
+  transition: 0.1 opacity;
+  z-index: 20;
+  pointer-events: none;
 }
