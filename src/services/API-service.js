@@ -8,7 +8,7 @@ export default class APIService {
 
     let header = new Headers();
     if (token) {
-      header.append('Authorization', token);
+      header.append('authorization', token);
     }
     header.append('Content-Type', 'application/json');
 
