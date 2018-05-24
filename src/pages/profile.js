@@ -1,6 +1,5 @@
 import React from 'react';
 import UserService from '../services/user-service';
-import ProfileService from '../services/profile-service';
 
 class Profile extends React.Component {
   constructor(props) {

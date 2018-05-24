@@ -4,7 +4,8 @@ export default class APIService {
   }
 
   static header() {
-    let token = window.localStorage['jwtToken'];
+    let token = 'Bearer ' + window.localStorage['jwtToken'];
+
     let header = new Headers();
     if (token) {
       header.append('Authorization', token);
