@@ -14,6 +14,7 @@ import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
 import Announcements from './pages/announcements';
+import Profile from './pages/profile';
 
 import UserService from './services/user-service';
 import { grey400 } from 'material-ui/styles/colors';
@@ -74,6 +75,16 @@ class App extends Component {
             }
           },
           path: '/announcements'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return <Profile />;
+            } else {
+              return <Redirect to={'/login'} />;
+            }
+          },
+          path: '/profile'
         }
       ]
     };
