@@ -47,8 +47,8 @@ class TaskBoard extends Component {
     }
   }
 
-  updateTask(event) {
-    this.setState({ newTask: event.target.value });
+  updateTask(event, newValue) {
+    this.setState({ newTask: newValue });
   }
 
   handleKeyPress(event) {

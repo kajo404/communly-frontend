@@ -22,8 +22,8 @@ export default class CreateTaskModal extends React.Component {
     this.onTitleChange = this.onTitleChange.bind(this);
   }
 
-  onTitleChange(event) {
-    this.setState({ modal: { title: event.target.value } });
+  onTitleChange(event, newValue) {
+    this.setState({ modal: { title: newValue } });
   }
 
   createTaskBoard = () => {
