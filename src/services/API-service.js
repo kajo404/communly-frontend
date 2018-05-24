@@ -7,7 +7,7 @@ export default class APIService {
     let token = window.localStorage['jwtToken'];
     let header = new Headers();
     if (token) {
-      header.append('Authorization', `JWT ${token}`);
+      header.append('Authorization', token);
     }
     header.append('Content-Type', 'application/json');
 
