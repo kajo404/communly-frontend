@@ -1,5 +1,7 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -74,7 +76,9 @@ export default class NewAnnouncementModal extends React.Component {
 
     return (
       <div className="c-create-task-modal">
-        <RaisedButton label="Add announcement" onClick={this.handleOpen} />
+        <FloatingActionButton onClick={this.handleOpen}>
+          <ContentAdd />
+        </FloatingActionButton>
         <Dialog
           title="Add new announcement"
           actions={actions}

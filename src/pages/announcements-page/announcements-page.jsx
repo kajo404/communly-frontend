@@ -35,7 +35,7 @@ class Announcements extends React.Component {
             <AnnouncementComponent announcement={announcement} key={index} />
           ))}
         </div>
-        <div className="p-announcements-footer">
+        <div className="p-announcements-add-button">
           <NewAnnouncementModal
             savedNewAnnouncement={this.savedNewAnnouncement}
           />

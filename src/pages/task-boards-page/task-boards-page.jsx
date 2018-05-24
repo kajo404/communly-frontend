@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import CreateTaskModal from './create-task-modal';
 import TaskBoard from './task-board';
 import TaskBoardService from '../../services/task-board-service';
@@ -39,7 +40,11 @@ class TaskBoardPage extends Component {
             <TaskBoard board={item} key={index} />
           ))}
         </div>
-        <RaisedButton label="Create new task board" onClick={this.handleOpen} />
+        <div className="p-task-boards-add-button">
+          <FloatingActionButton onClick={this.handleOpen}>
+            <ContentAdd />
+          </FloatingActionButton>
+        </div>
         <CreateTaskModal
           open={this.state.modalOpen}
           handleClose={this.handleClose}
