@@ -14,23 +14,6 @@
   text-decoration: line-through;
 }
 
-.c-task-board {
-  padding: 10px;
-  box-sizing: border-box;
-  max-width: 335px;
-  width: 100%;
-  min-height: 200px;
-}
-
-.c-task-board + .c-task-board {
-  margin-left: 20px;
-
-  @media (max-width: 768px) {
-    margin: 0;
-    margin-top: 20px;
-  }
-}
-
 .c-create-task-modal {
   margin-top: 50px;
 }
@@ -41,11 +24,30 @@
 }
 
 .p-task-boards {
-  padding-top: 80px;
+  padding-top: 100px;
+  width: 100%;
+}
+
+.p-task-boards__boards-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
+}
+
+.c-task-board__content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-height: 240px;
+  overflow-y: scroll;
+}
+
+.c-task-board {
+  padding: 20px 10px 3px 10px;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  max-width: 335px;
+  width: 100%;
 }
 
 .p-user-login__content {
@@ -98,4 +100,14 @@
   justify-content: center;
   align-items: center;
   padding: 0em 0em 1em;
+}
+
+.p-announcements-content {
+  padding-top: 80px;
+  width: 100%;
+}
+
+.p-announcements {
+  width: 100%;
+  align-content: center;
 }

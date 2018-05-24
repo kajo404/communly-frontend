@@ -41,8 +41,6 @@ export default class NewAnnouncementModal extends React.Component {
       isVotable: this.state.isVotable
     };
 
-    console.log(this.props);
-
     AnnouncementsService.createAnnouncement(newAnnouncement)
       .then(data => {
         this.props.savedNewAnnouncement();
@@ -54,12 +52,10 @@ export default class NewAnnouncementModal extends React.Component {
 
   updateTitle = (event, newValue) => {
     this.setState({ title: newValue });
-    console.log(this.state.title);
   };
 
   updateContent = (event, newValue) => {
     this.setState({ content: newValue });
-    console.log(this.state.content);
   };
 
   updateVotable = () => {

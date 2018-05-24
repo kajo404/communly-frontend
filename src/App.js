@@ -39,7 +39,7 @@ class App extends Component {
           //If the user is authenticated set announcements as the defalut page
           render: props => {
             if (UserService.isAuthenticated()) {
-              return <Redirect to={'/announcements-page'} />;
+              return <Redirect to={'/announcements'} />;
             } else {
               return <Redirect to={'/login'} />;
             }
@@ -73,7 +73,7 @@ class App extends Component {
               return <Redirect to={'/login'} />;
             }
           },
-          path: '/announcements-page'
+          path: '/announcements'
         }
       ]
     };

@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
-import Paper from 'material-ui/Paper';
-import { RaisedButton } from 'material-ui';
-
-//TODO: integrate material-ui card, checkbox, button and input field
 
 class ListItem extends Component {
   constructor(props) {
@@ -42,68 +36,4 @@ class ListItem extends Component {
   }
 }
 
-function List(props) {
-  return (
-    <div>
-      {props.tasks.map((item, index) => <ListItem key={index} value={item} />)}
-    </div>
-  );
-}
-
-class TodoComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tasks: [],
-      newTask: ''
-    };
-
-    this.updateTask = this.updateTask.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-  onClick(event) {
-    event.preventDefault();
-
-    if (this.state.newTask.trim()) {
-      this.setState({
-        newTask: '',
-        tasks: [...this.state.tasks, this.state.newTask]
-      });
-    }
-  }
-
-  updateTask(event) {
-    this.setState({ newTask: event.target.value });
-  }
-
-  handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      this.onClick(event);
-    }
-  }
-
-  render() {
-    return (
-      <Paper className="c-task-board" zDepth={1}>
-        <TextField
-          className="c-input-field"
-          hintText="What needs to be done?"
-          value={this.state.newTask}
-          onChange={this.updateTask}
-          onKeyPress={this.handleKeyPress}
-        />
-        <RaisedButton
-          label="Add task"
-          primary={true}
-          className="c-add-button"
-          onClick={this.onClick}
-        />
-        <List tasks={this.state.tasks} />
-      </Paper>
-    );
-  }
-}
-
-export default TodoComponent;
+export default ListItem;

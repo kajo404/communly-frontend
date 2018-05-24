@@ -30,7 +30,7 @@ class Announcements extends React.Component {
   render() {
     return (
       <div>
-        <div className="p-task-boards">
+        <div className="p-announcements-content">
           {this.state.announcements.map((announcement, index) => (
             <AnnouncementComponent announcement={announcement} key={index} />
           ))}

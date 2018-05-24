@@ -1,29 +1,15 @@
 import APIService from './API-service';
 
-export default class AnnouncementsService {
+export default class TaskService {
   static baseURL() {
-    return 'http://localhost:3000/announcements';
+    return 'http://localhost:3000/tasks';
   }
 
-  static getAnnouncements() {
-    return new Promise((resolve, reject) => {
-      APIService.get(
-        `${AnnouncementsService.baseURL()}/`,
-        function(data) {
-          resolve(data);
-        },
-        function(textStatus) {
-          reject(textStatus);
-        }
-      );
-    });
-  }
-
-  static createAnnouncement(announcement) {
+  static create(newTask) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${AnnouncementsService.baseURL()}/`,
-        announcement,
+        `${TaskService.baseURL()}/`,
+        newTask,
         function(data) {
           resolve(data);
         },
@@ -32,5 +18,24 @@ export default class AnnouncementsService {
         }
       );
     });
+  }
+
+  static updateTask(task) {
+    return new Promise((resolve, reject) => {
+      APIService.put(
+        `${TaskService.baseURL()}/${task._id}`,
+        task,
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getAllTasks(taskListId) {
+    return APIService.get$(`${TaskService.baseURL()}/${taskListId}`);
   }
 }
