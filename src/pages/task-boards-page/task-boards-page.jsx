@@ -17,11 +17,11 @@ class TaskBoardPage extends Component {
     this.updateBoards();
   }
 
-  updateBoards() {
+  updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
       .then(data => this.setState({ boards: data.tasklists }))
       .catch(error => console.error(error));
-  }
+  };
 
   handleOpen = () => {
     this.setState({ modalOpen: true });

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import FontIcon from 'material-ui/FontIcon';
+import TaskService from '../../services/task-service';
 
-const customCheckboxStyle = {
-  width: 'calc(100% - 20px)'
-};
 class ListItem extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +21,9 @@ class ListItem extends Component {
   }
 
   deleteTask = () => {
-    console.log('task theoretically deleted');
+    TaskService.delete(this.props.id)
+      .then(res => this.props.updateView())
+      .catch(error => console.error(error));
   };
 
   assignTask = () => {
@@ -45,10 +45,12 @@ class ListItem extends Component {
           label={this.props.value}
         />
         <i className="c-face-icon material-icons" onClick={this.assignTask}>
-          face
+          {' '}
+          face{' '}
         </i>
         <i className="c-close-icon material-icons" onClick={this.deleteTask}>
-          cancel
+          {' '}
+          cancel{' '}
         </i>
       </li>
     );

@@ -22,6 +22,20 @@ export default class TaskBoardService {
     });
   }
 
+  static delete(taskBoardId) {
+    return new Promise((resolve, reject) => {
+      APIService.remove(
+        `${TaskBoardService.baseURL()}/${taskBoardId}`,
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static getTaskBoards() {
     return APIService.get$(`${TaskBoardService.baseURL()}/`);
   }
