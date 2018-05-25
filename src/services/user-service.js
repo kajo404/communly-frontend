@@ -56,7 +56,7 @@ export default class UserService {
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return {
       id: JSON.parse(window.atob(base64)).id,
-      name: JSON.parse(window.atob(base64)).username
+      name: JSON.parse(window.atob(base64)).name
     };
   }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import UserService from '../services/user-service';
-import ProfileService from '../services/profile-service';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class Profile extends React.Component {
   }
 
   getProfile() {
-    ProfileService.getFullUserInformation(this.state.userId)
+    UserService.getFullUser()
       .then(result => {
         console.log(result);
         this.setState({
