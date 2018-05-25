@@ -17,6 +17,10 @@ const style = {
   fontWeight: '300'
 };
 
+const appBarStyle = {
+  position: 'fixed'
+};
+
 class PageLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -66,6 +70,7 @@ class PageLayout extends React.Component {
             iconElementLeft={
               <img className="c-logo" src={logo} alt="communly logo" />
             }
+            style={appBarStyle}
           />
           <div className="c-side-bar">
             <Link to="/announcements">
