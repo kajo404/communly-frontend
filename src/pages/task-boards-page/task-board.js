@@ -3,7 +3,10 @@ import ListItem from './todo-list';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
+import FontIcon from 'material-ui/FontIcon';
+
 import TaskService from '../../services/task-service';
+import TaskBoardService from '../../services/task-board-service';
 class TaskBoard extends Component {
   constructor(props) {
     super(props);
@@ -30,13 +33,19 @@ class TaskBoard extends Component {
       .catch(error => console.error(error));
   };
 
-  updateTasks() {
+  updateTasks = () => {
     this.tasksSubscription = TaskService.getAllTasks(this.props.board._id)
       .then(data => {
         this.setState({ tasks: data.tasks });
       })
       .catch(error => console.error(error));
-  }
+  };
+
+  deleteBoard = () => {
+    TaskBoardService.delete(this.props.board._id)
+      .then(data => this.props.updateView())
+      .catch(error => console.error(error));
+  };
 
   onClick(event) {
     event.preventDefault();
@@ -61,9 +70,21 @@ class TaskBoard extends Component {
     return (
       <Paper className="c-task-board" zDepth={1}>
         <span>{this.props.board.title}</span>
+        <i
+          className="c-task-board__close-icon material-icons"
+          onClick={this.deleteBoard}
+        >
+          {' '}
+          close{' '}
+        </i>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (
-            <ListItem key={index} value={task.name} />
+            <ListItem
+              key={index}
+              id={task._id}
+              value={task.name}
+              updateView={this.updateTasks}
+            />
           ))}
         </div>
         <div className="c-task-board__actions">

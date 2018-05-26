@@ -4,6 +4,7 @@
 //Task Board Styles
 .c-list-item {
   list-style: none;
+  position: relative;
 }
 
 .c-checkbox--checked {
@@ -43,11 +44,12 @@
 }
 
 .c-task-board {
-  padding: 20px 10px 3px 10px;
+  padding: 20px 10px 7px 10px;
   margin: 0 10px;
   margin-bottom: 20px;
   max-width: 335px;
   width: 100%;
+  position: relative;
 }
 
 .p-user-login__content {
@@ -122,4 +124,41 @@
 .p-announcements {
   width: 100%;
   align-content: center;
+}
+
+.c-close-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    opacity: 0;
+    transition: 0.1 opacity;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.c-task-board__close-icon {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.c-list-item:hover .c-close-icon,
+.c-list-item:hover .c-face-icon {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.c-face-icon {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  width: 30px;
+  opacity: 0;
+  transition: 0.1 opacity;
+  z-index: 20;
+  pointer-events: none;
 }

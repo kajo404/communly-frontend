@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
+import FontIcon from 'material-ui/FontIcon';
+import TaskService from '../../services/task-service';
 
 class ListItem extends Component {
   constructor(props) {
@@ -18,6 +20,16 @@ class ListItem extends Component {
     });
   }
 
+  deleteTask = () => {
+    TaskService.delete(this.props.id)
+      .then(res => this.props.updateView())
+      .catch(error => console.error(error));
+  };
+
+  assignTask = () => {
+    console.log('task theoretically assigned');
+  };
+
   getCheckboxClass() {
     return this.state.checked ? 'c-checkbox--checked' : 'c-checkbox';
   }
@@ -26,11 +38,20 @@ class ListItem extends Component {
     return (
       <li className="c-list-item">
         <Checkbox
+          style={{ width: 'calc(100% - 30px)' }}
           className={this.getCheckboxClass()}
           checked={this.state.checked}
           onCheck={this.updateCheck}
           label={this.props.value}
         />
+        <i className="c-face-icon material-icons" onClick={this.assignTask}>
+          {' '}
+          face{' '}
+        </i>
+        <i className="c-close-icon material-icons" onClick={this.deleteTask}>
+          {' '}
+          cancel{' '}
+        </i>
       </li>
     );
   }

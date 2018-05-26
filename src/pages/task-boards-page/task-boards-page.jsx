@@ -17,11 +17,11 @@ class TaskBoardPage extends Component {
     this.updateBoards();
   }
 
-  updateBoards() {
+  updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
       .then(data => this.setState({ boards: data.tasklists }))
       .catch(error => console.error(error));
-  }
+  };
 
   handleOpen = () => {
     this.setState({ modalOpen: true });
@@ -37,7 +37,11 @@ class TaskBoardPage extends Component {
       <div className="p-task-boards">
         <div className="p-task-boards__boards-wrapper">
           {this.state.boards.map((item, index) => (
-            <TaskBoard board={item} key={index} />
+            <TaskBoard
+              board={item}
+              key={index}
+              updateView={this.updateBoards}
+            />
           ))}
         </div>
         <div className="p-task-boards-add-button">

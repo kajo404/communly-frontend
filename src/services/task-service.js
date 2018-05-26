@@ -20,6 +20,20 @@ export default class TaskService {
     });
   }
 
+  static delete(taskId) {
+    return new Promise((resolve, reject) => {
+      APIService.remove(
+        `${TaskService.baseURL()}/${taskId}`,
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static updateTask(task) {
     return new Promise((resolve, reject) => {
       APIService.put(
