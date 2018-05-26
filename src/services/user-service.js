@@ -1,14 +1,14 @@
 import APIService from './API-service';
 
 export default class UserService {
-  static baseURL() {
-    return 'http://localhost:3000/auth';
+  static URL() {
+    return APIService.apiURL() + '/auth';
   }
 
   static register(name, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${UserService.baseURL()}/register`,
+        `${UserService.URL()}/register`,
         {
           name: name,
           email: email,
@@ -28,7 +28,7 @@ export default class UserService {
   static login(email, pass) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${UserService.baseURL()}/login`,
+        `${UserService.URL()}/login`,
         {
           email: email,
           password: pass
@@ -63,7 +63,7 @@ export default class UserService {
   static getFullUser() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${UserService.baseURL()}/me`,
+        `${UserService.URL()}/me`,
 
         function(data) {
           resolve(data);

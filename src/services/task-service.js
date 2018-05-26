@@ -1,14 +1,14 @@
 import APIService from './API-service';
 
 export default class TaskService {
-  static baseURL() {
-    return 'http://localhost:3000/tasks';
+  static URL() {
+    return APIService.apiURL() + '/tasks';
   }
 
   static create(newTask) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${TaskService.baseURL()}/`,
+        `${TaskService.URL()}/`,
         newTask,
         function(data) {
           resolve(data);
@@ -23,7 +23,7 @@ export default class TaskService {
   static updateTask(task) {
     return new Promise((resolve, reject) => {
       APIService.put(
-        `${TaskService.baseURL()}/${task._id}`,
+        `${TaskService.URL()}/${task._id}`,
         task,
         function(data) {
           resolve(data);
@@ -36,6 +36,6 @@ export default class TaskService {
   }
 
   static getAllTasks(taskListId) {
-    return APIService.get$(`${TaskService.baseURL()}/${taskListId}`);
+    return APIService.get$(`${TaskService.URL()}/${taskListId}`);
   }
 }
