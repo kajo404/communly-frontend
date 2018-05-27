@@ -21,7 +21,6 @@ class TaskBoardPage extends Component {
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
       .then(data => {
-        console.log(data.tasklists);
         this.setState({ boards: data.tasklists });
       })
       .catch(error => console.error(error));

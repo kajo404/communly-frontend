@@ -25,7 +25,7 @@ export default class TaskBoardService {
   static createTask(newTask) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${TaskBoardService.baseURL()}/${newTask.taskBoardId}/addTask`,
+        `${TaskBoardService.URL()}/${newTask.taskBoardId}/addTask`,
         {
           name: newTask.name
         },
@@ -42,7 +42,7 @@ export default class TaskBoardService {
   static delete(taskBoardId) {
     return new Promise((resolve, reject) => {
       APIService.remove(
-        `${TaskBoardService.baseURL()}/${taskBoardId}`,
+        `${TaskBoardService.URL()}/${taskBoardId}`,
         function(data) {
           resolve(data);
         },
@@ -55,5 +55,9 @@ export default class TaskBoardService {
 
   static getTaskBoards() {
     return APIService.get$(`${TaskBoardService.URL()}/`);
+  }
+
+  static getAllTasks(taskListId) {
+    return APIService.get$(`${TaskBoardService.URL()}/${taskListId}`);
   }
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
-import FontIcon from 'material-ui/FontIcon';
 import TaskService from '../../services/task-service';
 
 class ListItem extends Component {

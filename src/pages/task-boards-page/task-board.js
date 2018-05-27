@@ -3,7 +3,6 @@ import ListItem from './todo-list';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddMemberModal from './add-member';
@@ -50,11 +49,9 @@ class TaskBoard extends Component {
   };
 
   updateTasks = () => {
-    // this.tasksSubscription = TaskService.getAllTasks(this.props.board._id)
-    //   .then(data => {
-    //     this.setState({ tasks: data.tasks });
-    //   })
-    //   .catch(error => console.error(error));
+    this.tasksSubscription = TaskBoardService.getAllTasks(this.props.board._id)
+      .then(data => this.setState({ tasks: data.taskList.tasks }))
+      .catch(error => console.error(error));
   };
 
   deleteBoard = () => {

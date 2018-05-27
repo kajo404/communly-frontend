@@ -5,7 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
-import Toggle from 'material-ui/Toggle';
 
 const customModalStyle = {
   width: '300px'

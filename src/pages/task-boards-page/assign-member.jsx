@@ -2,7 +2,6 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import Subheader from 'material-ui/Subheader';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
@@ -52,7 +51,7 @@ export default class AssignMemberModal extends React.Component {
 
   addMembersToBoard = () => {
     console.log(
-      'Theoretically added members to taskboard',
+      'Theoretically added members to taskboard:',
       console.log(
         this.state.checkboxes.filter(member => member.checked === true)
       )
