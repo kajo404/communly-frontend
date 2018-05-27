@@ -53,6 +53,8 @@ class ListItem extends Component {
           cancel{' '}
         </i>
       </li>
+
+      //TODO: assign member to task modal
     );
   }
 }
