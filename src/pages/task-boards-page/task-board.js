@@ -26,7 +26,7 @@ class TaskBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
+      tasks: this.props.board.tasks,
       newTask: '',
       addMembersOpen: false
     };
@@ -41,20 +41,20 @@ class TaskBoard extends Component {
   createTask = newTaskText => {
     const newTask = {
       name: newTaskText,
-      taskListId: this.props.board._id
+      taskBoardId: this.props.board._id
     };
 
-    TaskService.create(newTask)
+    TaskBoardService.createTask(newTask)
       .then(response => this.updateTasks())
       .catch(error => console.error(error));
   };
 
   updateTasks = () => {
-    this.tasksSubscription = TaskService.getAllTasks(this.props.board._id)
-      .then(data => {
-        this.setState({ tasks: data.tasks });
-      })
-      .catch(error => console.error(error));
+    // this.tasksSubscription = TaskService.getAllTasks(this.props.board._id)
+    //   .then(data => {
+    //     this.setState({ tasks: data.tasks });
+    //   })
+    //   .catch(error => console.error(error));
   };
 
   deleteBoard = () => {
@@ -134,11 +134,11 @@ class TaskBoard extends Component {
             onClick={this.onClick}
           />
         </div>
-        <span> {this.props.board.author} </span>
         <AddMemberModal
           open={this.state.addMembersOpen}
           handleClose={this.handleAddMembersClose}
         />
+        <span> Author: {this.props.board.author.name} </span>
       </Paper>
     );
   }

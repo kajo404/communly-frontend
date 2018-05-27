@@ -20,7 +20,10 @@ class TaskBoardPage extends Component {
 
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
-      .then(data => this.setState({ boards: data.tasklists }))
+      .then(data => {
+        console.log(data.tasklists);
+        this.setState({ boards: data.tasklists });
+      })
       .catch(error => console.error(error));
   };
 
@@ -55,7 +58,7 @@ class TaskBoardPage extends Component {
           handleClose={this.handleClose}
           createTaskBoard={this.createTaskBoard}
         />
-        <AssignMemberModal />
+        {/* <AssignMemberModal /> */}
       </div>
     );
   }
