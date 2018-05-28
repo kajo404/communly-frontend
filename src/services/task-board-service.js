@@ -53,6 +53,23 @@ export default class TaskBoardService {
     });
   }
 
+  static addMembers(taskBoardId, members) {
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${TaskBoardService.baseURL()}/${taskBoardId}/addMembers`,
+        {
+          members: members
+        },
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static getTaskBoards() {
     return APIService.get$(`${TaskBoardService.URL()}/`);
   }

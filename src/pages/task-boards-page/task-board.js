@@ -7,8 +7,8 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddMemberModal from './add-member';
 
-import TaskService from '../../services/task-service';
 import TaskBoardService from '../../services/task-board-service';
+import UserService from '../../services/user-service';
 
 const addButtonStyle = {
   position: 'absolute',
@@ -27,14 +27,18 @@ class TaskBoard extends Component {
     this.state = {
       tasks: this.props.board.tasks,
       newTask: '',
+      users: [],
       addMembersOpen: false
     };
-
     this.updateTask = this.updateTask.bind(this);
-    this.onClick = this.onClick.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-
     this.updateTasks();
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.usersSubscription = UserService.getAllUsers()
+      .then(response => this.setState({ users: response.users }))
+      .catch(error => console.error(error));
   }
 
   createTask = newTaskText => {
@@ -45,6 +49,15 @@ class TaskBoard extends Component {
 
     TaskBoardService.createTask(newTask)
       .then(response => this.updateTasks())
+      .catch(error => console.error(error));
+  };
+
+  addMembers = members => {
+    TaskBoardService.addMembers(this.props.board._id, members)
+      .then(response => {
+        this.props.updateView();
+        this.handleAddMembersClose();
+      })
       .catch(error => console.error(error));
   };
 
@@ -60,24 +73,24 @@ class TaskBoard extends Component {
       .catch(error => console.error(error));
   };
 
-  onClick(event) {
+  onClick = event => {
     event.preventDefault();
 
     if (this.state.newTask.trim()) {
       this.createTask(this.state.newTask);
       this.setState({ newTask: '' });
     }
-  }
+  };
 
   updateTask(event, newValue) {
     this.setState({ newTask: newValue });
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = event => {
     if (event.key === 'Enter') {
       this.onClick(event);
     }
-  }
+  };
 
   openAddMembersModal = () => {
     this.setState({ addMembersOpen: true });
@@ -132,10 +145,16 @@ class TaskBoard extends Component {
           />
         </div>
         <AddMemberModal
+          users={this.state.users}
+          addMembers={this.addMembers}
           open={this.state.addMembersOpen}
           handleClose={this.handleAddMembersClose}
         />
-        <span> Author: {this.props.board.author.name} </span>
+        <span> Author: {this.props.board.author.name} </span> <br />
+        <span>
+          {' '}
+          Members: {this.props.board.members.map(member => member.name + ', ')}
+        </span>
       </Paper>
     );
   }

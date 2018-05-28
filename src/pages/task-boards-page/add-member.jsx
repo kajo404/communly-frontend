@@ -16,56 +16,28 @@ export default class AddMemberModal extends React.Component {
 
     this.state = {
       open: true,
-      checkboxes: [
-        {
-          name: 'Felix',
-          checked: false
-        },
-        {
-          name: 'Yasna',
-          checked: false
-        },
-        {
-          name: 'Peter',
-          checked: false
-        },
-        {
-          name: 'Jonas',
-          checked: false
-        },
-        {
-          name: 'Lara',
-          checked: false
-        }
-      ]
+      addedMembers: []
     };
   }
 
   addMembersToBoard = () => {
-    console.log(
-      'Theoretically added members to taskboard',
-      console.log(
-        this.state.checkboxes.filter(member => member.checked === true)
-      )
-    );
-    this.props.handleClose();
-    //TODO: Backend post call
+    this.props.addMembers(this.state.addedMembers);
   };
 
-  updateMembers() {
-    //TODO: Add member to the choice popover (get them from boards)
-  }
-
   handleToggle = key => event => {
-    const newCheckboxes = this.state.checkboxes;
-    newCheckboxes[key].checked = !newCheckboxes[key].checked;
+    const addedMembers = this.state.addedMembers;
+    if (addedMembers.indexOf(key) >= 0) {
+      addedMembers.splice(addedMembers.indexOf(key), 1);
+    } else {
+      addedMembers.push(key);
+    }
     this.setState({
-      checkboxes: newCheckboxes
+      addedMembers: addedMembers
     });
   };
 
   get buttonDisabled() {
-    return this.state.checkboxes.every(checkbox => checkbox.checked === false);
+    return this.state.addedMembers.length === 0;
   }
 
   render() {
@@ -93,11 +65,13 @@ export default class AddMemberModal extends React.Component {
         >
           <List>
             <Subheader>Choose members to add: </Subheader>
-            {this.state.checkboxes.map((member, index) => (
+            {this.props.users.map((user, index) => (
               <ListItem
                 key={index}
-                leftCheckbox={<Checkbox onCheck={this.handleToggle(index)} />}
-                primaryText={member.name}
+                leftCheckbox={
+                  <Checkbox onCheck={this.handleToggle(user._id)} />
+                }
+                primaryText={user.name}
               />
             ))}
           </List>
