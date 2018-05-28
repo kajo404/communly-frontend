@@ -1,14 +1,14 @@
 import APIService from './API-service';
 
 export default class TaskBoardService {
-  static baseURL() {
-    return 'http://localhost:3000/tasklists';
+  static URL() {
+    return APIService.apiURL() + '/tasklists';
   }
 
   static create(title) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${TaskBoardService.baseURL()}/`,
+        `${TaskBoardService.URL()}/`,
         {
           title: title
         },
@@ -37,6 +37,6 @@ export default class TaskBoardService {
   }
 
   static getTaskBoards() {
-    return APIService.get$(`${TaskBoardService.baseURL()}/`);
+    return APIService.get$(`${TaskBoardService.URL()}/`);
   }
 }

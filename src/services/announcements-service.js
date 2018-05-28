@@ -1,14 +1,14 @@
 import APIService from './API-service';
 
 export default class AnnouncementsService {
-  static baseURL() {
-    return 'http://localhost:3000/announcements';
+  static URL() {
+    return APIService.apiURL() + '/announcements';
   }
 
   static getAnnouncements() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AnnouncementsService.baseURL()}/`,
+        `${AnnouncementsService.URL()}/`,
         function(data) {
           resolve(data);
         },
@@ -22,7 +22,7 @@ export default class AnnouncementsService {
   static createAnnouncement(announcement) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${AnnouncementsService.baseURL()}/`,
+        `${AnnouncementsService.URL()}/`,
         announcement,
         function(data) {
           resolve(data);

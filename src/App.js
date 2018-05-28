@@ -33,7 +33,6 @@ const muiTheme = getMuiTheme({
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       routes: [
         {

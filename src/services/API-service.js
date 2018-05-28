@@ -1,6 +1,6 @@
 export default class APIService {
   static apiURL() {
-    return 'http://localhost:3000';
+    return process.env.REACT_APP_BACKEND_URL;
   }
 
   static header() {
