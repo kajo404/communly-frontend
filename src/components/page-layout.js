@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 import './page-layout.scss';
 
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
+import Menu from 'material-ui/Menu';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 
@@ -21,12 +22,21 @@ const appBarStyle = {
   position: 'fixed'
 };
 
+const selectedStyles = {
+  backgroundColor: '#eff2f9',
+  color: '#314f81',
+  borderLeft: '3px solid #9ab1d9'
+};
+
 class PageLayout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showUser: true
+      showUser: true,
+      activePage: 0
     };
+    console.log(this.state.activePage);
+    // this.props.history.push('/announcements');
   }
 
   get userName() {
@@ -51,6 +61,14 @@ class PageLayout extends React.Component {
     }
   }
 
+  changeActivePage = (event, menuItem, index) => {
+    console.log(this.state.activePage);
+    this.setState({ activePage: index });
+    // this can be done more elegantly
+    const newRoute = index === 0 ? '/announcements' : '/task-boards';
+    this.props.history.push(newRoute);
+  };
+
   render() {
     if (UserService.isAuthenticated()) {
       return (
@@ -73,12 +91,15 @@ class PageLayout extends React.Component {
             style={appBarStyle}
           />
           <div className="c-side-bar">
-            <Link to="/announcements">
-              <MenuItem> Announcements </MenuItem>{' '}
-            </Link>
-            <Link to="/task-boards">
-              <MenuItem> Task Boards </MenuItem>{' '}
-            </Link>
+            <Menu
+              style={sideBarStyles}
+              selectedMenuItemStyle={selectedStyles}
+              onItemClick={this.changeActivePage}
+              value={this.state.activePage}
+            >
+              <MenuItem primaryText="Announcements" value={0} />
+              <MenuItem primaryText="Task Boards" value={1} />
+            </Menu>
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
             <Link to="/profile" onClick={this.showHideProfile}>
@@ -116,4 +137,4 @@ class PageLayout extends React.Component {
   }
 }
 
-export default PageLayout;
+export default withRouter(PageLayout);
