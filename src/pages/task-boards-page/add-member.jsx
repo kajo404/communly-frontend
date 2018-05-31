@@ -42,11 +42,7 @@ export default class AddMemberModal extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.props.handleClose}
-      />,
+      <FlatButton label="Cancel" primary={true} onClick={this.props.close} />,
       <RaisedButton
         label="Add to board"
         disabled={this.buttonDisabled}

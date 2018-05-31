@@ -8,7 +8,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import AddMemberModal from './add-member';
 
 import TaskBoardService from '../../services/task-board-service';
-import UserService from '../../services/user-service';
 
 const addButtonStyle = {
   position: 'absolute',
@@ -26,19 +25,9 @@ class TaskBoard extends Component {
     super(props);
     this.state = {
       tasks: this.props.board.tasks,
-      newTask: '',
-      users: [],
-      addMembersOpen: false
+      newTask: ''
     };
-    this.updateTask = this.updateTask.bind(this);
     this.updateTasks();
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.usersSubscription = UserService.getAllUsers()
-      .then(response => this.setState({ users: response.users }))
-      .catch(error => console.error(error));
   }
 
   createTask = newTaskText => {
@@ -52,13 +41,8 @@ class TaskBoard extends Component {
       .catch(error => console.error(error));
   };
 
-  addMembers = members => {
-    TaskBoardService.addMembers(this.props.board._id, members)
-      .then(response => {
-        this.props.updateView();
-        this.handleAddMembersClose();
-      })
-      .catch(error => console.error(error));
+  openAddMembersModal = () => {
+    this.props.openAddMembersModal(this.props.board._id);
   };
 
   updateTasks = () => {
@@ -82,22 +66,14 @@ class TaskBoard extends Component {
     }
   };
 
-  updateTask(event, newValue) {
+  updateTask = (event, newValue) => {
     this.setState({ newTask: newValue });
-  }
+  };
 
   handleKeyPress = event => {
     if (event.key === 'Enter') {
       this.onClick(event);
     }
-  };
-
-  openAddMembersModal = () => {
-    this.setState({ addMembersOpen: true });
-  };
-
-  handleAddMembersClose = () => {
-    this.setState({ addMembersOpen: false });
   };
 
   render() {
@@ -144,12 +120,6 @@ class TaskBoard extends Component {
             onClick={this.onClick}
           />
         </div>
-        <AddMemberModal
-          users={this.state.users}
-          addMembers={this.addMembers}
-          open={this.state.addMembersOpen}
-          handleClose={this.handleAddMembersClose}
-        />
         <span> Author: {this.props.board.author.name} </span> <br />
         <span>
           {' '}
