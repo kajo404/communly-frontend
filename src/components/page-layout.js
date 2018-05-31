@@ -35,8 +35,6 @@ class PageLayout extends React.Component {
       showUser: true,
       activePage: 0
     };
-    console.log(this.state.activePage);
-    // this.props.history.push('/announcements');
   }
 
   get userName() {
