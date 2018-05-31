@@ -27,6 +27,27 @@ class PageLayout extends React.Component {
     this.state = {
       showUser: true
     };
+    if (UserService.isAuthenticated()) {
+      UserService.getFullUser()
+        .then(result => {
+          const buffer = result.image.data;
+          const b64 = new Buffer(buffer).toString('base64');
+
+          this.setState({
+            imageContentType: result.image.contentType,
+            imageData: b64
+          });
+        })
+        .catch(e => {
+          console.error(e);
+          this.setState({
+            error: 'Username or password is wrong!'
+          });
+          this.setState({
+            error: e
+          });
+        });
+    }
   }
 
   get userName() {
@@ -62,7 +83,17 @@ class PageLayout extends React.Component {
               <ListItem
                 style={style}
                 disabled={true}
-                leftAvatar={<Avatar src={avatar} size={30} />}
+                leftAvatar={
+                  <Avatar
+                    src={
+                      'data:' +
+                      this.state.imageContentType +
+                      ';base64,' +
+                      this.state.imageData
+                    }
+                    size={30}
+                  />
+                }
               >
                 {this.userName}
               </ListItem>

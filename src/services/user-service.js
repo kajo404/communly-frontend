@@ -67,7 +67,29 @@ export default class UserService {
 
         function(data) {
           resolve(data);
-          console.log(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static changeUserPicture(imageData, imageType) {
+    console.log('imageData: ' + imageData);
+    console.log('imageData: ' + imageType);
+    console.log('imageData: ' + JSON.stringify(imageData));
+    console.log('imageData: ' + imageType);
+
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${UserService.URL()}/changeUserPicture`,
+        {
+          imageData: imageData,
+          imageType: imageType
+        },
+        function(data) {
+          resolve(data);
         },
         function(textStatus) {
           reject(textStatus);
