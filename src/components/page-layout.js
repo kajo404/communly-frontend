@@ -62,7 +62,6 @@ class PageLayout extends React.Component {
   }
 
   changeActivePage = (event, menuItem, index) => {
-    console.log(this.state.activePage);
     this.setState({ activePage: index });
     // this can be done more elegantly
     const newRoute = index === 0 ? '/announcements' : '/task-boards';
@@ -92,7 +91,6 @@ class PageLayout extends React.Component {
           />
           <div className="c-side-bar">
             <Menu
-              style={sideBarStyles}
               selectedMenuItemStyle={selectedStyles}
               onItemClick={this.changeActivePage}
               value={this.state.activePage}
