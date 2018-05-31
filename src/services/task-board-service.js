@@ -26,7 +26,9 @@ export default class TaskBoardService {
     return new Promise((resolve, reject) => {
       APIService.post(`${TaskBoardService.baseURL()}/${newTask.taskBoardId}/tasks`,
         {
-          name: newTask.name
+          task: {
+            name: newTask.name
+          }
         },
         function(data) {
           resolve(data);
