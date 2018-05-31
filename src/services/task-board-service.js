@@ -24,7 +24,8 @@ export default class TaskBoardService {
 
   static createTask(newTask) {
     return new Promise((resolve, reject) => {
-      APIService.post(`${TaskBoardService.baseURL()}/${newTask.taskBoardId}/tasks`,
+      APIService.post(
+        `${TaskBoardService.URL()}/${newTask.taskBoardId}/tasks`,
         {
           task: {
             name: newTask.name
@@ -57,7 +58,7 @@ export default class TaskBoardService {
   static addMembers(taskBoardId, members) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${TaskBoardService.baseURL()}/${taskBoardId}/members`,
+        `${TaskBoardService.URL()}/${taskBoardId}/members`,
         {
           members: members
         },
