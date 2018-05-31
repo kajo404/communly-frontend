@@ -9,7 +9,7 @@ const customModalStyle = {
   width: '450px'
 };
 
-export default class CreateTaskModal extends React.Component {
+export default class CreateTaskBoardModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -25,6 +25,12 @@ export default class CreateTaskModal extends React.Component {
   onTitleChange(event, newValue) {
     this.setState({ modal: { title: newValue } });
   }
+
+  handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.createTaskBoard();
+    }
+  };
 
   createTaskBoard = () => {
     TaskBoardService.create(this.state.modal.title)
@@ -65,6 +71,7 @@ export default class CreateTaskModal extends React.Component {
             placeholder="Untitled"
             value={this.state.modal.title}
             onChange={this.onTitleChange}
+            onKeyPress={this.handleKeyPress}
           />
         </Dialog>
       </div>

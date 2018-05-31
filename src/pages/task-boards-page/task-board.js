@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ListItem from './todo-list';
+import Task from './task-component';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -11,8 +11,8 @@ import TaskBoardService from '../../services/task-board-service';
 
 const addButtonStyle = {
   position: 'absolute',
-  top: '8px',
-  right: '40px'
+  top: '13px',
+  right: '43px'
 };
 
 const iconStyle = {
@@ -79,7 +79,14 @@ class TaskBoard extends Component {
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
-        <span>{this.props.board.title}</span>
+        <span>
+          {this.props.board.title} (Author: {this.props.board.author.name})
+        </span>{' '}
+        <br />
+        <span>
+          Members: {this.props.board.members.map(member => member.name + ', ')}
+        </span>
+        <hr className="c-task-board__divider" />
         <FloatingActionButton
           mini={true}
           iconStyle={iconStyle}
@@ -97,7 +104,7 @@ class TaskBoard extends Component {
         </i>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (
-            <ListItem
+            <Task
               key={index}
               id={task._id}
               value={task.name}
@@ -120,11 +127,6 @@ class TaskBoard extends Component {
             onClick={this.onClick}
           />
         </div>
-        <span> Author: {this.props.board.author.name} </span> <br />
-        <span>
-          {' '}
-          Members: {this.props.board.members.map(member => member.name + ', ')}
-        </span>
       </Paper>
     );
   }
