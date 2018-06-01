@@ -22,10 +22,46 @@ export default class TaskBoardService {
     });
   }
 
+  static createTask(newTask) {
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${TaskBoardService.URL()}/${newTask.taskBoardId}/tasks`,
+        {
+          task: {
+            name: newTask.name
+          }
+        },
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static delete(taskBoardId) {
     return new Promise((resolve, reject) => {
       APIService.remove(
-        `${TaskBoardService.baseURL()}/${taskBoardId}`,
+        `${TaskBoardService.URL()}/${taskBoardId}`,
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static addMembers(taskBoardId, members) {
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${TaskBoardService.URL()}/${taskBoardId}/members`,
+        {
+          members: members
+        },
         function(data) {
           resolve(data);
         },
@@ -38,5 +74,9 @@ export default class TaskBoardService {
 
   static getTaskBoards() {
     return APIService.get$(`${TaskBoardService.URL()}/`);
+  }
+
+  static getAllTasks(taskListId) {
+    return APIService.get$(`${TaskBoardService.URL()}/${taskListId}`);
   }
 }
