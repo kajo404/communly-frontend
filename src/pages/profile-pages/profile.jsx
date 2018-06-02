@@ -105,7 +105,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="c-profile-wrapper">
         <img className="c-profile-img" src={this.state.image} alt="Profile" />
         <br />
         <br />
