@@ -5,9 +5,19 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
+import Avatar from 'material-ui/Avatar';
 
-const customModalStyle = {
-  width: '300px'
+const avatarStyles = {
+  top: '13px'
+};
+
+const contentStyle = {
+  width: '300px',
+  paddingTop: '-20px'
+};
+
+const checkAllStyles = {
+  marginTop: '-20px'
 };
 
 export default class AddMemberModal extends React.Component {
@@ -61,54 +71,68 @@ export default class AddMemberModal extends React.Component {
     return this.state.addedMembers.includes(userId);
   }
 
-  get buttonDisabled() {
-    return false;
-  }
-
   render() {
     const actions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.props.close} />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        style={{ marginRight: '7px' }}
+        onClick={this.props.close}
+      />,
       <RaisedButton
         label="Add to board"
-        disabled={this.buttonDisabled}
         primary={true}
         onClick={this.addMembersToBoard}
       />
     ];
 
     return (
-      <div className="c-create-task-modal">
+      <div>
         <Dialog
+          className="damn"
           actions={actions}
           modal={true}
-          contentStyle={customModalStyle}
+          contentStyle={contentStyle}
+          style={{ padding: 0 }}
           open={this.props.open}
         >
-          <List>
+          <div className="c-add-members-modal__content">
             <Subheader>Choose members to add: </Subheader>
-            {this.props.users.map((user, index) => (
+            <List style={{ padding: '10px' }}>
               <ListItem
-                key={index}
+                style={checkAllStyles}
+                key={'all'}
                 leftCheckbox={
                   <Checkbox
-                    checked={this.alreadyMember(user._id)}
-                    onCheck={this.handleToggle(user._id)}
+                    checked={this.state.allChecked}
+                    onCheck={this.toggleAll}
                   />
                 }
-                primaryText={user.name}
+                primaryText="Check all"
               />
-            ))}
-          </List>
-          <ListItem
-            key={'all'}
-            leftCheckbox={
-              <Checkbox
-                checked={this.state.allChecked}
-                onCheck={this.toggleAll}
-              />
-            }
-            primaryText="Check all"
-          />
+
+              {this.props.users.map((user, index) => (
+                <ListItem
+                  innerDivStyle={{ paddingBottom: '3px' }}
+                  key={index}
+                  rightAvatar={
+                    <Avatar
+                      src="http://via.placeholder.com/30x30"
+                      size={30}
+                      style={avatarStyles}
+                    />
+                  }
+                  leftCheckbox={
+                    <Checkbox
+                      checked={this.alreadyMember(user._id)}
+                      onCheck={this.handleToggle(user._id)}
+                    />
+                  }
+                  primaryText={user.name}
+                />
+              ))}
+            </List>
+          </div>
         </Dialog>
       </div>
     );

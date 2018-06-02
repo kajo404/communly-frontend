@@ -47,6 +47,7 @@ export default class CreateTaskBoardModal extends React.Component {
         label="Cancel"
         primary={true}
         onClick={this.props.handleClose}
+        style={{ marginRight: '7px' }}
       />,
       <RaisedButton
         label="Create"
@@ -62,6 +63,7 @@ export default class CreateTaskBoardModal extends React.Component {
           modal={true}
           contentStyle={customModalStyle}
           open={this.props.open}
+          actionsContainerStyle={{ paddingTop: 0 }}
         >
           <span> Name your new board. What is it about? </span>
           <TextField
