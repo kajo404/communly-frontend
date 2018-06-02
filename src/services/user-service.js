@@ -1,5 +1,4 @@
 import APIService from './API-service';
-import { WSAEPROVIDERFAILEDINIT } from 'constants';
 
 export default class UserService {
   static URL() {

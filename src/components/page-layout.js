@@ -53,7 +53,7 @@ class PageLayout extends React.Component {
   }
 
   logout() {
-    this.showHideProfile;
+    this.showHideProfile();
     UserService.logout();
   }
 
