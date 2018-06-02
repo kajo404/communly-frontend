@@ -26,7 +26,8 @@ const muiTheme = getMuiTheme({
     textColor: '#314f81',
     primary1Color: '#314f81',
     primary2Color: '#9ab1d9',
-    borderColor: grey400
+    primary3Color: '#9ab1d9',
+    pickerHeaderColor: '#314f81'
   }
 });
 
