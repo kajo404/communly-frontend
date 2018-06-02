@@ -107,6 +107,6 @@ export default class TaskBoardService {
   }
 
   static getAllTasks(taskListId) {
-    return APIService.get$(`${TaskBoardService.URL()}/${taskListId}`);
+    return APIService.get$(`${TaskBoardService.URL()}/byId/${taskListId}`);
   }
 }
