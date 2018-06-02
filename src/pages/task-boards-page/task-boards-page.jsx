@@ -7,6 +7,7 @@ import TaskBoardService from '../../services/task-board-service';
 import AssignMemberModal from './assign-member';
 import AddMemberModal from './add-member';
 import UserService from '../../services/user-service';
+
 class TaskBoardPage extends Component {
   taskBoardsSubscription;
   state = {
@@ -14,6 +15,7 @@ class TaskBoardPage extends Component {
     addMembersOpen: false,
     //so that i know which board called the modal and be able to make a correct backend call for addING MEMEBERS
     currentBoardOpening: '',
+    currentBoardMembers: [],
     boards: [],
     users: []
   };
@@ -22,6 +24,8 @@ class TaskBoardPage extends Component {
     super(props);
     this.updateBoards();
     this.getUsers();
+
+    console.log(UserService.getCurrentUser());
   }
 
   // Die drei funktionen drunter bracht man nur für das Modale Fenster AddMembers
@@ -35,14 +39,18 @@ class TaskBoardPage extends Component {
     this.setState({ addMembersOpen: false });
   };
 
-  openAddMembersModal = callingBoard => {
-    console.log(callingBoard);
-    this.setState({ addMembersOpen: true });
+  openAddMembersModal = (callingBoard, currentMembers) => {
+    this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
+    this.setState({ addMembersOpen: true });
   };
 
   // This gets called by the board that has added new members
   addMembers = members => {
+    if (!members.includes(UserService.getCurrentUser().id)) {
+      members.push(UserService.getCurrentUser().id);
+    }
+
     TaskBoardService.addMembers(this.state.currentBoardOpening, members)
       .then(response => {
         //TODO backend call for getting only one board again
@@ -79,6 +87,7 @@ class TaskBoardPage extends Component {
               key={index}
               updateView={this.updateBoards}
               openAddMembersModal={this.openAddMembersModal}
+              setCurrentBoardMembers={this.setCurrentBoardMembers}
             />
           ))}
         </div>
@@ -92,8 +101,11 @@ class TaskBoardPage extends Component {
           handleClose={this.handleClose}
         />
         <AddMemberModal
-          users={this.state.users}
+          users={this.state.users.filter(
+            user => user._id !== UserService.getCurrentUser().id
+          )}
           addMembers={this.addMembers}
+          currentMembers={this.state.currentBoardMembers}
           open={this.state.addMembersOpen}
           close={this.handleAddMembersClose}
         />

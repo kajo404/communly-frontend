@@ -5,7 +5,6 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddMemberModal from './add-member';
 
 import TaskBoardService from '../../services/task-board-service';
 
@@ -42,7 +41,10 @@ class TaskBoard extends Component {
   };
 
   openAddMembersModal = () => {
-    this.props.openAddMembersModal(this.props.board._id);
+    this.props.openAddMembersModal(
+      this.props.board._id,
+      this.props.board.members
+    );
   };
 
   updateTasks = () => {
@@ -84,7 +86,8 @@ class TaskBoard extends Component {
         </span>{' '}
         <br />
         <span>
-          Members: {this.props.board.members.map(member => member.name + ', ')}
+          Members:{' '}
+          {this.props.board.members.map(member => member.name).join(', ')}
         </span>
         <hr className="c-task-board__divider" />
         <FloatingActionButton
@@ -99,8 +102,7 @@ class TaskBoard extends Component {
           className="c-task-board__close-icon material-icons"
           onClick={this.deleteBoard}
         >
-          {' '}
-          close{' '}
+          close
         </i>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (

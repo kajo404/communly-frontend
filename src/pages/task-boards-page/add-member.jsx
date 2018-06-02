@@ -15,9 +15,18 @@ export default class AddMemberModal extends React.Component {
     super(props);
 
     this.state = {
-      open: true,
+      open: false,
+      allChecked: false,
       addedMembers: []
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({
+        addedMembers: this.props.currentMembers.map(member => member._id)
+      });
+    }
   }
 
   addMembersToBoard = () => {
@@ -25,19 +34,35 @@ export default class AddMemberModal extends React.Component {
   };
 
   handleToggle = key => event => {
-    const addedMembers = this.state.addedMembers;
-    if (addedMembers.indexOf(key) >= 0) {
-      addedMembers.splice(addedMembers.indexOf(key), 1);
+    const members = [...this.state.addedMembers];
+
+    if (members.includes(key)) {
+      members.splice(members.indexOf(key), 1);
     } else {
-      addedMembers.push(key);
+      members.push(key);
     }
+
     this.setState({
-      addedMembers: addedMembers
+      addedMembers: members
     });
   };
 
+  toggleAll = () => {
+    const members = !this.state.allChecked
+      ? [...this.props.users.map(user => user._id)]
+      : [];
+    this.setState({
+      addedMembers: members,
+      allChecked: !this.state.allChecked
+    });
+  };
+
+  alreadyMember(userId) {
+    return this.state.addedMembers.includes(userId);
+  }
+
   get buttonDisabled() {
-    return this.state.addedMembers.length === 0;
+    return false;
   }
 
   render() {
@@ -65,12 +90,25 @@ export default class AddMemberModal extends React.Component {
               <ListItem
                 key={index}
                 leftCheckbox={
-                  <Checkbox onCheck={this.handleToggle(user._id)} />
+                  <Checkbox
+                    checked={this.alreadyMember(user._id)}
+                    onCheck={this.handleToggle(user._id)}
+                  />
                 }
                 primaryText={user.name}
               />
             ))}
           </List>
+          <ListItem
+            key={'all'}
+            leftCheckbox={
+              <Checkbox
+                checked={this.state.allChecked}
+                onCheck={this.toggleAll}
+              />
+            }
+            primaryText="Check all"
+          />
         </Dialog>
       </div>
     );
