@@ -64,7 +64,3 @@ export default class TaskService {
     });
   }
 
-  static getAllTasks(taskListId) {
-    return APIService.get$(`${TaskService.URL()}/byId/${taskListId}`);
-  }
-}

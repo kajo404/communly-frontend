@@ -4,6 +4,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import CreateTaskModal from './create-task-modal';
 import TaskBoard from './task-board';
 import TaskBoardService from '../../services/task-board-service';
+import AssignMemberModal from './assign-member';
 
 class TaskBoardPage extends Component {
   taskBoardsSubscription;
@@ -19,7 +20,9 @@ class TaskBoardPage extends Component {
 
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
-      .then(data => this.setState({ boards: data.tasklists }))
+      .then(data => {
+        this.setState({ boards: data.tasklists });
+      })
       .catch(error => console.error(error));
   };
 
@@ -54,6 +57,7 @@ class TaskBoardPage extends Component {
           handleClose={this.handleClose}
           createTaskBoard={this.createTaskBoard}
         />
+        {/* <AssignMemberModal /> */}
       </div>
     );
   }

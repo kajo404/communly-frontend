@@ -6,6 +6,10 @@ export default class UserService {
     return APIService.apiURL() + '/auth';
   }
 
+  static usersURL() {
+    return 'http://localhost:3000/users';
+  }
+
   static register(name, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
@@ -93,6 +97,10 @@ export default class UserService {
         }
       );
     });
+  }
+
+  static getAllUsers() {
+    return APIService.get$(`${UserService.usersURL()}/`);
   }
 
   static isAuthenticated() {
