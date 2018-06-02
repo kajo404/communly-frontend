@@ -22,6 +22,36 @@ export default class TaskBoardService {
     });
   }
 
+  static getTasklistsForUserAsAuthor() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${TaskBoardService.URL()}/getTasklistsForUserAsAuthor`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getTasklistsForUserAsMemeber() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${TaskBoardService.URL()}/getTasklistsForUserAsMemeber`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static delete(taskBoardId) {
     return new Promise((resolve, reject) => {
       APIService.remove(

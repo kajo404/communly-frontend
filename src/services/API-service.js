@@ -15,18 +15,6 @@ export default class APIService {
     return header;
   }
 
-  // static headerWithFormData() {
-  //   let token = 'Bearer ' + window.localStorage['jwtToken'];
-
-  //   let header = new Headers();
-  //   if (token) {
-  //     header.append('authorization', token);
-  //   }
-  //   header.append('Content-Type', 'multipart/form-data');
-
-  //   return header;
-  // }
-
   static get(url, onSuccess, onError) {
     fetch(url, {
       method: 'GET',
@@ -139,36 +127,6 @@ export default class APIService {
         onError(e.message);
       });
   }
-
-  // static formPost(url, data, onSuccess, onError) {
-
-  //   fetch(url, {
-  //     method: 'POST',
-  //     headers: APIService.headerWithFormData(),
-  //     body: data
-  //   })
-  //     .then(resp => {
-  //       if (resp.ok) {
-  //         console.log(resp);
-  //         return resp.json();
-  //       } else if (this.checkIfUnauthorized(resp)) {
-  //         window.location = '/#login';
-  //       } else {
-  //         resp.json().then(json => {
-  //           onError(json.error);
-  //         });
-  //       }
-  //     })
-  //     .then(resp => {
-  //       if (resp.hasOwnProperty('token')) {
-  //         window.localStorage['jwtToken'] = resp.token;
-  //       }
-  //       onSuccess(resp);
-  //     })
-  //     .catch(e => {
-  //       onError(e.message);
-  //     });
-  // }
 
   static remove(url, onSuccess, onError) {
     fetch(url, {

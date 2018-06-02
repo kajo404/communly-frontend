@@ -30,12 +30,10 @@ class PageLayout extends React.Component {
     if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
-          const buffer = result.image.data;
-          const b64 = new Buffer(buffer).toString('base64');
+          const dataUrl = result.image;
 
           this.setState({
-            imageContentType: result.image.contentType,
-            imageData: b64
+            image: dataUrl
           });
         })
         .catch(e => {
@@ -83,17 +81,7 @@ class PageLayout extends React.Component {
               <ListItem
                 style={style}
                 disabled={true}
-                leftAvatar={
-                  <Avatar
-                    src={
-                      'data:' +
-                      this.state.imageContentType +
-                      ';base64,' +
-                      this.state.imageData
-                    }
-                    size={30}
-                  />
-                }
+                leftAvatar={<Avatar src={this.state.image} size={30} />}
               >
                 {this.userName}
               </ListItem>

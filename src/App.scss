@@ -167,5 +167,38 @@
 //Profile
 
 .c-profile-img{
+  position: relative;
+  width: 206px;
+  height: 206px;
+  margin-top: 80px;
+  text-align: left;
+  border: 3px solid rgb(49, 79, 129); 
+  border-radius: 200px;
+  text-align: center;
+}
+
+.c-profile-imgSelector{
+  display: flex;
+  width: 100%;
+}
+
+.c-profile-imgPreviewContainer{
+  position: relative;
+  width: 206px;
+  height: 206px;
+  margin-left: 100px;
+  margin-top: 50px;
+  text-align: left;
+  border: 3px dashed rgb(49, 79, 129); 
+  border-radius: 200px;
+  text-align: center;
+  line-height: 200px;
+}
+
+.c-profile-imgPreview{
+  position: absolute;
   width: 200px;
+  height: 200px;
+  left: 0px;
+  top: 0px;
 }

@@ -1,4 +1,5 @@
 import APIService from './API-service';
+import { WSAEPROVIDERFAILEDINIT } from 'constants';
 
 export default class UserService {
   static URL() {
@@ -75,18 +76,14 @@ export default class UserService {
     });
   }
 
-  static changeUserPicture(imageData, imageType) {
-    console.log('imageData: ' + imageData);
-    console.log('imageData: ' + imageType);
-    console.log('imageData: ' + JSON.stringify(imageData));
-    console.log('imageData: ' + imageType);
+  static changeUserPicture(fileData) {
+    console.log(fileData);
 
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.URL()}/changeUserPicture`,
         {
-          imageData: imageData,
-          imageType: imageType
+          imageData: fileData
         },
         function(data) {
           resolve(data);

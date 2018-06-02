@@ -20,10 +20,25 @@ export default class TaskService {
     });
   }
 
+  static getAllAsignedTasksForUser() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${TaskService.URL()}/getAllAsignedTasksForUser`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static delete(taskId) {
     return new Promise((resolve, reject) => {
       APIService.remove(
-        `${TaskService.baseURL()}/${taskId}`,
+        `${TaskService.URL()}/${taskId}`,
         function(data) {
           resolve(data);
         },
@@ -50,6 +65,6 @@ export default class TaskService {
   }
 
   static getAllTasks(taskListId) {
-    return APIService.get$(`${TaskService.URL()}/${taskListId}`);
+    return APIService.get$(`${TaskService.URL()}/byId/${taskListId}`);
   }
 }
