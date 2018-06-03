@@ -23,7 +23,7 @@ export default class TaskService {
   static getAllAsignedTasksForUser() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${TaskService.URL()}/getAllAsignedTasksForUser`,
+        `${TaskService.URL()}/allAsignedTasksForUser`,
 
         function(data) {
           resolve(data);

@@ -25,7 +25,7 @@ export default class TaskBoardService {
   static getTasklistsForUserAsAuthor() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${TaskBoardService.URL()}/getTasklistsForUserAsAuthor`,
+        `${TaskBoardService.URL()}/tasklistsForUserAsAuthor`,
 
         function(data) {
           resolve(data);
@@ -40,7 +40,7 @@ export default class TaskBoardService {
   static getTasklistsForUserAsMemeber() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${TaskBoardService.URL()}/getTasklistsForUserAsMemeber`,
+        `${TaskBoardService.URL()}/tasklistsForUserAsMemeber`,
 
         function(data) {
           resolve(data);

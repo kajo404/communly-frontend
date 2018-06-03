@@ -84,7 +84,7 @@ export default class UserService {
 
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${UserService.URL()}/changeUserPicture`,
+        `${UserService.URL()}/userPicture`,
         {
           imageData: fileData
         },
