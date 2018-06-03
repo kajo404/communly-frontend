@@ -7,6 +7,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import TaskBoardService from '../../services/task-board-service';
+import UserService from '../../services/user-service';
 
 const addButtonStyle = {
   position: 'absolute',
@@ -78,6 +79,10 @@ class TaskBoard extends Component {
     }
   };
 
+  isUserAuthor = () => {
+    return this.props.board.author._id === UserService.getCurrentUser().id;
+  };
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
@@ -94,6 +99,7 @@ class TaskBoard extends Component {
           mini={true}
           iconStyle={iconStyle}
           style={addButtonStyle}
+          disabled={!this.isUserAuthor()}
           onClick={this.openAddMembersModal}
         >
           <ContentAdd />
