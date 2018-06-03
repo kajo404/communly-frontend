@@ -24,8 +24,6 @@ class TaskBoardPage extends Component {
     super(props);
     this.updateBoards();
     this.getUsers();
-
-    console.log(UserService.getCurrentUser());
   }
 
   // Die drei funktionen drunter bracht man nur für das Modale Fenster AddMembers
