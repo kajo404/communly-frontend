@@ -80,8 +80,6 @@ export default class UserService {
   }
 
   static changeUserPicture(fileData) {
-    console.log(fileData);
-
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.URL()}/userPicture`,

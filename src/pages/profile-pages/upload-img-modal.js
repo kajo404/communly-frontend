@@ -42,7 +42,7 @@ export default class NewUploadModal extends React.Component {
         window.location = 'profile';
       })
       .catch(e => {
-        console.log(e);
+        console.error(e);
         this.setState({ error: e });
       });
   };
