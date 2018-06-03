@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import NewUploadModal from './upload-img-modal';
+import NewEditModal from './edit-profile-modal';
 import RaisedButton from 'material-ui/RaisedButton';
 
 //Services
@@ -148,11 +149,9 @@ class UserDetailComponent extends Component {
         <div className="p-profile-uploadButton">
           <NewUploadModal />
         </div>
-        <RaisedButton
-          label="Edit"
-          primary={true}
-          className="p-profile-editButton"
-        />
+        <div className="p-profile-editButton">
+          <NewEditModal />
+        </div>
       </Paper>
     );
   }
