@@ -85,8 +85,8 @@ export default class NewUploadModal extends React.Component {
     ];
 
     return (
-      <div className="c-create-task-modal">
-        <RaisedButton label="Upload" primary={true} onClick={this.handleOpen} />
+      <div>
+        <RaisedButton label="Change" primary={true} onClick={this.handleOpen} />
         <Dialog
           title="Upload new Profile Picture"
           actions={actions}

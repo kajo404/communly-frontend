@@ -15,7 +15,8 @@ import UserService from '../services/user-service';
 
 const style = {
   color: 'white',
-  fontWeight: '300'
+  fontWeight: '300',
+  lineheigth: '35px'
 };
 
 const appBarStyle = {
@@ -96,7 +97,13 @@ class PageLayout extends React.Component {
               <ListItem
                 style={style}
                 disabled={true}
-                leftAvatar={<Avatar src={this.state.image} size={30} />}
+                leftAvatar={
+                  <Avatar
+                    src={this.state.image}
+                    size={35}
+                    className="c-app-bar-avatarImg"
+                  />
+                }
               >
                 {this.userName}
               </ListItem>
