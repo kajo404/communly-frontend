@@ -6,9 +6,6 @@ import AnnouncementService from '../../services/announcements-service';
 import TaskService from '../../services/task-service';
 import TaskBoardService from '../../services/task-board-service';
 
-import Avatar from 'react-avatar-edit';
-import RaisedButton from 'material-ui/RaisedButton';
-
 import NewUploadModal from './upload-img-modal';
 
 class Profile extends React.Component {
