@@ -9,7 +9,7 @@ const customModalStyle = {
   width: '450px'
 };
 
-export default class CreateTaskModal extends React.Component {
+export default class CreateTaskBoardModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,6 +26,12 @@ export default class CreateTaskModal extends React.Component {
     this.setState({ modal: { title: newValue } });
   }
 
+  handleKeyPress = event => {
+    if (event.key === 'Enter') {
+      this.createTaskBoard();
+    }
+  };
+
   createTaskBoard = () => {
     TaskBoardService.create(this.state.modal.title)
       .then(response => {
@@ -41,6 +47,7 @@ export default class CreateTaskModal extends React.Component {
         label="Cancel"
         primary={true}
         onClick={this.props.handleClose}
+        style={{ marginRight: '7px' }}
       />,
       <RaisedButton
         label="Create"
@@ -56,6 +63,7 @@ export default class CreateTaskModal extends React.Component {
           modal={true}
           contentStyle={customModalStyle}
           open={this.props.open}
+          actionsContainerStyle={{ paddingTop: 0 }}
         >
           <span> Name your new board. What is it about? </span>
           <TextField
@@ -65,6 +73,7 @@ export default class CreateTaskModal extends React.Component {
             placeholder="Untitled"
             value={this.state.modal.title}
             onChange={this.onTitleChange}
+            onKeyPress={this.handleKeyPress}
           />
         </Dialog>
       </div>
