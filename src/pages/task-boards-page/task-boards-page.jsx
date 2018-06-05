@@ -1,22 +1,62 @@
 import React, { Component } from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import CreateTaskModal from './create-task-modal';
+import CreateTaskBoardModal from './create-task-board-modal';
 import TaskBoard from './task-board';
 import TaskBoardService from '../../services/task-board-service';
 import AssignMemberModal from './assign-member';
+import AddMemberModal from './add-member';
+import UserService from '../../services/user-service';
 
 class TaskBoardPage extends Component {
   taskBoardsSubscription;
   state = {
     modalOpen: false,
-    boards: []
+    addMembersOpen: false,
+    //so that i know which board called the modal and be able to make a correct backend call for addING MEMEBERS
+    currentBoardOpening: '',
+    currentBoardMembers: [],
+    boards: [],
+    users: []
   };
 
   constructor(props) {
     super(props);
     this.updateBoards();
+    this.getUsers();
   }
+
+  // Die drei funktionen drunter bracht man nur für das Modale Fenster AddMembers
+  getUsers() {
+    this.usersSubscription = UserService.getAllUsers()
+      .then(response => this.setState({ users: response.users }))
+      .catch(error => console.error(error));
+  }
+
+  handleAddMembersClose = () => {
+    this.setState({ addMembersOpen: false });
+  };
+
+  openAddMembersModal = (callingBoard, currentMembers) => {
+    this.setState({ currentBoardMembers: currentMembers });
+    this.setState({ currentBoardOpening: callingBoard });
+    this.setState({ addMembersOpen: true });
+  };
+
+  // This gets called by the board that has added new members
+  addMembers = members => {
+    if (!members.includes(UserService.getCurrentUser().id)) {
+      members.push(UserService.getCurrentUser().id);
+    }
+
+    TaskBoardService.addMembers(this.state.currentBoardOpening, members)
+      .then(response => {
+        //TODO backend call for getting only one board again
+        this.updateBoards();
+        this.handleAddMembersClose();
+      })
+      .catch(error => console.error(error));
+  };
 
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
@@ -44,6 +84,8 @@ class TaskBoardPage extends Component {
               board={item}
               key={index}
               updateView={this.updateBoards}
+              openAddMembersModal={this.openAddMembersModal}
+              setCurrentBoardMembers={this.setCurrentBoardMembers}
             />
           ))}
         </div>
@@ -52,10 +94,18 @@ class TaskBoardPage extends Component {
             <ContentAdd />
           </FloatingActionButton>
         </div>
-        <CreateTaskModal
+        <CreateTaskBoardModal
           open={this.state.modalOpen}
           handleClose={this.handleClose}
-          createTaskBoard={this.createTaskBoard}
+        />
+        <AddMemberModal
+          users={this.state.users.filter(
+            user => user._id !== UserService.getCurrentUser().id
+          )}
+          addMembers={this.addMembers}
+          currentMembers={this.state.currentBoardMembers}
+          open={this.state.addMembersOpen}
+          close={this.handleAddMembersClose}
         />
         {/* <AssignMemberModal /> */}
       </div>

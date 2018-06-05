@@ -5,9 +5,19 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { List, ListItem } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
+import Avatar from 'material-ui/Avatar';
 
-const customModalStyle = {
-  width: '300px'
+const avatarStyles = {
+  top: '13px'
+};
+
+const contentStyle = {
+  width: '300px',
+  paddingTop: '-20px'
+};
+
+const checkAllStyles = {
+  marginTop: '-20px'
 };
 
 export default class AddMemberModal extends React.Component {
@@ -15,9 +25,18 @@ export default class AddMemberModal extends React.Component {
     super(props);
 
     this.state = {
-      open: true,
+      open: false,
+      allChecked: false,
       addedMembers: []
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({
+        addedMembers: this.props.currentMembers.map(member => member._id)
+      });
+    }
   }
 
   addMembersToBoard = () => {
@@ -25,19 +44,31 @@ export default class AddMemberModal extends React.Component {
   };
 
   handleToggle = key => event => {
-    const addedMembers = this.state.addedMembers;
-    if (addedMembers.indexOf(key) >= 0) {
-      addedMembers.splice(addedMembers.indexOf(key), 1);
+    const members = [...this.state.addedMembers];
+
+    if (members.includes(key)) {
+      members.splice(members.indexOf(key), 1);
     } else {
-      addedMembers.push(key);
+      members.push(key);
     }
+
     this.setState({
-      addedMembers: addedMembers
+      addedMembers: members
     });
   };
 
-  get buttonDisabled() {
-    return this.state.addedMembers.length === 0;
+  toggleAll = () => {
+    const members = !this.state.allChecked
+      ? [...this.props.users.map(user => user._id)]
+      : [];
+    this.setState({
+      addedMembers: members,
+      allChecked: !this.state.allChecked
+    });
+  };
+
+  alreadyMember(userId) {
+    return this.state.addedMembers.includes(userId);
   }
 
   render() {
@@ -45,36 +76,63 @@ export default class AddMemberModal extends React.Component {
       <FlatButton
         label="Cancel"
         primary={true}
-        onClick={this.props.handleClose}
+        style={{ marginRight: '7px' }}
+        onClick={this.props.close}
       />,
       <RaisedButton
         label="Add to board"
-        disabled={this.buttonDisabled}
         primary={true}
         onClick={this.addMembersToBoard}
       />
     ];
 
     return (
-      <div className="c-create-task-modal">
+      <div>
         <Dialog
+          className="damn"
           actions={actions}
           modal={true}
-          contentStyle={customModalStyle}
+          contentStyle={contentStyle}
+          style={{ padding: 0 }}
           open={this.props.open}
         >
-          <List>
+          <div className="c-add-members-modal__content">
             <Subheader>Choose members to add: </Subheader>
-            {this.props.users.map((user, index) => (
+            <List style={{ padding: '10px' }}>
               <ListItem
-                key={index}
+                style={checkAllStyles}
+                key={'all'}
                 leftCheckbox={
-                  <Checkbox onCheck={this.handleToggle(user._id)} />
+                  <Checkbox
+                    checked={this.state.allChecked}
+                    onCheck={this.toggleAll}
+                  />
                 }
-                primaryText={user.name}
+                primaryText="Check all"
               />
-            ))}
-          </List>
+
+              {this.props.users.map((user, index) => (
+                <ListItem
+                  innerDivStyle={{ paddingBottom: '3px' }}
+                  key={index}
+                  rightAvatar={
+                    <Avatar
+                      src="http://via.placeholder.com/30x30"
+                      size={30}
+                      style={avatarStyles}
+                    />
+                  }
+                  leftCheckbox={
+                    <Checkbox
+                      checked={this.alreadyMember(user._id)}
+                      onCheck={this.handleToggle(user._id)}
+                    />
+                  }
+                  primaryText={user.name}
+                />
+              ))}
+            </List>
+          </div>
         </Dialog>
       </div>
     );
