@@ -22,7 +22,7 @@ export default class AnnouncementsService {
   static getAnnoncementsForUser() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AnnouncementsService.URL()}/annoncementsForUser`,
+        `${AnnouncementsService.URL()}/user/annoncements`,
 
         function(data) {
           resolve(data);
