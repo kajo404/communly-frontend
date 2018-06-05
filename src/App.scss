@@ -56,6 +56,12 @@
   position: relative;
 }
 
+.c-task-board__close-icon.material-icons.disabled {
+  fill:rgba(0, 0, 0, 0.3);
+  color :rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
 .c-task-board__divider {
   width: 100%;
   max-width: 220px;
@@ -96,7 +102,7 @@
     top: 0;
     width: 30px;
     opacity: 0;
-    transition: 0.1 opacity;
+    transition: 0.13s opacity ease-in;
     z-index: 20;
     pointer-events: none;
 }
@@ -122,11 +128,10 @@
   top: 0;
   width: 30px;
   opacity: 0;
-  transition: 0.1 opacity;
+  transition: 0.13s opacity ease-in;
   z-index: 20;
   pointer-events: none;
 }
-
 
 //Profile
 
@@ -181,7 +186,7 @@
   height: 206px;
   margin: 30px;
   text-align: left;
-  border: 3px solid rgb(49, 79, 129); 
+  border: 3px solid rgb(49, 79, 129);
   border-radius: 200px;
   vertical-align: top;
 }
@@ -198,7 +203,7 @@
   margin-left: 50px;
   margin-top: 50px;
   text-align: left;
-  border: 3px dashed rgb(49, 79, 129); 
+  border: 3px dashed rgb(49, 79, 129);
   border-radius: 200px;
   text-align: center;
   line-height: 200px;
@@ -212,4 +217,13 @@
   top: 0px;
 }
 
+.c-icon-warning {
+  font-size: 30px;
+  display: inline-block;
+  margin-right: 10px;
+}
 
+.c-warning__content {
+  display: flex;
+  align-items: center;
+}

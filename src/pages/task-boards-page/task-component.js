@@ -9,15 +9,26 @@ class Task extends Component {
       checked: false
     };
 
-    this.updateCheck = this.updateCheck.bind(this);
     this.getCheckboxClass = this.getCheckboxClass.bind(this);
   }
 
-  updateCheck() {
-    this.setState({
-      checked: !this.state.checked
-    });
-  }
+  updateCheck = () => {
+    this.setState(
+      {
+        checked: !this.state.checked
+      },
+      () => {
+        console.log(this.state.checked);
+        //todo populate task to parent, otherwise it is not updated
+        TaskService.changeTaskStatus(this.props.id, this.state.checked)
+          .then(response => {
+            console.log(response);
+            this.props.updateView();
+          })
+          .catch(error => console.error(error));
+      }
+    );
+  };
 
   deleteTask = () => {
     TaskService.delete(this.props.id)
@@ -39,7 +50,7 @@ class Task extends Component {
         <Checkbox
           style={{ width: 'calc(100% - 30px)' }}
           className={this.getCheckboxClass()}
-          checked={this.state.checked}
+          checked={this.props.isDone}
           onCheck={this.updateCheck}
           label={this.props.value}
         />
@@ -52,8 +63,6 @@ class Task extends Component {
           cancel{' '}
         </i>
       </li>
-
-      //TODO: assign member to task modal
     );
   }
 }
