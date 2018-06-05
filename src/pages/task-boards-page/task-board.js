@@ -20,14 +20,27 @@ const iconStyle = {
   width: '20px',
   height: '20px'
 };
+
+const inputStyle = {
+  backgroundColor: 'transparent',
+  outline: 0,
+  border: 0,
+  fontSize: '16px',
+  color: 'rgb(49,79,129)',
+  maxWidth: '200px'
+};
 class TaskBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: this.props.board.tasks,
-      newTask: ''
+      newTask: '',
+      currentTitle: this.props.board.title
     };
+    this.textInputDebounceTimeoutIndex = -1;
+    this.textInputDebounceTime = 500;
     this.updateTasks();
+    console.log(this.props.board);
   }
 
   createTask = newTaskText => {
@@ -48,17 +61,21 @@ class TaskBoard extends Component {
     );
   };
 
+  openDeleteConfirmationModal = () => {
+    this.props.openDeleteConfirmationModal(this.props.board._id);
+  };
+
   updateTasks = () => {
     this.tasksSubscription = TaskBoardService.getAllTasks(this.props.board._id)
       .then(data => this.setState({ tasks: data.taskList.tasks }))
       .catch(error => console.error(error));
   };
 
-  deleteBoard = () => {
-    TaskBoardService.delete(this.props.board._id)
-      .then(data => this.props.updateView())
-      .catch(error => console.error(error));
-  };
+  // deleteBoard = () => {
+  //   TaskBoardService.delete(this.props.board._id)
+  //     .then(data => this.props.updateView())
+  //     .catch(error => console.error(error));
+  // };
 
   onClick = event => {
     event.preventDefault();
@@ -83,13 +100,40 @@ class TaskBoard extends Component {
     return this.props.board.author._id === UserService.getCurrentUser().id;
   };
 
+  onTitleChange = event => {
+    this.setState({ currentTitle: event.target.value });
+    if (this.textInputDebounceTimeoutIndex > -1) {
+      clearTimeout(this.textInputDebounceTimeoutIndex);
+    }
+    this.textInputDebounceTimeoutIndex = setTimeout(
+      () => this.updateBoardTitle(),
+      this.textInputDebounceTime
+    );
+  };
+
+  updateBoardTitle = () => {
+    this.props.updateBoardTitle(this.props.board._id, this.state.currentTitle);
+  };
+
+  get deleteIconClasses() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? 'c-task-board__close-icon material-icons'
+      : 'c-task-board__close-icon material-icons disabled';
+  }
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
-        <span>
-          {this.props.board.title} (Author: {this.props.board.author.name})
-        </span>{' '}
+        <TextField
+          id="title"
+          ref={this.textInput}
+          disabled={!this.isUserAuthor()}
+          style={inputStyle}
+          value={this.state.currentTitle}
+          onChange={this.onTitleChange}
+        />
         <br />
+        <span>(Author: {this.props.board.author.name})</span> <br />
         <span>
           Members:{' '}
           {this.props.board.members.map(member => member.name).join(', ')}
@@ -105,8 +149,8 @@ class TaskBoard extends Component {
           <ContentAdd />
         </FloatingActionButton>
         <i
-          className="c-task-board__close-icon material-icons"
-          onClick={this.deleteBoard}
+          className={this.deleteIconClasses}
+          onClick={this.openDeleteConfirmationModal}
         >
           close
         </i>

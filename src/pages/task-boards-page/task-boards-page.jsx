@@ -6,6 +6,7 @@ import TaskBoard from './task-board';
 import TaskBoardService from '../../services/task-board-service';
 import AssignMemberModal from './assign-member';
 import AddMemberModal from './add-member';
+import DeleteBoardConfirmation from './delete-confirmation';
 import UserService from '../../services/user-service';
 
 class TaskBoardPage extends Component {
@@ -13,6 +14,7 @@ class TaskBoardPage extends Component {
   state = {
     modalOpen: false,
     addMembersOpen: false,
+    deleteBoardOpen: false,
     //so that i know which board called the modal and be able to make a correct backend call for addING MEMEBERS
     currentBoardOpening: '',
     currentBoardMembers: [],
@@ -37,6 +39,15 @@ class TaskBoardPage extends Component {
     this.setState({ addMembersOpen: false });
   };
 
+  handleDeleteBoardClose = () => {
+    this.setState({ deleteBoardOpen: false });
+  };
+
+  openDeleteBoardModal = callingBoard => {
+    this.setState({ currentBoardOpening: callingBoard });
+    this.setState({ deleteBoardOpen: true });
+  };
+
   openAddMembersModal = (callingBoard, currentMembers) => {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
@@ -58,12 +69,25 @@ class TaskBoardPage extends Component {
       .catch(error => console.error(error));
   };
 
+  deleteBoard = () => {
+    TaskBoardService.delete(this.state.currentBoardOpening)
+      .then(response => {
+        this.handleDeleteBoardClose();
+        this.updateBoards();
+      })
+      .catch(error => console.error(error));
+  };
+
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
       .then(data => {
         this.setState({ boards: data.tasklists });
       })
       .catch(error => console.error(error));
+  };
+
+  updateBoardTitle = (boardId, title) => {
+    TaskBoardService.updateBoardTitle(boardId, title);
   };
 
   handleOpen = () => {
@@ -85,7 +109,9 @@ class TaskBoardPage extends Component {
               key={index}
               updateView={this.updateBoards}
               openAddMembersModal={this.openAddMembersModal}
+              openDeleteConfirmationModal={this.openDeleteBoardModal}
               setCurrentBoardMembers={this.setCurrentBoardMembers}
+              updateBoardTitle={this.updateBoardTitle}
             />
           ))}
         </div>
@@ -106,6 +132,11 @@ class TaskBoardPage extends Component {
           currentMembers={this.state.currentBoardMembers}
           open={this.state.addMembersOpen}
           close={this.handleAddMembersClose}
+        />
+        <DeleteBoardConfirmation
+          open={this.state.deleteBoardOpen}
+          close={this.handleDeleteBoardClose}
+          deleteBoard={this.deleteBoard}
         />
         {/* <AssignMemberModal /> */}
       </div>
