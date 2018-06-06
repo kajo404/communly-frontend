@@ -6,9 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 //Services
 import UserService from '../../services/user-service';
-import AnnouncementService from '../../services/announcements-service';
-import TaskService from '../../services/task-service';
-import TaskBoardService from '../../services/task-board-service';
 
 class UserDetailComponent extends Component {
   date;
@@ -40,7 +37,7 @@ class UserDetailComponent extends Component {
         this.setState({ error: e });
       });
 
-    AnnouncementService.getAnnoncementsForUser()
+    UserService.getAnnoncements()
       .then(result => {
         var numberAnnouncements = Object.keys(result.announcements).length;
         this.setState({ numberAnnouncements: numberAnnouncements });
@@ -50,7 +47,7 @@ class UserDetailComponent extends Component {
         this.setState({ error: e });
       });
 
-    TaskBoardService.getTasklistsForUserAsAuthor()
+    UserService.getTasklistsAsAuthor()
       .then(result => {
         var numberTasklistsAuthor = Object.keys(result.tasklists).length;
         this.setState({ numberTasklistsAuthor: numberTasklistsAuthor });
@@ -60,7 +57,7 @@ class UserDetailComponent extends Component {
         this.setState({ error: e });
       });
 
-    TaskBoardService.getTasklistsForUserAsMemeber()
+    UserService.getTasklistsAsMemeber()
       .then(result => {
         var numberTasklistsMember = Object.keys(result.tasklists).length;
         this.setState({ numberTasklistsMember: numberTasklistsMember });
@@ -70,7 +67,7 @@ class UserDetailComponent extends Component {
         this.setState({ error: e });
       });
 
-    TaskService.getAllAsignedTasksForUser()
+    UserService.getAllAsignedTasks()
       .then(result => {
         var numberAssignedTasks = Object.keys(result.tasks).length;
         this.setState({ numberAssignedTasks: numberAssignedTasks });

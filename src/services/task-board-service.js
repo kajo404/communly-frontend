@@ -22,36 +22,6 @@ export default class TaskBoardService {
     });
   }
 
-  static getTasklistsForUserAsAuthor() {
-    return new Promise((resolve, reject) => {
-      APIService.get(
-        `${TaskBoardService.URL()}/author/tasklists`,
-
-        function(data) {
-          resolve(data);
-        },
-        function(textStatus) {
-          reject(textStatus);
-        }
-      );
-    });
-  }
-
-  static getTasklistsForUserAsMemeber() {
-    return new Promise((resolve, reject) => {
-      APIService.get(
-        `${TaskBoardService.URL()}/member/tasklists`,
-
-        function(data) {
-          resolve(data);
-        },
-        function(textStatus) {
-          reject(textStatus);
-        }
-      );
-    });
-  }
-
   static createTask(newTask) {
     return new Promise((resolve, reject) => {
       APIService.post(

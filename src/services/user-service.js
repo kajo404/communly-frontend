@@ -82,7 +82,7 @@ export default class UserService {
   static changeUserPicture(fileData) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${UserService.URL()}/userPicture`,
+        `${UserService.usersURL()}/changePicture`,
         {
           imageData: fileData
         },
@@ -102,5 +102,65 @@ export default class UserService {
 
   static isAuthenticated() {
     return !!window.localStorage['jwtToken'];
+  }
+
+  static getAllAsignedTasks() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${UserService.usersURL()}/tasks`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getTasklistsAsAuthor() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${UserService.usersURL()}/tasklists/author`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getTasklistsAsMemeber() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${UserService.usersURL()}/tasklists/member`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getAnnoncements() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${UserService.usersURL()}/annoncements`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
   }
 }

@@ -20,21 +20,6 @@ export default class TaskService {
     });
   }
 
-  static getAllAsignedTasksForUser() {
-    return new Promise((resolve, reject) => {
-      APIService.get(
-        `${TaskService.URL()}/user/asignedTasks`,
-
-        function(data) {
-          resolve(data);
-        },
-        function(textStatus) {
-          reject(textStatus);
-        }
-      );
-    });
-  }
-
   static delete(taskId) {
     return new Promise((resolve, reject) => {
       APIService.remove(
