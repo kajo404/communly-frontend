@@ -29,6 +29,7 @@ const inputStyle = {
   color: 'rgb(49,79,129)',
   maxWidth: '200px'
 };
+
 class TaskBoard extends Component {
   constructor(props) {
     super(props);
@@ -40,7 +41,6 @@ class TaskBoard extends Component {
     this.textInputDebounceTimeoutIndex = -1;
     this.textInputDebounceTime = 500;
     this.updateTasks();
-    console.log(this.props.board);
   }
 
   createTask = newTaskText => {
@@ -67,15 +67,11 @@ class TaskBoard extends Component {
 
   updateTasks = () => {
     this.tasksSubscription = TaskBoardService.getAllTasks(this.props.board._id)
-      .then(data => this.setState({ tasks: data.taskList.tasks }))
+      .then(data => {
+        this.setState({ tasks: data.taskList.tasks });
+      })
       .catch(error => console.error(error));
   };
-
-  // deleteBoard = () => {
-  //   TaskBoardService.delete(this.props.board._id)
-  //     .then(data => this.props.updateView())
-  //     .catch(error => console.error(error));
-  // };
 
   onClick = event => {
     event.preventDefault();
@@ -121,24 +117,38 @@ class TaskBoard extends Component {
       : 'c-task-board__close-icon material-icons disabled';
   }
 
+  get underlineFocusStyle() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? {}
+      : { border: '0.5px solid #ddd' };
+  }
+
+  get editableTitle() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? 'c-edit-icon material-icons'
+      : 'c-edit-icon material-icons hidden';
+  }
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
         <TextField
+          className="c-text-input-title"
           id="title"
           ref={this.textInput}
-          disabled={!this.isUserAuthor()}
+          readOnly={!this.isUserAuthor()}
           style={inputStyle}
           value={this.state.currentTitle}
           onChange={this.onTitleChange}
+          underlineFocusStyle={this.underlineFocusStyle}
         />
+        <i className={this.editableTitle}>edit</i>
         <br />
         <span>(Author: {this.props.board.author.name})</span> <br />
         <span>
           Members:{' '}
           {this.props.board.members.map(member => member.name).join(', ')}
         </span>
-        <hr className="c-task-board__divider" />
         <FloatingActionButton
           mini={true}
           iconStyle={iconStyle}
@@ -160,6 +170,7 @@ class TaskBoard extends Component {
               key={index}
               id={task._id}
               value={task.name}
+              done={task.isDone}
               updateView={this.updateTasks}
             />
           ))}

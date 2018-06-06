@@ -48,7 +48,7 @@
 }
 
 .c-task-board {
-  padding: 20px 10px 7px 20px;
+  padding: 0 10px 7px 20px;
   margin: 0 10px;
   margin-bottom: 20px;
   max-width: 343px;
@@ -60,15 +60,6 @@
   fill:rgba(0, 0, 0, 0.3);
   color :rgba(0, 0, 0, 0.3);
   pointer-events: none;
-}
-
-.c-task-board__divider {
-  width: 100%;
-  max-width: 220px;
-  background-color: #c8d4ea;
-  height: 2px;
-  border: 0;
-  margin: 7px 0;
 }
 
 .p-user-login__content {
@@ -226,4 +217,30 @@
 .c-warning__content {
   display: flex;
   align-items: center;
+}
+
+.c-edit-icon {
+  position: absolute;
+  top: 15px;
+  left: 192px;
+  font-size: 16px;
+  background: #9ab1d9;
+  border-radius: 50%;
+  border: 2px solid #9ab1d9;
+  color: white;
+  opacity: 0;
+}
+
+.c-text-input-title:hover + .c-edit-icon {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.c-text-input-title:focus + .c-edit-icon,
+.c-text-input-title:focus:hover + .c-edit-icon  {
+  opacity: 0;
+}
+
+.c-edit-icon.hidden {
+  display: none;
 }
