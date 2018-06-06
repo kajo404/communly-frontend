@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import TaskService from '../../services/task-service';
 
-class ListItem extends Component {
+class Task extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,4 +58,4 @@ class ListItem extends Component {
   }
 }
 
-export default ListItem;
+export default Task;

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import ListItem from './todo-list';
+import Task from './task-component';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import AddMemberModal from './add-member';
 
 import TaskBoardService from '../../services/task-board-service';
 import UserService from '../../services/user-service';
 
 const addButtonStyle = {
   position: 'absolute',
-  top: '8px',
-  right: '40px'
+  top: '13px',
+  right: '43px'
 };
 
 const iconStyle = {
@@ -26,19 +25,9 @@ class TaskBoard extends Component {
     super(props);
     this.state = {
       tasks: this.props.board.tasks,
-      newTask: '',
-      users: [],
-      addMembersOpen: false
+      newTask: ''
     };
-    this.updateTask = this.updateTask.bind(this);
     this.updateTasks();
-    this.getUsers();
-  }
-
-  getUsers() {
-    this.usersSubscription = UserService.getAllUsers()
-      .then(response => this.setState({ users: response.users }))
-      .catch(error => console.error(error));
   }
 
   createTask = newTaskText => {
@@ -52,13 +41,11 @@ class TaskBoard extends Component {
       .catch(error => console.error(error));
   };
 
-  addMembers = members => {
-    TaskBoardService.addMembers(this.props.board._id, members)
-      .then(response => {
-        this.props.updateView();
-        this.handleAddMembersClose();
-      })
-      .catch(error => console.error(error));
+  openAddMembersModal = () => {
+    this.props.openAddMembersModal(
+      this.props.board._id,
+      this.props.board.members
+    );
   };
 
   updateTasks = () => {
@@ -82,9 +69,9 @@ class TaskBoard extends Component {
     }
   };
 
-  updateTask(event, newValue) {
+  updateTask = (event, newValue) => {
     this.setState({ newTask: newValue });
-  }
+  };
 
   handleKeyPress = event => {
     if (event.key === 'Enter') {
@@ -92,22 +79,27 @@ class TaskBoard extends Component {
     }
   };
 
-  openAddMembersModal = () => {
-    this.setState({ addMembersOpen: true });
-  };
-
-  handleAddMembersClose = () => {
-    this.setState({ addMembersOpen: false });
+  isUserAuthor = () => {
+    return this.props.board.author._id === UserService.getCurrentUser().id;
   };
 
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
-        <span>{this.props.board.title}</span>
+        <span>
+          {this.props.board.title} (Author: {this.props.board.author.name})
+        </span>{' '}
+        <br />
+        <span>
+          Members:{' '}
+          {this.props.board.members.map(member => member.name).join(', ')}
+        </span>
+        <hr className="c-task-board__divider" />
         <FloatingActionButton
           mini={true}
           iconStyle={iconStyle}
           style={addButtonStyle}
+          disabled={!this.isUserAuthor()}
           onClick={this.openAddMembersModal}
         >
           <ContentAdd />
@@ -116,12 +108,11 @@ class TaskBoard extends Component {
           className="c-task-board__close-icon material-icons"
           onClick={this.deleteBoard}
         >
-          {' '}
-          close{' '}
+          close
         </i>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (
-            <ListItem
+            <Task
               key={index}
               id={task._id}
               value={task.name}
@@ -144,17 +135,6 @@ class TaskBoard extends Component {
             onClick={this.onClick}
           />
         </div>
-        <AddMemberModal
-          users={this.state.users}
-          addMembers={this.addMembers}
-          open={this.state.addMembersOpen}
-          handleClose={this.handleAddMembersClose}
-        />
-        <span> Author: {this.props.board.author.name} </span> <br />
-        <span>
-          {' '}
-          Members: {this.props.board.members.map(member => member.name + ', ')}
-        </span>
       </Paper>
     );
   }

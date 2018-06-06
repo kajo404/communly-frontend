@@ -19,6 +19,10 @@
   margin-top: 50px;
 }
 
+.c-add-members-modal__content {
+  padding: 0;
+}
+
 .c-input-field {
   max-width: 200px;
   margin-right: 10px;
@@ -44,12 +48,21 @@
 }
 
 .c-task-board {
-  padding: 20px 10px 7px 10px;
+  padding: 20px 10px 7px 20px;
   margin: 0 10px;
   margin-bottom: 20px;
-  max-width: 335px;
+  max-width: 343px;
   width: 100%;
   position: relative;
+}
+
+.c-task-board__divider {
+  width: 100%;
+  max-width: 220px;
+  background-color: #c8d4ea;
+  height: 2px;
+  border: 0;
+  margin: 7px 0;
 }
 
 .p-user-login__content {
@@ -67,4 +80,49 @@
 
 .c-loginError {
   color: red;
+}
+
+.p-task-boards-add-button,
+.p-announcements-add-button {
+  position: fixed;
+  margin: 2em 2em 2em;
+  right: 0;
+  bottom: 0;
+}
+
+.c-close-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    opacity: 0;
+    transition: 0.1 opacity;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.c-task-board__close-icon {
+  position: absolute;
+  right: 13px;
+  top: 13px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.c-list-item:hover .c-close-icon,
+.c-list-item:hover .c-face-icon {
+    opacity: 1;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.c-face-icon {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  width: 30px;
+  opacity: 0;
+  transition: 0.1 opacity;
+  z-index: 20;
+  pointer-events: none;
 }
