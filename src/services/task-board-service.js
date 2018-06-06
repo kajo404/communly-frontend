@@ -74,7 +74,7 @@ export default class TaskBoardService {
 
   static updateBoardTitle(taskBoardId, title) {
     return new Promise((resolve, reject) => {
-      APIService.post(
+      APIService.put(
         `${TaskBoardService.URL()}/${taskBoardId}/title`,
         {
           title: title
