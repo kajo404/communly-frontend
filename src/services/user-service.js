@@ -21,6 +21,7 @@ export default class UserService {
         },
         function(data) {
           resolve(data);
+          window.location.reload();
         },
         function(textStatus) {
           reject(textStatus);
@@ -39,6 +40,7 @@ export default class UserService {
         },
         function(data) {
           resolve(data);
+          window.location.reload();
         },
         function(textStatus) {
           reject(textStatus);
@@ -82,7 +84,7 @@ export default class UserService {
   static changeUserPicture(fileData) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${UserService.usersURL()}/changePicture`,
+        `${UserService.usersURL()}/picture`,
         {
           imageData: fileData
         },
