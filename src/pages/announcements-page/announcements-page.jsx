@@ -72,16 +72,13 @@ class Announcements extends React.Component {
   }
 
   filterAnnouncements(announcements) {
-    console.log(announcements);
     const adminAnnouncementsFiltered = announcements.filter(announcement => {
       return announcement.author.roles.includes('admin');
     });
 
-    console.log(adminAnnouncementsFiltered);
     const normalAnnouncementsFiltered = announcements.filter(announcement => {
       return !announcement.author.roles.includes('admin');
     });
-    console.log(normalAnnouncementsFiltered);
 
     this.setState({
       adminAnnouncements: adminAnnouncementsFiltered,
