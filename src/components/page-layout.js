@@ -15,7 +15,8 @@ import UserService from '../services/user-service';
 
 const style = {
   color: 'white',
-  fontWeight: '300'
+  fontWeight: '300',
+  lineheigth: '35px'
 };
 
 const appBarStyle = {
@@ -39,6 +40,28 @@ class PageLayout extends React.Component {
 
   get userName() {
     return UserService.getCurrentUser().name;
+  }
+
+  get userPicture() {
+    if (UserService.isAuthenticated()) {
+      UserService.getFullUser()
+        .then(result => {
+          const dataUrl = result.image;
+
+          this.setState({
+            image: dataUrl
+          });
+        })
+        .catch(e => {
+          console.error(e);
+          this.setState({
+            error: 'Username or password is wrong!'
+          });
+          this.setState({
+            error: e
+          });
+        });
+    }
   }
 
   logout() {
@@ -67,6 +90,7 @@ class PageLayout extends React.Component {
   };
 
   render() {
+    this.userPicture;
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
@@ -77,7 +101,13 @@ class PageLayout extends React.Component {
               <ListItem
                 style={style}
                 disabled={true}
-                leftAvatar={<Avatar src={avatar} size={30} />}
+                leftAvatar={
+                  <Avatar
+                    src={this.state.image}
+                    size={35}
+                    className="c-app-bar-avatarImg"
+                  />
+                }
               >
                 {this.userName}
               </ListItem>

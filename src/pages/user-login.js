@@ -81,7 +81,7 @@ class UserLogin extends React.Component {
     return (
       <div className="p-user-login__content">
         <TextField
-          floatingLabelText="User name"
+          floatingLabelText="Email"
           required={true}
           value={this.state.username}
           onChange={this.onUserNameChange}

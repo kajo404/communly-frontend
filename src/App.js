@@ -14,7 +14,7 @@ import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
 import Announcements from './pages/announcements-page/announcements-page';
-import Profile from './pages/profile';
+import Profile from './pages/profile-pages/profile';
 
 import UserService from './services/user-service';
 import { grey400 } from 'material-ui/styles/colors';
