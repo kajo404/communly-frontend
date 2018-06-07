@@ -1,5 +1,4 @@
 import APIService from './API-service';
-
 export default class TaskBoardService {
   static URL() {
     return APIService.apiURL() + '/tasklists';
@@ -94,6 +93,6 @@ export default class TaskBoardService {
   }
 
   static getAllTasks(taskListId) {
-    return APIService.get$(`${TaskBoardService.URL()}/byId/${taskListId}`);
+    return APIService.get$(`${TaskBoardService.URL()}/${taskListId}/tasks`);
   }
 }

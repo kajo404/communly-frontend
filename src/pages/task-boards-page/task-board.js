@@ -9,10 +9,12 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TaskBoardService from '../../services/task-board-service';
 import UserService from '../../services/user-service';
 
+import './task-boards.scss';
+
 const addButtonStyle = {
   position: 'absolute',
-  top: '13px',
-  right: '43px'
+  top: '7px',
+  right: '37px'
 };
 
 const iconStyle = {

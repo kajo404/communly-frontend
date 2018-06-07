@@ -6,7 +6,7 @@ export default class UserService {
   }
 
   static usersURL() {
-    return 'http://localhost:3000/users';
+    return APIService.apiURL() + '/users';
   }
 
   static register(name, email, pass, dateOfBirth) {
