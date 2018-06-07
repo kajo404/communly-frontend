@@ -21,7 +21,6 @@ export default class UserService {
         },
         function(data) {
           resolve(data);
-          window.location.reload();
         },
         function(textStatus) {
           reject(textStatus);
@@ -40,7 +39,6 @@ export default class UserService {
         },
         function(data) {
           resolve(data);
-          window.location.reload();
         },
         function(textStatus) {
           reject(textStatus);

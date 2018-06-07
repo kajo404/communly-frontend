@@ -36,6 +36,13 @@ class PageLayout extends React.Component {
       showUser: true,
       activePage: 0
     };
+  }
+
+  get userName() {
+    return UserService.getCurrentUser().name;
+  }
+
+  get userPicture() {
     if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
@@ -55,10 +62,6 @@ class PageLayout extends React.Component {
           });
         });
     }
-  }
-
-  get userName() {
-    return UserService.getCurrentUser().name;
   }
 
   logout() {
@@ -87,6 +90,7 @@ class PageLayout extends React.Component {
   };
 
   render() {
+    this.userPicture;
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
