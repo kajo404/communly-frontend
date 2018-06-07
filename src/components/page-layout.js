@@ -36,13 +36,21 @@ class PageLayout extends React.Component {
       showUser: true,
       activePage: 0
     };
+    this.updateUserPicture();
   }
+
+  componentDidMount = () => {
+    UserService.registerListener(
+      'userPictureChanged',
+      this.updateUserPicture.bind(this)
+    );
+  };
 
   get userName() {
     return UserService.getCurrentUser().name;
   }
 
-  get userPicture() {
+  updateUserPicture() {
     if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
@@ -90,7 +98,6 @@ class PageLayout extends React.Component {
   };
 
   render() {
-    this.userPicture;
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">

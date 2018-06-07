@@ -1,6 +1,8 @@
 import APIService from './API-service';
 
 export default class UserService {
+  static listeners = {};
+
   static URL() {
     return APIService.apiURL() + '/auth';
   }
@@ -87,6 +89,7 @@ export default class UserService {
           imageData: fileData
         },
         function(data) {
+          UserService.notifyListeners('userPictureChanged');
           resolve(data);
         },
         function(textStatus) {
@@ -94,6 +97,19 @@ export default class UserService {
         }
       );
     });
+  }
+
+  static registerListener(event, fn) {
+    if (!UserService.listeners.hasOwnProperty(event)) {
+      UserService.listeners[event] = [];
+    }
+    UserService.listeners[event].push(fn);
+  }
+
+  static notifyListeners(event) {
+    if (UserService.listeners.hasOwnProperty(event)) {
+      UserService.listeners[event].forEach(fn => fn());
+    }
   }
 
   static getAllUsers() {

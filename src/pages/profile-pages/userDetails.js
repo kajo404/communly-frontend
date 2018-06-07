@@ -22,6 +22,13 @@ class UserDetailComponent extends Component {
     this.getProfile();
   }
 
+  componentDidMount = () => {
+    UserService.registerListener(
+      'userPictureChanged',
+      this.getProfile.bind(this)
+    );
+  };
+
   getProfile() {
     UserService.getFullUser()
       .then(result => {
