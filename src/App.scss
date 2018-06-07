@@ -44,6 +44,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   max-height: 240px;
+  flex-grow: 1;
   overflow-y: scroll;
 }
 
@@ -54,6 +55,8 @@
   max-width: 343px;
   width: 100%;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .c-task-board__close-icon.material-icons.disabled {

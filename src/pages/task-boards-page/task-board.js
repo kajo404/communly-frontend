@@ -132,38 +132,40 @@ class TaskBoard extends Component {
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
-        <TextField
-          className="c-text-input-title"
-          id="title"
-          ref={this.textInput}
-          readOnly={!this.isUserAuthor()}
-          style={inputStyle}
-          value={this.state.currentTitle}
-          onChange={this.onTitleChange}
-          underlineFocusStyle={this.underlineFocusStyle}
-        />
-        <i className={this.editableTitle}>edit</i>
-        <br />
-        <span>(Author: {this.props.board.author.name})</span> <br />
-        <span>
-          Members:{' '}
-          {this.props.board.members.map(member => member.name).join(', ')}
-        </span>
-        <FloatingActionButton
-          mini={true}
-          iconStyle={iconStyle}
-          style={addButtonStyle}
-          disabled={!this.isUserAuthor()}
-          onClick={this.openAddMembersModal}
-        >
-          <ContentAdd />
-        </FloatingActionButton>
-        <i
-          className={this.deleteIconClasses}
-          onClick={this.openDeleteConfirmationModal}
-        >
-          close
-        </i>
+        <div className="c-task-board__header">
+          <TextField
+            className="c-text-input-title"
+            id="title"
+            ref={this.textInput}
+            readOnly={!this.isUserAuthor()}
+            style={inputStyle}
+            value={this.state.currentTitle}
+            onChange={this.onTitleChange}
+            underlineFocusStyle={this.underlineFocusStyle}
+          />
+          <i className={this.editableTitle}>edit</i>
+          <br />
+          <span>(Author: {this.props.board.author.name})</span> <br />
+          <span>
+            Members:{' '}
+            {this.props.board.members.map(member => member.name).join(', ')}
+          </span>
+          <FloatingActionButton
+            mini={true}
+            iconStyle={iconStyle}
+            style={addButtonStyle}
+            disabled={!this.isUserAuthor()}
+            onClick={this.openAddMembersModal}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
+          <i
+            className={this.deleteIconClasses}
+            onClick={this.openDeleteConfirmationModal}
+          >
+            close
+          </i>
+        </div>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (
             <Task

@@ -92,7 +92,7 @@ class TaskBoardPage extends Component {
   updateBoardTitle = (boardId, title) => {
     TaskBoardService.updateBoardTitle(boardId, title)
       .then(response =>
-        requestAnimationFrame(() => this.setState({ snackbarOpen: true }), 6000)
+        setTimeout(() => this.setState({ snackbarOpen: true }), 700)
       )
       .catch(error => console.error(error));
   };
@@ -147,7 +147,7 @@ class TaskBoardPage extends Component {
         />
         <Snackbar
           open={this.state.snackbarOpen}
-          message="The title of your board was changed!"
+          message="The title of your board was saved!"
           autoHideDuration={3000}
           onRequestClose={this.closeSnackbar}
         />
