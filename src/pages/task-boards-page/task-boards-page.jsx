@@ -18,7 +18,6 @@ class TaskBoardPage extends Component {
     addMembersOpen: false,
     deleteBoardOpen: false,
     snackbarOpen: false,
-    //so that i know which board called the modal and be able to make a correct backend call for addING MEMEBERS
     currentBoardOpening: '',
     currentBoardMembers: [],
     boards: [],
@@ -31,7 +30,6 @@ class TaskBoardPage extends Component {
     this.getUsers();
   }
 
-  // Die drei funktionen drunter bracht man nur für das Modale Fenster AddMembers
   getUsers() {
     this.usersSubscription = UserService.getAllUsers()
       .then(response => this.setState({ users: response.users }))

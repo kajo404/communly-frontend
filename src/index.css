@@ -19,7 +19,3 @@ html {
 #home {
   height: 100%;
 }
-
-input[disabled] {
-  pointer-events: all;
-}
