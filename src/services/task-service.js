@@ -34,11 +34,11 @@ export default class TaskService {
     });
   }
 
-  static updateTask(task) {
+  static changeTaskStatus(taskId, status) {
     return new Promise((resolve, reject) => {
       APIService.put(
-        `${TaskService.URL()}/${task._id}`,
-        task,
+        `${TaskService.URL()}/${taskId}/status`,
+        { taskStatus: status },
         function(data) {
           resolve(data);
         },

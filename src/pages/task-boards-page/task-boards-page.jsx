@@ -6,14 +6,18 @@ import TaskBoard from './task-board';
 import TaskBoardService from '../../services/task-board-service';
 import AssignMemberModal from './assign-member';
 import AddMemberModal from './add-member';
+import DeleteBoardConfirmation from './delete-confirmation';
 import UserService from '../../services/user-service';
+import Snackbar from 'material-ui/Snackbar';
+import { request } from 'https';
 
 class TaskBoardPage extends Component {
   taskBoardsSubscription;
   state = {
     modalOpen: false,
     addMembersOpen: false,
-    //so that i know which board called the modal and be able to make a correct backend call for addING MEMEBERS
+    deleteBoardOpen: false,
+    snackbarOpen: false,
     currentBoardOpening: '',
     currentBoardMembers: [],
     boards: [],
@@ -26,7 +30,6 @@ class TaskBoardPage extends Component {
     this.getUsers();
   }
 
-  // Die drei funktionen drunter bracht man nur für das Modale Fenster AddMembers
   getUsers() {
     this.usersSubscription = UserService.getAllUsers()
       .then(response => this.setState({ users: response.users }))
@@ -35,6 +38,15 @@ class TaskBoardPage extends Component {
 
   handleAddMembersClose = () => {
     this.setState({ addMembersOpen: false });
+  };
+
+  handleDeleteBoardClose = () => {
+    this.setState({ deleteBoardOpen: false });
+  };
+
+  openDeleteBoardModal = callingBoard => {
+    this.setState({ currentBoardOpening: callingBoard });
+    this.setState({ deleteBoardOpen: true });
   };
 
   openAddMembersModal = (callingBoard, currentMembers) => {
@@ -58,11 +70,28 @@ class TaskBoardPage extends Component {
       .catch(error => console.error(error));
   };
 
+  deleteBoard = () => {
+    TaskBoardService.delete(this.state.currentBoardOpening)
+      .then(response => {
+        this.handleDeleteBoardClose();
+        this.updateBoards();
+      })
+      .catch(error => console.error(error));
+  };
+
   updateBoards = () => {
     this.taskBoardsSubscription = TaskBoardService.getTaskBoards()
       .then(data => {
         this.setState({ boards: data.tasklists });
       })
+      .catch(error => console.error(error));
+  };
+
+  updateBoardTitle = (boardId, title) => {
+    TaskBoardService.updateBoardTitle(boardId, title)
+      .then(response =>
+        setTimeout(() => this.setState({ snackbarOpen: true }), 700)
+      )
       .catch(error => console.error(error));
   };
 
@@ -85,7 +114,9 @@ class TaskBoardPage extends Component {
               key={index}
               updateView={this.updateBoards}
               openAddMembersModal={this.openAddMembersModal}
+              openDeleteConfirmationModal={this.openDeleteBoardModal}
               setCurrentBoardMembers={this.setCurrentBoardMembers}
+              updateBoardTitle={this.updateBoardTitle}
             />
           ))}
         </div>
@@ -106,6 +137,17 @@ class TaskBoardPage extends Component {
           currentMembers={this.state.currentBoardMembers}
           open={this.state.addMembersOpen}
           close={this.handleAddMembersClose}
+        />
+        <DeleteBoardConfirmation
+          open={this.state.deleteBoardOpen}
+          close={this.handleDeleteBoardClose}
+          deleteBoard={this.deleteBoard}
+        />
+        <Snackbar
+          open={this.state.snackbarOpen}
+          message="The title of your board was saved!"
+          autoHideDuration={3000}
+          onRequestClose={this.closeSnackbar}
         />
         {/* <AssignMemberModal /> */}
       </div>

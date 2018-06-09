@@ -37,7 +37,7 @@ export default class NewUploadModal extends React.Component {
   handleUpload = () => {
     UserService.changeUserPicture(this.state.preview)
       .then(result => {
-        window.location = 'profile';
+        this.handleClose();
       })
       .catch(e => {
         console.error(e);

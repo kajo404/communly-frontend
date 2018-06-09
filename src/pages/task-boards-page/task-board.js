@@ -5,14 +5,17 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Avatar from 'material-ui/Avatar';
 
 import TaskBoardService from '../../services/task-board-service';
 import UserService from '../../services/user-service';
 
+import './task-boards.scss';
+
 const addButtonStyle = {
   position: 'absolute',
-  top: '13px',
-  right: '43px'
+  top: '7px',
+  right: '37px'
 };
 
 const iconStyle = {
@@ -20,13 +23,26 @@ const iconStyle = {
   width: '20px',
   height: '20px'
 };
+
+const inputStyle = {
+  backgroundColor: 'transparent',
+  outline: 0,
+  border: 0,
+  fontSize: '16px',
+  color: 'rgb(49,79,129)',
+  maxWidth: '200px'
+};
+
 class TaskBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: this.props.board.tasks,
-      newTask: ''
+      newTask: '',
+      currentTitle: this.props.board.title
     };
+    this.textInputDebounceTimeoutIndex = -1;
+    this.textInputDebounceTime = 500;
     this.updateTasks();
   }
 
@@ -48,15 +64,15 @@ class TaskBoard extends Component {
     );
   };
 
-  updateTasks = () => {
-    this.tasksSubscription = TaskBoardService.getAllTasks(this.props.board._id)
-      .then(data => this.setState({ tasks: data.taskList.tasks }))
-      .catch(error => console.error(error));
+  openDeleteConfirmationModal = () => {
+    this.props.openDeleteConfirmationModal(this.props.board._id);
   };
 
-  deleteBoard = () => {
-    TaskBoardService.delete(this.props.board._id)
-      .then(data => this.props.updateView())
+  updateTasks = () => {
+    this.tasksSubscription = TaskBoardService.getAllTasks(this.props.board._id)
+      .then(data => {
+        this.setState({ tasks: data.taskList.tasks });
+      })
       .catch(error => console.error(error));
   };
 
@@ -83,39 +99,90 @@ class TaskBoard extends Component {
     return this.props.board.author._id === UserService.getCurrentUser().id;
   };
 
+  onTitleChange = event => {
+    this.setState({ currentTitle: event.target.value });
+    if (this.textInputDebounceTimeoutIndex > -1) {
+      clearTimeout(this.textInputDebounceTimeoutIndex);
+    }
+    this.textInputDebounceTimeoutIndex = setTimeout(
+      () => this.updateBoardTitle(),
+      this.textInputDebounceTime
+    );
+  };
+
+  updateBoardTitle = () => {
+    this.props.updateBoardTitle(this.props.board._id, this.state.currentTitle);
+  };
+
+  get deleteIconClasses() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? 'c-task-board__close-icon material-icons'
+      : 'c-task-board__close-icon material-icons disabled';
+  }
+
+  get underlineFocusStyle() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? {}
+      : { border: '0.5px solid #ddd' };
+  }
+
+  get editableTitle() {
+    return this.props.board.author._id === UserService.getCurrentUser().id
+      ? 'c-edit-icon material-icons'
+      : 'c-edit-icon material-icons hidden';
+  }
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
-        <span>
-          {this.props.board.title} (Author: {this.props.board.author.name})
-        </span>{' '}
-        <br />
-        <span>
-          Members:{' '}
-          {this.props.board.members.map(member => member.name).join(', ')}
-        </span>
-        <hr className="c-task-board__divider" />
-        <FloatingActionButton
-          mini={true}
-          iconStyle={iconStyle}
-          style={addButtonStyle}
-          disabled={!this.isUserAuthor()}
-          onClick={this.openAddMembersModal}
-        >
-          <ContentAdd />
-        </FloatingActionButton>
-        <i
-          className="c-task-board__close-icon material-icons"
-          onClick={this.deleteBoard}
-        >
-          close
-        </i>
+        <div className="c-task-board__header">
+          <div className="c-task-board__members-wrapper">
+            {this.props.board.members.map(member => (
+              <Avatar
+                key={member._id}
+                title={member.name}
+                src={member.image}
+                size={20}
+                className="c-task-board-avatar"
+              />
+            ))}
+          </div>
+          <TextField
+            className="c-text-input-title"
+            id="title"
+            ref={this.textInput}
+            readOnly={!this.isUserAuthor()}
+            style={inputStyle}
+            value={this.state.currentTitle}
+            onChange={this.onTitleChange}
+            underlineFocusStyle={this.underlineFocusStyle}
+          />
+          <i className={this.editableTitle}>edit</i>
+          <br />
+          {/* <span> {this.props.board.author.name}</span> <br /> */}
+          <FloatingActionButton
+            mini={true}
+            iconStyle={iconStyle}
+            style={addButtonStyle}
+            disabled={!this.isUserAuthor()}
+            onClick={this.openAddMembersModal}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
+          <i
+            className={this.deleteIconClasses}
+            onClick={this.openDeleteConfirmationModal}
+          >
+            close
+          </i>
+        </div>
         <div className="c-task-board__content">
           {this.state.tasks.map((task, index) => (
             <Task
               key={index}
               id={task._id}
               value={task.name}
+              done={task.isDone}
               updateView={this.updateTasks}
             />
           ))}
