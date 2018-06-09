@@ -128,7 +128,7 @@ export default class AddMemberModal extends React.Component {
                       onCheck={this.handleToggle(user._id)}
                     />
                   }
-                  primaryText={user.name}
+                  primaryText={user.firstname + user.lastname}
                 />
               ))}
             </List>

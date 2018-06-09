@@ -92,7 +92,9 @@ class TaskBoard extends Component {
         <br />
         <span>
           Members:{' '}
-          {this.props.board.members.map(member => member.name).join(', ')}
+          {this.props.board.members
+            .map(member => member.firstname + ' ' + member.lastname)
+            .join(', ')}
         </span>
         <hr className="c-task-board__divider" />
         <FloatingActionButton
