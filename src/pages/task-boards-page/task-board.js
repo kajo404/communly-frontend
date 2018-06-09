@@ -5,6 +5,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Avatar from 'material-ui/Avatar';
 
 import TaskBoardService from '../../services/task-board-service';
 import UserService from '../../services/user-service';
@@ -135,6 +136,17 @@ class TaskBoard extends Component {
     return (
       <Paper className="c-task-board" zDepth={1}>
         <div className="c-task-board__header">
+          <div className="c-task-board__members-wrapper">
+            {this.props.board.members.map(member => (
+              <Avatar
+                key={member._id}
+                title={member.name}
+                src={member.image}
+                size={20}
+                className="c-task-board-avatar"
+              />
+            ))}
+          </div>
           <TextField
             className="c-text-input-title"
             id="title"
@@ -147,11 +159,7 @@ class TaskBoard extends Component {
           />
           <i className={this.editableTitle}>edit</i>
           <br />
-          <span>(Author: {this.props.board.author.name})</span> <br />
-          <span>
-            Members:{' '}
-            {this.props.board.members.map(member => member.name).join(', ')}
-          </span>
+          {/* <span> {this.props.board.author.name}</span> <br /> */}
           <FloatingActionButton
             mini={true}
             iconStyle={iconStyle}

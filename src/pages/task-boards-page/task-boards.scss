@@ -192,3 +192,14 @@
   z-index: 20;
   pointer-events: none;
 }
+
+.c-task-board__members-wrapper {
+    padding-top: 7px;
+    display: flex;
+    flex-direction: row;
+}
+
+.c-task-board-avatar {
+    border: 1px solid #314f81;
+    margin-right: 3px;
+}

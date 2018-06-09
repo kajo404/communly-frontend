@@ -55,7 +55,6 @@ class PageLayout extends React.Component {
       UserService.getFullUser()
         .then(result => {
           const dataUrl = result.image;
-
           this.setState({
             image: dataUrl
           });
@@ -148,15 +147,6 @@ class PageLayout extends React.Component {
         <div className="c-layout">
           <AppBar
             className="c-app-bar"
-            iconElementRight={
-              <ListItem
-                style={style}
-                disabled={true}
-                leftAvatar={<Avatar src={avatar} size={30} />}
-              >
-                {this.name}
-              </ListItem>
-            }
             iconElementLeft={
               <img className="c-logo" src={logo} alt="communly logo" />
             }
