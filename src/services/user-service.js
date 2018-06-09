@@ -9,12 +9,13 @@ export default class UserService {
     return 'http://localhost:3000/users';
   }
 
-  static register(name, email, pass, dateOfBirth) {
+  static register(firstname, lastname, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.URL()}/register`,
         {
-          name: name,
+          firstname: firstname,
+          lastname: lastname,
           email: email,
           password: pass,
           dateOfBirth: dateOfBirth
@@ -60,7 +61,8 @@ export default class UserService {
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return {
       id: JSON.parse(window.atob(base64)).id,
-      name: JSON.parse(window.atob(base64)).name
+      firstname: JSON.parse(window.atob(base64)).firstname,
+      lastname: JSON.parse(window.atob(base64)).lastname
     };
   }
 

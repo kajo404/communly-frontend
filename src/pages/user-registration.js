@@ -10,14 +10,16 @@ class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      firstname: '',
+      lastname: '',
       email: '',
       dateOfBirth: null,
       password: ''
     };
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
+    this.onFirstNameChange = this.onFirstNameChange.bind(this);
+    this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onBirthDateChange = this.onBirthDateChange.bind(this);
@@ -32,7 +34,8 @@ class UserRegistration extends React.Component {
     event.preventDefault();
 
     const user = {
-      name: this.state.name,
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
       email: this.state.email,
       dateOfBirth: this.state.dateOfBirth,
       password: this.state.password
@@ -43,7 +46,8 @@ class UserRegistration extends React.Component {
 
   register(user) {
     UserService.register(
-      user.name,
+      user.firstname,
+      user.lastname,
       user.email,
       user.password,
       user.dateOfBirth.toISOString()
@@ -61,8 +65,15 @@ class UserRegistration extends React.Component {
     //TODO: Set error string (e) according to chached error
   }
 
-  onNameChange(event) {
-    this.setState({ name: event.target.value.trim() });
+  onFirstNameChange(event) {
+    this.setState({ firstname: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
+  }
+
+  onLastNameChange(event) {
+    this.setState({ lastname: event.target.value.trim() });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
@@ -92,7 +103,8 @@ class UserRegistration extends React.Component {
   get isButtonDisabled() {
     return (
       this.state.username === '' ||
-      this.state.name === '' ||
+      this.state.firstname === '' ||
+      this.state.lastname === '' ||
       this.state.email === '' ||
       this.state.password === ''
     );
@@ -108,10 +120,17 @@ class UserRegistration extends React.Component {
     return (
       <div className="p-user-login__content">
         <TextField
-          floatingLabelText="Name"
+          floatingLabelText="First Name"
           required={true}
-          value={this.state.name}
-          onChange={this.onNameChange}
+          value={this.state.firstname}
+          onChange={this.onFirstNameChange}
+          // errorText={this.getNameErrorText}
+        />
+        <TextField
+          floatingLabelText="Last Name"
+          required={true}
+          value={this.state.lastname}
+          onChange={this.onLastNameChange}
           // errorText={this.getNameErrorText}
         />
         <DatePicker
