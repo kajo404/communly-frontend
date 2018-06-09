@@ -16,7 +16,8 @@ class UserDetailComponent extends Component {
     var user = UserService.getCurrentUser();
     this.state = {
       userId: user.id,
-      name: user.name
+      firstname: user.firstname,
+      lastname: user.lastname
     };
 
     this.getProfile();
@@ -112,7 +113,9 @@ class UserDetailComponent extends Component {
             <tbody>
               <tr>
                 <td>Name: </td>
-                <td>{this.state.name}</td>
+                <td>
+                  {this.state.firstname} {this.state.lastname}
+                </td>
               </tr>
               <tr>
                 <td>Email: </td>
