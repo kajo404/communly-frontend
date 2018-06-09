@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import UserDetailComponent from './userDetails';
 
 const customModalStyle = {
   width: '500px'
@@ -19,7 +20,7 @@ export default class NewEditModal extends React.Component {
       name: '',
       email: '',
       dateOfBirth: null,
-      password: ''
+      newPassword: ''
     };
 
     this.handleOpen = this.handleOpen.bind(this);
@@ -29,6 +30,23 @@ export default class NewEditModal extends React.Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onBirthDateChange = this.onBirthDateChange.bind(this);
+  }
+
+  getProfileData() {
+    UserService.getFullUser()
+      .then(result => {
+        this.setState({
+          name: result.name,
+          email: result.email,
+          dateOfBirth: result.dateOfBirth,
+          role: result.roles[0],
+          image: result.image
+        });
+      })
+      .catch(e => {
+        this.setState({ error: 'Username or password is wrong!' });
+        this.setState({ error: e });
+      });
   }
 
   handleOpen = () => {

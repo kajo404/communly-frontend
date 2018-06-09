@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import NewUploadModal from './upload-img-modal';
 import NewEditModal from './edit-profile-modal';
-import RaisedButton from 'material-ui/RaisedButton';
 
 //Services
 import UserService from '../../services/user-service';

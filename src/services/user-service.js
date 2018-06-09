@@ -68,7 +68,6 @@ export default class UserService {
     return new Promise((resolve, reject) => {
       APIService.get(
         `${UserService.URL()}/me`,
-
         function(data) {
           resolve(data);
         },
