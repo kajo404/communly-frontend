@@ -34,29 +34,20 @@ class PageLayout extends React.Component {
     super(props);
     this.state = {
       showUser: true,
+      retrievedUser: false,
       activePage: 0
     };
-    this.updateUserPicture();
-  }
-
-  componentDidMount = () => {
-    UserService.registerListener(
-      'userPictureChanged',
-      this.updateUserPicture.bind(this)
-    );
-  };
-
-  get userName() {
-    return UserService.getCurrentUser().name;
   }
 
   updateUserPicture() {
-    if (UserService.isAuthenticated()) {
+    if (UserService.isAuthenticated() && !this.state.retrievedUser) {
       UserService.getFullUser()
         .then(result => {
           const dataUrl = result.image;
+
           this.setState({
-            image: dataUrl
+            image: dataUrl,
+            retrievedUser: true
           });
         })
         .catch(e => {
@@ -69,6 +60,10 @@ class PageLayout extends React.Component {
           });
         });
     }
+  }
+
+  get userName() {
+    return UserService.getCurrentUser().name;
   }
 
   logout() {
@@ -97,6 +92,7 @@ class PageLayout extends React.Component {
   };
 
   render() {
+    this.updateUserPicture();
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
