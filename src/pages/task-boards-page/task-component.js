@@ -3,21 +3,13 @@ import Checkbox from 'material-ui/Checkbox';
 import TaskService from '../../services/task-service';
 
 class Task extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      checked: false
-    };
-
-    this.updateCheck = this.updateCheck.bind(this);
-    this.getCheckboxClass = this.getCheckboxClass.bind(this);
-  }
-
-  updateCheck() {
-    this.setState({
-      checked: !this.state.checked
-    });
-  }
+  updateCheck = () => {
+    TaskService.changeTaskStatus(this.props.id, !this.props.done)
+      .then(response => {
+        this.props.updateView();
+      })
+      .catch(error => console.error(error));
+  };
 
   deleteTask = () => {
     TaskService.delete(this.props.id)
@@ -30,7 +22,7 @@ class Task extends Component {
   };
 
   getCheckboxClass() {
-    return this.state.checked ? 'c-checkbox--checked' : 'c-checkbox';
+    return this.props.done ? 'c-checkbox--checked' : 'c-checkbox';
   }
 
   render() {
@@ -39,7 +31,7 @@ class Task extends Component {
         <Checkbox
           style={{ width: 'calc(100% - 30px)' }}
           className={this.getCheckboxClass()}
-          checked={this.state.checked}
+          checked={this.props.done}
           onCheck={this.updateCheck}
           label={this.props.value}
         />
@@ -52,8 +44,6 @@ class Task extends Component {
           cancel{' '}
         </i>
       </li>
-
-      //TODO: assign member to task modal
     );
   }
 }
