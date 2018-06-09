@@ -34,6 +34,7 @@ class PageLayout extends React.Component {
     super(props);
     this.state = {
       showUser: true,
+      retrievedUser: false,
       activePage: 0
     };
   }
@@ -43,13 +44,14 @@ class PageLayout extends React.Component {
   }
 
   get userPicture() {
-    if (UserService.isAuthenticated()) {
+    if (UserService.isAuthenticated() && !this.state.retrievedUser) {
       UserService.getFullUser()
         .then(result => {
           const dataUrl = result.image;
 
           this.setState({
-            image: dataUrl
+            image: dataUrl,
+            retrievedUser: true
           });
         })
         .catch(e => {
