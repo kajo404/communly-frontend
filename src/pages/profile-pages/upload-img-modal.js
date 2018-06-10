@@ -31,14 +31,15 @@ export default class NewUploadModal extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      preview: null
+    });
   };
 
   handleUpload = () => {
-    UserService.changeUserPicture(this.state.preview)
-      .then(result => {
-        this.handleClose();
-      })
+    UserService.updateUserPicture(this.state.preview)
+      .then(this.handleClose())
       .catch(e => {
         console.error(e);
         this.setState({ error: e });
@@ -52,22 +53,6 @@ export default class NewUploadModal extends React.Component {
   onCrop(preview) {
     this.setState({ preview: preview });
   }
-
-  updateTitle = (event, newValue) => {
-    this.setState({ title: newValue });
-  };
-
-  updateContent = (event, newValue) => {
-    this.setState({ content: newValue });
-  };
-
-  updateVotable = () => {
-    this.setState(oldState => {
-      return {
-        isVotable: !oldState.checked
-      };
-    });
-  };
 
   get isButtonDisabled() {
     return this.state.preview === null;

@@ -10,7 +10,6 @@ import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 
 import logo from './../assets/logo.png';
-import avatar from './../assets/avatar.png';
 import UserService from '../services/user-service';
 
 const style = {
@@ -39,14 +38,24 @@ class PageLayout extends React.Component {
     };
   }
 
-  updateUserPicture() {
-    if (UserService.isAuthenticated() && !this.state.retrievedUser) {
+  componentDidMount = () => {
+    UserService.registerListener(
+      'userPictureChanged',
+      this.updateUser.bind(this)
+    );
+
+    UserService.registerListener('userDataChanged', this.updateUser.bind(this));
+
+    UserService.registerListener('userLogedIn', this.updateUser.bind(this));
+  };
+
+  updateUser() {
+    if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
-          const dataUrl = result.image;
-
           this.setState({
-            image: dataUrl,
+            name: result.name,
+            image: result.image,
             retrievedUser: true
           });
         })
@@ -60,10 +69,6 @@ class PageLayout extends React.Component {
           });
         });
     }
-  }
-
-  get userName() {
-    return UserService.getCurrentUser().name;
   }
 
   logout() {
@@ -92,7 +97,6 @@ class PageLayout extends React.Component {
   };
 
   render() {
-    this.updateUserPicture();
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
@@ -111,7 +115,7 @@ class PageLayout extends React.Component {
                   />
                 }
               >
-                {this.userName}
+                {this.state.name}
               </ListItem>
             }
             iconElementLeft={

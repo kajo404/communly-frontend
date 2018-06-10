@@ -40,6 +40,7 @@ export default class UserService {
           password: pass
         },
         function(data) {
+          UserService.notifyListeners('userLogedIn');
           resolve(data);
         },
         function(textStatus) {
@@ -61,8 +62,7 @@ export default class UserService {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return {
-      id: JSON.parse(window.atob(base64)).id,
-      name: JSON.parse(window.atob(base64)).name
+      id: JSON.parse(window.atob(base64)).id
     };
   }
 
@@ -80,9 +80,46 @@ export default class UserService {
     });
   }
 
-  static changeUserPicture(fileData) {
+  static updateUserData(name, email, dateOfBirth) {
     return new Promise((resolve, reject) => {
-      APIService.post(
+      APIService.put(
+        `${UserService.usersURL()}/data`,
+        {
+          name: name,
+          email: email,
+          dateOfBirth: dateOfBirth
+        },
+        function(data) {
+          UserService.notifyListeners('userDataChanged');
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static updatePassword(password) {
+    return new Promise((resolve, reject) => {
+      APIService.put(
+        `${UserService.usersURL()}/password`,
+        {
+          password: password
+        },
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static updateUserPicture(fileData) {
+    return new Promise((resolve, reject) => {
+      APIService.put(
         `${UserService.usersURL()}/picture`,
         {
           imageData: fileData

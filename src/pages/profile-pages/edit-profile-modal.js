@@ -5,10 +5,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
-import UserDetailComponent from './userDetails';
 
 const customModalStyle = {
-  width: '500px'
+  width: '320px'
 };
 
 export default class NewEditModal extends React.Component {
@@ -16,12 +15,10 @@ export default class NewEditModal extends React.Component {
     super(props);
 
     this.state = {
-      open: false,
-      name: '',
-      email: '',
-      dateOfBirth: null,
-      newPassword: ''
+      open: false
     };
+
+    this.getProfileData();
 
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -37,8 +34,11 @@ export default class NewEditModal extends React.Component {
       .then(result => {
         this.setState({
           name: result.name,
+          initialName: result.name,
           email: result.email,
+          initialEmail: result.email,
           dateOfBirth: result.dateOfBirth,
+          initialDateOfBirth: result.dateOfBirth,
           role: result.roles[0],
           image: result.image
         });
@@ -58,41 +58,63 @@ export default class NewEditModal extends React.Component {
   };
 
   submit = () => {
-    // UserService.changeUserPicture(this.state.preview)
-    //   .then(result => {
-    //     window.location = 'profile';
-    //   })
-    //   .catch(e => {
-    //     console.error(e);
-    //     this.setState({ error: e });
-    //   });
+    UserService.updateUserData(
+      this.state.name,
+      this.state.email,
+      this.state.dateOfBirth
+    )
+      .then(this.handleClose())
+      .catch(e => {
+        console.error(e);
+        this.setState({ error: e });
+      });
   };
 
   onNameChange(event) {
-    this.setState({ name: event.target.value.trim() });
+    this.setState({
+      name: event.target.value.trim()
+    });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
   }
 
   onPasswordChange(event) {
-    this.setState({ password: event.target.value.trim() });
+    this.setState({
+      password: event.target.value.trim()
+    });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
   }
 
   onEmailChange(event) {
-    this.setState({ email: event.target.value.trim() });
+    this.setState({
+      email: event.target.value.trim()
+    });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
   }
 
   onBirthDateChange(event, date) {
-    this.setState({ dateOfBirth: date });
+    this.setState({
+      dateOfBirth: date.toISOString()
+    });
     if (date === '') {
       this.setState({ displayError: 'none' });
+    }
+  }
+
+  dataChanged() {
+    if (
+      this.state.initialName !== this.state.name ||
+      this.state.initialEmail !== this.state.email ||
+      this.state.initialDateOfBirth !== this.state.dateOfBirth
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -101,7 +123,8 @@ export default class NewEditModal extends React.Component {
       this.state.username === '' ||
       this.state.name === '' ||
       this.state.email === '' ||
-      this.state.password === ''
+      this.state.password === '' ||
+      !this.dataChanged()
     );
   }
 
@@ -134,25 +157,19 @@ export default class NewEditModal extends React.Component {
             // errorText={this.getNameErrorText}
           />
           <DatePicker
-            value={this.state.dateOfBirth}
+            value={new Date(this.state.dateOfBirth)}
             onChange={this.onBirthDateChange}
             floatingLabelText="Birth Date"
             hintText="e.g 13.07.1995"
           />
           <TextField
             type="email"
-            floatingLabelText="Email (Future username)"
+            floatingLabelText="Email"
             required={true}
             value={this.state.email}
             onChange={this.onEmailChange}
+
             // errorText={this.getEmailErrorText}
-          />
-          <TextField
-            type="password"
-            floatingLabelText="Password"
-            required={true}
-            value={this.state.password}
-            onChange={this.onPasswordChange}
           />
         </Dialog>
       </div>

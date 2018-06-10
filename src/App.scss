@@ -64,6 +64,13 @@
   vertical-align: bottom;
 }
 
+.p-profile-changePwButton{
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+}
+
 .c-profile-img{
   position: relative;
   display: inline-block;
@@ -100,4 +107,21 @@
   height: 200px;
   left: 0px;
   top: 0px;
+}
+
+.c-profile-checkbox-showHidePw{
+  float: left;
+  width: 190px!important;
+  margin-left: -10px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+  margin-top: -15px;
+}
+
+.c-profile-changePw-message-ok{
+  color: green;
+}
+
+.c-profile-changePw-message-error{
+  color: red;
 }

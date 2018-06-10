@@ -56,7 +56,7 @@
 }
 
 .c-profile-bar-slide-in {
-    z-index: 100!important;
+    z-index: 10000!important;
     animation: fade-in 0.5s forwards;
     -webkit-animation: fade-in 0.5s forwards;
 }

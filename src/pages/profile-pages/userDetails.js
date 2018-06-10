@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import NewUploadModal from './upload-img-modal';
 import NewEditModal from './edit-profile-modal';
+import NewChangePwModal from './change-password-modal';
 
 //Services
 import UserService from '../../services/user-service';
@@ -11,13 +12,10 @@ class UserDetailComponent extends Component {
 
   constructor(props) {
     super(props);
-
-    var user = UserService.getCurrentUser();
     this.state = {
-      userId: user.id,
-      name: user.name
+      userId: '',
+      name: ''
     };
-
     this.getProfile();
   }
 
@@ -26,12 +24,16 @@ class UserDetailComponent extends Component {
       'userPictureChanged',
       this.getProfile.bind(this)
     );
+
+    UserService.registerListener('userDataChanged', this.getProfile.bind(this));
   };
 
   getProfile() {
     UserService.getFullUser()
       .then(result => {
         this.setState({
+          userId: result._id,
+          name: result.name,
           email: result.email,
           dateOfBirth: result.dateOfBirth,
           role: result.roles[0],
@@ -154,6 +156,9 @@ class UserDetailComponent extends Component {
         </div>
         <div className="p-profile-editButton">
           <NewEditModal />
+        </div>
+        <div className="p-profile-changePwButton">
+          <NewChangePwModal />
         </div>
       </Paper>
     );
