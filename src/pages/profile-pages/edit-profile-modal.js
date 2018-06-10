@@ -89,7 +89,6 @@ export default class NewEditModal extends React.Component {
 
   get isButtonDisabled() {
     return (
-      this.state.username === '' ||
       this.state.firstname === '' ||
       this.state.lastname === '' ||
       this.state.email === '' ||
@@ -140,7 +139,7 @@ export default class NewEditModal extends React.Component {
           />
           <TextField
             type="email"
-            floatingLabelText="Email (Future username)"
+            floatingLabelText="Email"
             required={true}
             value={this.state.email}
             onChange={this.onEmailChange}

@@ -140,7 +140,7 @@ class TaskBoard extends Component {
             {this.props.board.members.map(member => (
               <Avatar
                 key={member._id}
-                title={member.name}
+                title={member.firstname + ' ' + member.lastname}
                 src={member.image}
                 size={20}
                 className="c-task-board-avatar"
@@ -159,7 +159,6 @@ class TaskBoard extends Component {
           />
           <i className={this.editableTitle}>edit</i>
           <br />
-          {/* <span> {this.props.board.author.name}</span> <br /> */}
           <FloatingActionButton
             mini={true}
             iconStyle={iconStyle}

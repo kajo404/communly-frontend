@@ -120,9 +120,7 @@ class UserDetailComponent extends Component {
             <tbody>
               <tr>
                 <td>Name: </td>
-                <td>
-                  {this.state.firstname} {this.state.lastname}
-                </td>
+                <td>{this.state.firstname + ' ' + this.state.lastname}</td>
               </tr>
               <tr>
                 <td>Email: </td>
