@@ -41,12 +41,17 @@ export default class CreateTaskBoardModal extends React.Component {
       .catch(error => console.error(error));
   };
 
+  closeModal = () => {
+    this.props.handleClose();
+    this.setState({ modal: { title: '' } });
+  };
+
   render() {
     const actions = [
       <FlatButton
         label="Cancel"
         primary={true}
-        onClick={this.props.handleClose}
+        onClick={this.closeModal}
         style={{ marginRight: '7px' }}
       />,
       <RaisedButton

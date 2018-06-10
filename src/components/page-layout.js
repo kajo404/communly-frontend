@@ -39,11 +39,7 @@ class PageLayout extends React.Component {
     };
   }
 
-  get userName() {
-    return UserService.getCurrentUser().name;
-  }
-
-  get userPicture() {
+  updateUserPicture() {
     if (UserService.isAuthenticated() && !this.state.retrievedUser) {
       UserService.getFullUser()
         .then(result => {
@@ -64,6 +60,10 @@ class PageLayout extends React.Component {
           });
         });
     }
+  }
+
+  get userName() {
+    return UserService.getCurrentUser().name;
   }
 
   logout() {
@@ -92,7 +92,7 @@ class PageLayout extends React.Component {
   };
 
   render() {
-    this.userPicture;
+    this.updateUserPicture();
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
@@ -143,15 +143,6 @@ class PageLayout extends React.Component {
         <div className="c-layout">
           <AppBar
             className="c-app-bar"
-            iconElementRight={
-              <ListItem
-                style={style}
-                disabled={true}
-                leftAvatar={<Avatar src={avatar} size={30} />}
-              >
-                {this.name}
-              </ListItem>
-            }
             iconElementLeft={
               <img className="c-logo" src={logo} alt="communly logo" />
             }
