@@ -58,7 +58,7 @@ class TaskBoardPage extends Component {
   // This gets called by the board that has added new members
   addMembers = members => {
     if (!members.includes(UserService.getCurrentUser().id)) {
-      members.push(UserService.getCurrentUser().id);
+      members.unshift(UserService.getCurrentUser().id);
     }
 
     TaskBoardService.addMembers(this.state.currentBoardOpening, members)

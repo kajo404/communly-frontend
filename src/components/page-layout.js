@@ -8,6 +8,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Menu from 'material-ui/Menu';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import logo from './../assets/logo.png';
 import UserService from '../services/user-service';
@@ -28,6 +29,10 @@ const selectedStyles = {
   borderLeft: '3px solid #9ab1d9'
 };
 
+const logoutButtonStyle = {
+  marginTop: '10px',
+  width: '220px'
+};
 class PageLayout extends React.Component {
   constructor(props) {
     super(props);
@@ -94,6 +99,13 @@ class PageLayout extends React.Component {
     }
   }
 
+  toggleMobileMenu() {
+    var navToggler = document.querySelector('.c-header__nav-toggler');
+    var navEl = document.querySelector('.c-mobile-menu');
+    navToggler.classList.toggle('is-open');
+    navEl.classList.toggle('is-open');
+  }
+
   changeActivePage = (event, menuItem, index) => {
     this.setState({ activePage: index });
     // this can be done more elegantly
@@ -106,12 +118,12 @@ class PageLayout extends React.Component {
       return (
         <div className="c-layout">
           <AppBar
-            onClick={this.showHideProfile}
             className="c-app-bar"
             iconElementRight={
               <ListItem
+                onClick={this.showHideProfile}
+                className="c-app-bar__user-info"
                 style={style}
-                disabled={true}
                 leftAvatar={
                   <Avatar
                     src={this.state.image}
@@ -124,7 +136,41 @@ class PageLayout extends React.Component {
               </ListItem>
             }
             iconElementLeft={
-              <img className="c-logo" src={logo} alt="communly logo" />
+              <div>
+                <img className="c-logo" src={logo} alt="communly logo" />
+                <div
+                  className="c-header__nav-toggler"
+                  onClick={this.toggleMobileMenu}
+                >
+                  <div className="c-header__nav-toggler-line" />
+                  <div className="c-header__nav-toggler-line" />
+                  <div className="c-header__nav-toggler-line" />
+                </div>
+                <div className="c-mobile-menu">
+                  <Link to="/profile" onClick={this.toggleMobileMenu}>
+                    <MenuItem className="c-menu-item"> Profile </MenuItem>{' '}
+                  </Link>
+                  <Link to="/announcements" onClick={this.toggleMobileMenu}>
+                    <MenuItem
+                      className="c-menu-item"
+                      primaryText="Announcements"
+                    />
+                  </Link>
+                  <Link to="/task-boards" onClick={this.toggleMobileMenu}>
+                    <MenuItem
+                      className="c-menu-item"
+                      primaryText="Task Boards"
+                    />
+                  </Link>
+                  <RaisedButton
+                    labelColor="white"
+                    style={logoutButtonStyle}
+                    primary={true}
+                    onClick={this.logout}
+                    label="LOGOUT"
+                  />
+                </div>
+              </div>
             }
             style={appBarStyle}
           />
@@ -134,8 +180,16 @@ class PageLayout extends React.Component {
               onItemClick={this.changeActivePage}
               value={this.state.activePage}
             >
-              <MenuItem primaryText="Announcements" value={0} />
-              <MenuItem primaryText="Task Boards" value={1} />
+              <MenuItem
+                className="c-menu-item"
+                primaryText="Announcements"
+                value={0}
+              />
+              <MenuItem
+                className="c-menu-item"
+                primaryText="Task Boards"
+                value={1}
+              />
             </Menu>
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
