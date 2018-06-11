@@ -3,9 +3,9 @@ import Paper from 'material-ui/Paper';
 import NewUploadModal from './upload-img-modal';
 import NewEditModal from './edit-profile-modal';
 import NewChangePwModal from './change-password-modal';
-
-//Services
 import UserService from '../../services/user-service';
+
+import './profile.scss';
 
 class UserDetailComponent extends Component {
   date;

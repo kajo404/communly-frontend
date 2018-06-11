@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
 import EditPwIcon from 'material-ui/svg-icons/image/edit';
 
+import './profile.scss';
+
 const customModalStyle = {
   width: '320px'
 };

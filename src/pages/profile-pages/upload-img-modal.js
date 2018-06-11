@@ -6,6 +6,8 @@ import Avatar from 'react-avatar-edit';
 import UserService from '../../services/user-service';
 import UploadIcon from 'material-ui/svg-icons/editor/publish';
 
+import './profile.scss';
+
 const customModalStyle = {
   width: '700px'
 };

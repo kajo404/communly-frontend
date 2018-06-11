@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 
+import './profile.scss';
+
 const customModalStyle = {
   width: '320px'
 };
