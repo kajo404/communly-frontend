@@ -71,10 +71,10 @@ class PageLayout extends React.Component {
     return user.firstname + ' ' + user.lastname;
   }
 
-  logout() {
-    this.showHideProfile;
+  logout = () => {
+    this.showHideProfile();
     UserService.logout();
-  }
+  };
 
   showHideProfile() {
     var $slider = document.getElementById('profileMenuSlider');

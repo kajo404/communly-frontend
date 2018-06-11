@@ -12,7 +12,8 @@ const avatarStyles = {
 };
 
 const contentStyle = {
-  width: '300px',
+  maxWidth: '340px',
+  width: '90%',
   paddingTop: '-20px'
 };
 
@@ -37,6 +38,8 @@ export default class AddMemberModal extends React.Component {
         addedMembers: this.props.currentMembers.map(member => member._id)
       });
     }
+
+    console.log('users', this.props.users);
   }
 
   addMembersToBoard = () => {
@@ -116,11 +119,7 @@ export default class AddMemberModal extends React.Component {
                   innerDivStyle={{ paddingBottom: '3px' }}
                   key={index}
                   rightAvatar={
-                    <Avatar
-                      src="http://via.placeholder.com/30x30"
-                      size={30}
-                      style={avatarStyles}
-                    />
+                    <Avatar src={user.image} size={30} style={avatarStyles} />
                   }
                   leftCheckbox={
                     <Checkbox

@@ -4,7 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const contentStyle = {
-  width: '500px'
+  maxWidth: '500px',
+  width: '90%'
 };
 
 export default class DeleteBoardConfirmation extends React.Component {
@@ -17,7 +18,7 @@ export default class DeleteBoardConfirmation extends React.Component {
   }
 
   deleteTaskBoard = () => {
-    this.props.deleteTaskBoard;
+    this.props.deleteTaskBoard();
   };
 
   render() {
