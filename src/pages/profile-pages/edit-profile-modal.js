@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import EditIcon from 'material-ui/svg-icons/image/edit';
 
 const customModalStyle = {
   width: '320px'
@@ -141,7 +142,12 @@ export default class NewEditModal extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Edit" primary={true} onClick={this.handleOpen} />
+        <RaisedButton
+          label="Edit"
+          primary={true}
+          onClick={this.handleOpen}
+          icon={<EditIcon />}
+        />
         <Dialog
           title="Edit Profile Details"
           actions={actions}

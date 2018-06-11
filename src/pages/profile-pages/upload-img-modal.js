@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'react-avatar-edit';
 import UserService from '../../services/user-service';
+import UploadIcon from 'material-ui/svg-icons/editor/publish';
 
 const customModalStyle = {
   width: '700px'
@@ -71,7 +72,11 @@ export default class NewUploadModal extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Change" primary={true} onClick={this.handleOpen} />
+        <RaisedButton
+          primary={true}
+          onClick={this.handleOpen}
+          icon={<UploadIcon />}
+        />
         <Dialog
           title="Upload new Profile Picture"
           actions={actions}
