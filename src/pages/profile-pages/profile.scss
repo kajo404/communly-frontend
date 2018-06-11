@@ -1,59 +1,33 @@
 //Profile
 
+
+//user details
 .p-profile{
   padding-top: 74px;
+  padding-bottom: 10px;
 }
 
 .c-userDetails-paper{
-  width: auto;
   margin-left: 14px;
   margin-right: 10px;
+  @media (max-width: 768px) {
+        margin: 0 10px;
+    }
 }
 
-
-.c-userDetails-content{
-  position: relative;
+.c-profile-img-wrapper{
   display: inline-block;
-  margin: 50px;
-  margin-bottom: 20px;
-  height: auto;
-  width: auto;
-  vertical-align: top;
-}
-
-.c-userDetails-content-table{
-  margin-top: 20px;
-  line-height: 24px;
-}
-
-.c-userDetails-content-table td{
-  min-width: 100px;
-}
-
-.p-profile-uploadButton{
-  display: inline-block;
-  margin-left: 90px;
-  margin-bottom: 20px;
-  vertical-align: bottom;
-}
-
-.p-profile-editButton{
-  display: inline-block;
-  margin-left: 137px;
-  margin-bottom: 20px;
-  vertical-align: bottom;
-}
-
-.p-profile-changePwButton{
-  display: inline-block;
-  margin-left: 20px;
-  margin-bottom: 20px;
-  vertical-align: bottom;
+  width: 30%;
+  min-width: 220px;
+  height: 100%;
+  @media (max-width: 768px) {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 .c-profile-img{
   position: relative;
-  display: inline-block;
   width: 206px;
   height: 206px;
   margin: 30px;
@@ -63,22 +37,89 @@
   vertical-align: top;
 }
 
+.p-profile-uploadButton{
+  margin-left: 90px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+  @media (max-width: 768px) {
+        margin-left: 0px;
+    }
+}
+
+.c-profile-content-wrapper{
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.c-userDetails-content{
+  position: relative;
+  display: inline-block;
+  margin: 30px;
+  height: auto;
+  width: auto;
+  vertical-align: top;
+  @media (max-width: 768px) {
+        margin: 20px;
+    }
+}
+
+.c-userDetails-content-table{
+  margin-top: 20px;
+  line-height: 24px;
+}
+
+.c-userDetails-content-table td{
+  min-width: 100px;
+  @media (max-width: 768px) {
+        min-width: 65px;
+    }
+}
+
+.p-profile-editButton{
+  display: inline-block;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+  @media (max-width: 768px) {
+        margin-left: 20px;
+    }
+}
+
+.p-profile-changePwButton{
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+}
+
+
+//upload image
 .c-profile-imgSelector{
   display: flex;
-  width: 100%;
 }
+
+.c-profile-imgUpload-dialog{
+  overflow: scroll;
+  @media (max-width: 768px) {
+    
+    }
+}
+
 
 .c-profile-imgPreviewContainer{
   position: relative;
   width: 206px;
   height: 206px;
-  margin-left: 50px;
-  margin-top: 50px;
+  margin-left: 70px;
+  margin-top: 25px;
   text-align: left;
   border: 3px dashed rgb(49, 79, 129);
   border-radius: 200px;
   text-align: center;
   line-height: 200px;
+  @media (max-width: 768px) {
+        display: none;
+    }
 }
 
 .c-profile-imgPreview{

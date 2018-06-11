@@ -113,52 +113,57 @@ class UserDetailComponent extends Component {
   render() {
     return (
       <Paper className="c-userDetails-paper" zDepth={1}>
-        <img className="c-profile-img" src={this.state.image} alt="Profile" />
-        <div className="c-userDetails-content">
-          <h2>Profile</h2>
-          <table className="c-userDetails-content-table">
-            <tbody>
-              <tr>
-                <td>Name: </td>
-                <td>{this.state.name}</td>
-              </tr>
-              <tr>
-                <td>Email: </td>
-                <td>{this.state.email}</td>
-              </tr>
-              <tr>
-                <td>Birthday:</td>
-                <td>{this.formatDate(this.state.dateOfBirth)}</td>
-              </tr>
-              <tr>
-                <td />
-                <td />
-              </tr>
-              <tr>
-                <td>ID:</td>
-                <td>{this.state.userId}</td>
-              </tr>
-              <tr>
-                <td>Role:</td>
-                <td>{this.state.role}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="c-profile-img-wrapper">
+          <img className="c-profile-img" src={this.state.image} alt="Profile" />
+          <div className="p-profile-uploadButton">
+            <NewUploadModal />
+          </div>
+        </div>
+        <div className="c-profile-content-wrapper">
+          <div className="c-userDetails-content">
+            <h2>Profile</h2>
+            <table className="c-userDetails-content-table">
+              <tbody>
+                <tr>
+                  <td>Name: </td>
+                  <td>{this.state.name}</td>
+                </tr>
+                <tr>
+                  <td>Email: </td>
+                  <td>{this.state.email}</td>
+                </tr>
+                <tr>
+                  <td>Birthday:</td>
+                  <td>{this.formatDate(this.state.dateOfBirth)}</td>
+                </tr>
+                <tr>
+                  <td />
+                  <td />
+                </tr>
+                <tr>
+                  <td>ID:</td>
+                  <td>{this.state.userId}</td>
+                </tr>
+                <tr>
+                  <td>Role:</td>
+                  <td>{this.state.role}</td>
+                </tr>
+              </tbody>
+            </table>
 
-          {/* <h3> # created Announcements: {this.state.numberAnnouncements}</h3>
-            <h3> # created Tasklists: {this.state.numberTasklistsAuthor}</h3>
-            <h3> # atended Tasklists: {this.state.numberTasklistsMember}</h3>
-            <h3> # assigned Tasks: {this.state.numberAssignedTasks}</h3> */}
-        </div>
-        <br />
-        <div className="p-profile-uploadButton">
-          <NewUploadModal />
-        </div>
-        <div className="p-profile-editButton">
-          <NewEditModal />
-        </div>
-        <div className="p-profile-changePwButton">
-          <NewChangePwModal />
+            {/* <h3> # created Announcements: {this.state.numberAnnouncements}</h3>
+              <h3> # created Tasklists: {this.state.numberTasklistsAuthor}</h3>
+              <h3> # atended Tasklists: {this.state.numberTasklistsMember}</h3>
+              <h3> # assigned Tasks: {this.state.numberAssignedTasks}</h3> */}
+          </div>
+          <br />
+
+          <div className="p-profile-editButton">
+            <NewEditModal />
+          </div>
+          <div className="p-profile-changePwButton">
+            <NewChangePwModal />
+          </div>
         </div>
       </Paper>
     );
