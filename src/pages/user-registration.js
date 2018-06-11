@@ -5,7 +5,17 @@ import { withRouter, Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
+const buttonStyles = {
+  position: 'relative',
+  marginTop: '30px'
+};
+
+const ERROR_CODES = {
+  400: 'This email is already taken!',
+  'Failed to fetch': 'Hm, could not connect to the server!'
+};
 class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
@@ -14,19 +24,11 @@ class UserRegistration extends React.Component {
       lastname: '',
       email: '',
       dateOfBirth: null,
-      password: ''
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onFirstNameChange = this.onFirstNameChange.bind(this);
-    this.onLastNameChange = this.onLastNameChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onBirthDateChange = this.onBirthDateChange.bind(this);
-
-    this.buttonStyles = {
-      position: 'relative',
-      marginTop: '30px'
+      password: '',
+      errorBar: {
+        open: false,
+        message: ''
+      }
     };
   }
 
@@ -44,7 +46,7 @@ class UserRegistration extends React.Component {
     this.register(user);
   }
 
-  register(user) {
+  register = user => {
     UserService.register(
       user.firstname,
       user.lastname,
@@ -55,50 +57,37 @@ class UserRegistration extends React.Component {
       .then(result => {
         this.props.history.push('/announcements');
       })
-      .catch(e => {
-        console.error(e);
+
+      //TODO default fehler wenn kein fehler zutrifft
+      .catch(errorCode => {
         this.setState({
-          error: e
+          errorBar: {
+            message: ERROR_CODES[errorCode],
+            open: true
+          }
         });
-        this.onRegistrationError();
       });
-    //TODO: Set error string (e) according to chached error
-  }
+  };
 
-  onFirstNameChange(event) {
+  onFirstNameChange = event => {
     this.setState({ firstname: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
-  }
+  };
 
-  onLastNameChange(event) {
+  onLastNameChange = event => {
     this.setState({ lastname: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
-  }
+  };
 
-  onPasswordChange(event) {
+  onPasswordChange = event => {
     this.setState({ password: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
-  }
+  };
 
-  onEmailChange(event) {
+  onEmailChange = event => {
     this.setState({ email: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
-  }
+  };
 
-  onBirthDateChange(event, date) {
+  onBirthDateChange = (event, date) => {
     this.setState({ dateOfBirth: date });
-    if (date === '') {
-      this.setState({ displayError: 'none' });
-    }
-  }
+  };
 
   get isButtonDisabled() {
     return (
@@ -106,15 +95,16 @@ class UserRegistration extends React.Component {
       this.state.firstname === '' ||
       this.state.lastname === '' ||
       this.state.email === '' ||
-      this.state.password === ''
+      this.state.password === '' ||
+      this.state.dateOfBirth === null
     );
   }
 
-  onRegistrationError() {
+  closeSnackbar = () => {
     this.setState({
-      displayError: 'display'
+      errorBar: { message: '', open: false }
     });
-  }
+  };
 
   render() {
     return (
@@ -124,16 +114,15 @@ class UserRegistration extends React.Component {
           required={true}
           value={this.state.firstname}
           onChange={this.onFirstNameChange}
-          // errorText={this.getNameErrorText}
         />
         <TextField
           floatingLabelText="Last Name"
           required={true}
           value={this.state.lastname}
           onChange={this.onLastNameChange}
-          // errorText={this.getNameErrorText}
         />
         <DatePicker
+          required={true}
           value={this.state.dateOfBirth}
           onChange={this.onBirthDateChange}
           floatingLabelText="Birth Date"
@@ -145,7 +134,6 @@ class UserRegistration extends React.Component {
           required={true}
           value={this.state.email}
           onChange={this.onEmailChange}
-          // errorText={this.getEmailErrorText}
         />
         <TextField
           type="password"
@@ -156,7 +144,7 @@ class UserRegistration extends React.Component {
         />
         <RaisedButton
           label="REGISTER"
-          labelStyle={this.buttonStyles}
+          labelStyle={buttonStyles}
           primary={true}
           className="c-login__button"
           onClick={this.onSubmit}
@@ -175,6 +163,12 @@ class UserRegistration extends React.Component {
         >
           {this.state.error}
         </div>
+        <Snackbar
+          open={this.state.errorBar.open}
+          message={this.state.errorBar.message}
+          autoHideDuration={3000}
+          onRequestClose={this.closeSnackbar}
+        />
       </div>
     );
   }

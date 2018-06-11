@@ -113,7 +113,7 @@ export default class APIService {
           window.location = '/#login';
         } else {
           resp.json().then(json => {
-            onError(json.error);
+            onError(resp.status);
           });
         }
       })

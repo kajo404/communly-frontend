@@ -25,8 +25,8 @@ export default class UserService {
         function(data) {
           resolve(data);
         },
-        function(textStatus) {
-          reject(textStatus);
+        function(errorCode) {
+          reject(errorCode);
         }
       );
     });
