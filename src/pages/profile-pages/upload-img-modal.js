@@ -88,7 +88,12 @@ export default class NewUploadModal extends React.Component {
           //className="c-profile-imgUpload-dialog"
         >
           <div className="c-profile-imgSelector">
-            <Avatar onCrop={this.onCrop} onClose={this.onClose} />
+            <Avatar
+              height={255}
+              width={350}
+              onCrop={this.onCrop}
+              onClose={this.onClose}
+            />
             <div className="c-profile-imgPreviewContainer">
               <h3>Preview</h3>
               <img
