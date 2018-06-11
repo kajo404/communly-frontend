@@ -67,7 +67,8 @@ class PageLayout extends React.Component {
   }
 
   get userName() {
-    return UserService.getCurrentUser().name;
+    const user = UserService.getCurrentUser();
+    return user.firstname + ' ' + user.lastname;
   }
 
   logout() {
