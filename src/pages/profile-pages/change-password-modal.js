@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
 import TextField from 'material-ui/TextField';
 import Checkbox from 'material-ui/Checkbox';
+import EditPw from 'material-ui/svg-icons/image/edit';
 
 const customModalStyle = {
   width: '320px'
@@ -120,9 +121,10 @@ export default class NewEditModal extends React.Component {
     return (
       <div>
         <RaisedButton
-          label="Change Password"
+          label="Password"
           primary={true}
           onClick={this.handleOpen}
+          icon={<EditPw />}
         />
         <Dialog
           title="Change Password"

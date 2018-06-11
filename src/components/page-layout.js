@@ -36,6 +36,7 @@ class PageLayout extends React.Component {
       retrievedUser: false,
       activePage: 0
     };
+    this.updateUser();
   }
 
   componentDidMount = () => {
@@ -43,10 +44,15 @@ class PageLayout extends React.Component {
       'userPictureChanged',
       this.updateUser.bind(this)
     );
-
     UserService.registerListener('userDataChanged', this.updateUser.bind(this));
-
-    UserService.registerListener('userLogedIn', this.updateUser.bind(this));
+    UserService.registerListener(
+      'userPictureChanged',
+      this.updateUser.bind(this)
+    );
+    UserService.registerListener(
+      'userAutheticated',
+      this.updateUser.bind(this)
+    );
   };
 
   updateUser() {
@@ -55,8 +61,7 @@ class PageLayout extends React.Component {
         .then(result => {
           this.setState({
             name: result.name,
-            image: result.image,
-            retrievedUser: true
+            image: result.image
           });
         })
         .catch(e => {
