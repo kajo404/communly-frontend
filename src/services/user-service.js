@@ -11,6 +11,28 @@ export default class UserService {
     return APIService.apiURL() + '/users';
   }
 
+  static registerAdmin(firstname, lastname, email, pass, dateOfBirth, code) {
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${UserService.URL()}/registerAdmin`,
+        {
+          firstname: firstname,
+          lastname: lastname,
+          email: email,
+          password: pass,
+          dateOfBirth: dateOfBirth,
+          code: code
+        },
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static register(firstname, lastname, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
