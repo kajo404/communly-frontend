@@ -38,8 +38,9 @@ export default class NewEditModal extends React.Component {
       .then(result => {
         this.setState({
           firstname: result.firstname,
+          initialFirstame: result.firstname,
           lastname: result.lastname,
-          initialName: result.name,
+          initialLastname: result.lastname,
           email: result.email,
           initialEmail: result.email,
           dateOfBirth: result.dateOfBirth,
@@ -64,7 +65,8 @@ export default class NewEditModal extends React.Component {
 
   submit = () => {
     UserService.updateUserData(
-      this.state.name,
+      this.state.lastname,
+      this.state.firstname,
       this.state.email,
       this.state.dateOfBirth
     )
@@ -118,7 +120,8 @@ export default class NewEditModal extends React.Component {
 
   dataChanged() {
     if (
-      this.state.initialName !== this.state.name ||
+      this.state.initialFirstame !== this.state.firstname ||
+      this.state.initialLastname !== this.state.lastname ||
       this.state.initialEmail !== this.state.email ||
       this.state.initialDateOfBirth !== this.state.dateOfBirth
     ) {

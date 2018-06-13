@@ -13,6 +13,9 @@ class UserDetailComponent extends Component {
   constructor(props) {
     super(props);
     this.getProfile();
+    this.state = {
+      image: ''
+    };
   }
 
   componentDidMount = () => {
@@ -20,7 +23,6 @@ class UserDetailComponent extends Component {
       'userPictureChanged',
       this.getProfile.bind(this)
     );
-
     UserService.registerListener('userDataChanged', this.getProfile.bind(this));
   };
 
