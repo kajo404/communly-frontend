@@ -2,6 +2,10 @@ import APIService from './API-service';
 
 export default class UserService {
   static listeners = {};
+  static receivedAnnouncements = false;
+  static receivedTasklistsAuthor = false;
+  static receivedTasklistsMember = false;
+  static receivedTasks = false;
 
   static URL() {
     return APIService.apiURL() + '/auth';
@@ -167,6 +171,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasks`,
 
         function(data) {
+          UserService.receivedTasks = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -182,6 +188,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/author`,
 
         function(data) {
+          UserService.receivedTasklistsAuthor = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -197,6 +205,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/member`,
 
         function(data) {
+          UserService.receivedTasklistsMember = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -212,6 +222,8 @@ export default class UserService {
         `${UserService.usersURL()}/annoncements`,
 
         function(data) {
+          UserService.receivedAnnouncements = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -219,5 +231,16 @@ export default class UserService {
         }
       );
     });
+  }
+
+  static receivedUserActivityData() {
+    if (
+      UserService.receivedAnnouncements &&
+      UserService.receivedTasklistsAuthor &&
+      UserService.receivedTasklistsMember &&
+      UserService.receivedTasks
+    ) {
+      UserService.notifyListeners('receivedUserActivityData');
+    }
   }
 }

@@ -1,18 +1,21 @@
 //Profile
 
 
-//user details
+//------------------------------- user details
 .p-profile{
   padding-top: 74px;
   padding-bottom: 10px;
 }
 
-.c-userDetails-paper{
+.c-userProfile-wrapper{
+  color: #314f81;
   margin-left: 14px;
   margin-right: 10px;
-  @media (max-width: 768px) {
-        margin: 0 10px;
-    }
+  margin-top: 10px;
+}
+
+.c-userDetails-paper{
+  margin-top: 10px;
 }
 
 .c-profile-img-wrapper{
@@ -55,18 +58,26 @@
 .c-userDetails-content{
   position: relative;
   display: inline-block;
-  margin: 30px;
+  margin: 10px 30px 40px;
   height: auto;
   width: auto;
   vertical-align: top;
   @media (max-width: 768px) {
         margin: 20px;
-    }
+          
+      }
 }
 
 .c-userDetails-content-table{
   margin-top: 20px;
-  line-height: 24px;
+  line-height: 30px;
+  font-size: 20px;
+  @media (max-width: 768px) {
+        min-width: 65px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
 }
 
 .c-userDetails-content-table td{
@@ -93,8 +104,6 @@
   vertical-align: bottom;
 }
 
-
-//upload image
 .c-profile-imgSelector{
   display: flex;
 }
@@ -146,4 +155,49 @@
 
 .c-profile-changePw-message-error{
   color: red;
+}
+
+//------------------------------- user activity
+
+
+.c-userActivity-wrapper{
+  color: #314f81;
+  margin-left: 14px;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
+.c-userActivity-paper{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.c-userActivity-component{
+  margin: 20px 10px;
+  max-width: 200px;
+  min-height: 200px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.c-userActivity-componentIcon{
+  width: 70px!important;
+  height: 70px!important;
+  margin: 0 65px;
+  margin-top: 15px;
+}
+
+.c-userActivity-componentText{
+  margin-top: 5px;
+}
+
+.c-userActivity-componentNumber{
+  font-size: 50px;
+  margin-top: 15px;
 }
