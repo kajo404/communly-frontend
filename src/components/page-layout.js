@@ -45,10 +45,6 @@ class PageLayout extends React.Component {
   }
 
   componentDidMount = () => {
-    UserService.registerListener(
-      'userPictureChanged',
-      this.updateUser.bind(this)
-    );
     UserService.registerListener('userDataChanged', this.updateUser.bind(this));
     UserService.registerListener(
       'userPictureChanged',
