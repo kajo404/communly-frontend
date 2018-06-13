@@ -12,10 +12,6 @@ class UserDetailComponent extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      userId: '',
-      name: ''
-    };
     this.getProfile();
   }
 
@@ -33,7 +29,8 @@ class UserDetailComponent extends Component {
       .then(result => {
         this.setState({
           userId: result._id,
-          name: result.name,
+          lastname: result.lastname,
+          firstname: result.firstname,
           email: result.email,
           dateOfBirth: result.dateOfBirth,
           role: result.roles[0],
@@ -126,7 +123,7 @@ class UserDetailComponent extends Component {
               <tbody>
                 <tr>
                   <td>Name: </td>
-                  <td>{this.state.name}</td>
+                  <td>{this.state.firstname + ' ' + this.state.lastname}</td>
                 </tr>
                 <tr>
                   <td>Email: </td>

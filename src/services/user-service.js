@@ -11,12 +11,13 @@ export default class UserService {
     return APIService.apiURL() + '/users';
   }
 
-  static register(name, email, pass, dateOfBirth) {
+  static register(firstname, lastname, email, pass, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.post(
         `${UserService.URL()}/register`,
         {
-          name: name,
+          firstname: firstname,
+          lastname: lastname,
           email: email,
           password: pass,
           dateOfBirth: dateOfBirth
@@ -63,7 +64,9 @@ export default class UserService {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return {
-      id: JSON.parse(window.atob(base64)).id
+      id: JSON.parse(window.atob(base64)).id,
+      firstname: JSON.parse(window.atob(base64)).firstname,
+      lastname: JSON.parse(window.atob(base64)).lastname
     };
   }
 
@@ -81,12 +84,13 @@ export default class UserService {
     });
   }
 
-  static updateUserData(name, email, dateOfBirth) {
+  static updateUserData(lastname, firstname, email, dateOfBirth) {
     return new Promise((resolve, reject) => {
       APIService.put(
         `${UserService.usersURL()}/data`,
         {
-          name: name,
+          lastname: lastname,
+          firstname: firstname,
           email: email,
           dateOfBirth: dateOfBirth
         },

@@ -65,7 +65,8 @@ class PageLayout extends React.Component {
       UserService.getFullUser()
         .then(result => {
           this.setState({
-            name: result.name,
+            firstname: result.firstname,
+            lastname: result.lastname,
             image: result.image
           });
         })
@@ -132,7 +133,7 @@ class PageLayout extends React.Component {
                   />
                 }
               >
-                {this.state.name}
+                {this.state.firstname + ' ' + this.state.lastname}
               </ListItem>
             }
             iconElementLeft={

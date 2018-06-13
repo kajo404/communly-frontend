@@ -26,7 +26,8 @@ export default class NewEditModal extends React.Component {
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.submit = this.submit.bind(this);
-    this.onNameChange = this.onNameChange.bind(this);
+    this.onFirstNameChange = this.onFirstNameChange.bind(this);
+    this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onBirthDateChange = this.onBirthDateChange.bind(this);
@@ -36,7 +37,8 @@ export default class NewEditModal extends React.Component {
     UserService.getFullUser()
       .then(result => {
         this.setState({
-          name: result.name,
+          firstname: result.firstname,
+          lastname: result.lastname,
           initialName: result.name,
           email: result.email,
           initialEmail: result.email,
@@ -73,10 +75,15 @@ export default class NewEditModal extends React.Component {
       });
   };
 
-  onNameChange(event) {
-    this.setState({
-      name: event.target.value.trim()
-    });
+  onFirstNameChange(event) {
+    this.setState({ firstname: event.target.value.trim() });
+    if (event.target.value.trim() === '') {
+      this.setState({ displayError: 'none' });
+    }
+  }
+
+  onLastNameChange(event) {
+    this.setState({ lastname: event.target.value.trim() });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
@@ -123,8 +130,8 @@ export default class NewEditModal extends React.Component {
 
   get isButtonDisabled() {
     return (
-      this.state.username === '' ||
-      this.state.name === '' ||
+      this.state.firstname === '' ||
+      this.state.lastname === '' ||
       this.state.email === '' ||
       this.state.password === '' ||
       !this.dataChanged()
@@ -158,10 +165,17 @@ export default class NewEditModal extends React.Component {
           open={this.state.open}
         >
           <TextField
-            floatingLabelText="Name"
+            floatingLabelText="First Name"
             required={true}
-            value={this.state.name}
-            onChange={this.onNameChange}
+            value={this.state.firstname}
+            onChange={this.onFirstNameChange}
+            // errorText={this.getNameErrorText}
+          />
+          <TextField
+            floatingLabelText="Last Name"
+            required={true}
+            value={this.state.lastname}
+            onChange={this.onLastNameChange}
             // errorText={this.getNameErrorText}
           />
           <DatePicker
@@ -176,7 +190,6 @@ export default class NewEditModal extends React.Component {
             required={true}
             value={this.state.email}
             onChange={this.onEmailChange}
-
             // errorText={this.getEmailErrorText}
           />
         </Dialog>

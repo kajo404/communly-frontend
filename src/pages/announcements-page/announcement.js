@@ -21,7 +21,8 @@ class AnnouncementComponent extends Component {
           {this.props.announcement.content}
         </div>
         <div className="c-announcement-author">
-          {this.props.announcement.author.name},{' '}
+          {this.props.announcement.author.firstname}{' '}
+          {this.props.announcement.author.lastname},{' '}
           {this.date.toLocaleDateString()}
         </div>
       </Paper>
