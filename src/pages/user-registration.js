@@ -32,7 +32,7 @@ class UserRegistration extends React.Component {
     };
   }
 
-  onSubmit(event) {
+  onSubmit = event => {
     event.preventDefault();
 
     const user = {
@@ -44,7 +44,7 @@ class UserRegistration extends React.Component {
     };
 
     this.register(user);
-  }
+  };
 
   register = user => {
     UserService.register(
@@ -58,11 +58,11 @@ class UserRegistration extends React.Component {
         this.props.history.push('/announcements');
       })
 
-      //TODO default fehler wenn kein fehler zutrifft
       .catch(errorCode => {
+        const errorText = ERROR_CODES[errorCode];
         this.setState({
           errorBar: {
-            message: ERROR_CODES[errorCode],
+            message: errorText,
             open: true
           }
         });

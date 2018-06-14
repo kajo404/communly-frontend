@@ -109,8 +109,8 @@ export default class APIService {
       .then(resp => {
         if (resp.ok) {
           return resp.json();
-        } else if (this.checkIfUnauthorized(resp)) {
-          window.location = '/#login';
+          // } else if (this.checkIfUnauthorized(resp)) {
+          //   window.location = '/#login';
         } else {
           resp.json().then(json => {
             onError(resp.status);
