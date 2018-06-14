@@ -38,8 +38,6 @@ export default class AddMemberModal extends React.Component {
         addedMembers: this.props.currentMembers.map(member => member._id)
       });
     }
-
-    console.log('users', this.props.users);
   }
 
   addMembersToBoard = () => {
