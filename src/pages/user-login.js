@@ -5,6 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
+import { validateEmail } from './../services/email-validator';
 
 const buttonStyles = {
   position: 'relative',
@@ -22,6 +23,8 @@ class UserLogin extends React.Component {
     this.state = {
       username: '',
       password: '',
+      errorTextEmail: '',
+      errorTextPW: '',
       errorBar: {
         open: false,
         message: ''
@@ -42,11 +45,9 @@ class UserLogin extends React.Component {
   login = user => {
     UserService.login(user.username, user.password)
       .then(result => {
-        console.log(result);
         this.props.history.push('/announcements');
       })
       .catch(errorCode => {
-        console.log(errorCode);
         this.setState({
           errorBar: {
             message: ERROR_CODES[errorCode],
@@ -58,10 +59,23 @@ class UserLogin extends React.Component {
 
   onUserNameChange = event => {
     this.setState({ username: event.target.value.trim() });
+    const emailValid = validateEmail(event.target.value);
+    if (!emailValid && event.target.value.trim() !== '') {
+      this.setState({ errorTextEmail: 'Please enter a valid email address!' });
+    } else {
+      this.setState({ errorTextEmail: '' });
+    }
   };
 
   onPasswordChange = event => {
     this.setState({ password: event.target.value.trim() });
+    if (event.target.value.length < 8) {
+      this.setState({
+        errorTextPW: 'Your password should be at least 8 characters!'
+      });
+    } else {
+      this.setState({ errorTextPW: '' });
+    }
   };
 
   get isButtonDisabled() {
@@ -82,7 +96,7 @@ class UserLogin extends React.Component {
           required={true}
           value={this.state.username}
           onChange={this.onUserNameChange}
-          errorText={this.getUsernameErrorText}
+          errorText={this.state.errorTextEmail}
         />
         <br />
         <TextField
@@ -91,7 +105,7 @@ class UserLogin extends React.Component {
           required={true}
           value={this.state.password}
           onChange={this.onPasswordChange}
-          errorText={this.getPassErrorText}
+          errorText={this.state.errorTextPW}
         />
         <RaisedButton
           label="LOGIN"

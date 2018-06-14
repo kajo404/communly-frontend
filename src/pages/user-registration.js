@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
+import { validateEmail } from '../services/email-validator';
 
 const buttonStyles = {
   position: 'relative',
@@ -16,6 +17,7 @@ const ERROR_CODES = {
   400: 'This email is already taken!',
   'Failed to fetch': 'Hm, could not connect to the server!'
 };
+
 class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,8 @@ class UserRegistration extends React.Component {
       email: '',
       dateOfBirth: null,
       password: '',
+      errorTextEmail: '',
+      errorTextPW: '',
       errorBar: {
         open: false,
         message: ''
@@ -79,10 +83,23 @@ class UserRegistration extends React.Component {
 
   onPasswordChange = event => {
     this.setState({ password: event.target.value.trim() });
+    if (event.target.value.length < 8) {
+      this.setState({
+        errorTextPW: 'Your password should be at least 8 characters!'
+      });
+    } else {
+      this.setState({ errorTextPW: '' });
+    }
   };
 
   onEmailChange = event => {
     this.setState({ email: event.target.value.trim() });
+    const emailValid = validateEmail(event.target.value);
+    if (!emailValid && event.target.value.trim() !== '') {
+      this.setState({ errorTextEmail: 'Please enter a valid email address!' });
+    } else {
+      this.setState({ errorTextEmail: '' });
+    }
   };
 
   onBirthDateChange = (event, date) => {
@@ -96,7 +113,9 @@ class UserRegistration extends React.Component {
       this.state.lastname === '' ||
       this.state.email === '' ||
       this.state.password === '' ||
-      this.state.dateOfBirth === null
+      this.state.dateOfBirth === null ||
+      this.state.errorText !== '' ||
+      this.state.errorTextPW !== ''
     );
   }
 
@@ -134,6 +153,7 @@ class UserRegistration extends React.Component {
           required={true}
           value={this.state.email}
           onChange={this.onEmailChange}
+          errorText={this.state.errorTextEmail}
         />
         <TextField
           type="password"
@@ -141,6 +161,7 @@ class UserRegistration extends React.Component {
           required={true}
           value={this.state.password}
           onChange={this.onPasswordChange}
+          errorText={this.state.errorTextPW}
         />
         <RaisedButton
           label="REGISTER"
