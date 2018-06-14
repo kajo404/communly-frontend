@@ -56,7 +56,7 @@ class PageLayout extends React.Component {
         })
         .catch(e => {
           console.error(e);
-          //TODO: correct
+          //TODO Eric: correct this one
           this.setState({
             error: 'Username or password is wrong!'
           });

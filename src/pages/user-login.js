@@ -58,16 +58,10 @@ class UserLogin extends React.Component {
 
   onUserNameChange = event => {
     this.setState({ username: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
   };
 
   onPasswordChange = event => {
     this.setState({ password: event.target.value.trim() });
-    if (event.target.value.trim() === '') {
-      this.setState({ displayError: 'none' });
-    }
   };
 
   get isButtonDisabled() {
