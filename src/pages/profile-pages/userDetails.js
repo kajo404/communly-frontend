@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 //Services
 import UserService from '../../services/user-service';
+import AdminService from '../../services/admin-service';
 
 class UserDetailComponent extends Component {
   date;
@@ -21,6 +22,18 @@ class UserDetailComponent extends Component {
     };
 
     this.getProfile();
+    this.test();
+  }
+
+  test() {
+    AdminService.getUserAmount()
+      .then(result => {
+        console.log(result);
+      })
+      .catch(e => {
+        this.setState({ error: 'test Error' });
+        this.setState({ error: e });
+      });
   }
 
   componentDidMount = () => {

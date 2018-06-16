@@ -68,6 +68,15 @@ export default class UserService {
     };
   }
 
+  static isUserAdmin() {
+    let token = window.localStorage['jwtToken'];
+    if (!token) return {};
+
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64)).isAdmin;
+  }
+
   static getFullUser() {
     return new Promise((resolve, reject) => {
       APIService.get(
