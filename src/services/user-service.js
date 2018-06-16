@@ -30,8 +30,8 @@ export default class UserService {
           UserService.notifyListeners('userAutheticated');
           resolve(data);
         },
-        function(textStatus) {
-          reject(textStatus);
+        function(errorCode) {
+          reject(errorCode);
         }
       );
     });

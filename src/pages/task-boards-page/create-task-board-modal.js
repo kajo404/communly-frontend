@@ -6,7 +6,8 @@ import TextField from 'material-ui/TextField';
 import TaskBoardService from '../../services/task-board-service';
 
 const customModalStyle = {
-  width: '450px'
+  maxWidth: '450px',
+  width: '90%'
 };
 
 export default class CreateTaskBoardModal extends React.Component {
@@ -33,12 +34,14 @@ export default class CreateTaskBoardModal extends React.Component {
   };
 
   createTaskBoard = () => {
-    TaskBoardService.create(this.state.modal.title)
-      .then(response => {
-        this.props.handleClose();
-        this.setState({ modal: { title: '' } });
-      })
-      .catch(error => console.error(error));
+    if (this.state.title !== '') {
+      TaskBoardService.create(this.state.modal.title)
+        .then(response => {
+          this.props.handleClose();
+          this.setState({ modal: { title: '' } });
+        })
+        .catch(error => console.error(error));
+    }
   };
 
   closeModal = () => {
