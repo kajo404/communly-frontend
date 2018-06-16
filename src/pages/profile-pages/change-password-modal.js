@@ -25,10 +25,7 @@ export default class NewEditModal extends React.Component {
       pwEquals: ''
     };
 
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
     this.handleChangeShowPw = this.handleChangeShowPw.bind(this);
-    this.submit = this.submit.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onConfirmationPasswordChange = this.onConfirmationPasswordChange.bind(
       this

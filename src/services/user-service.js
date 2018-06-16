@@ -27,7 +27,7 @@ export default class UserService {
           dateOfBirth: dateOfBirth
         },
         function(data) {
-          UserService.notifyListeners('userAutheticated');
+          UserService.notifyListeners('userAuthenticated');
           resolve(data);
         },
         function(textStatus) {
@@ -46,7 +46,7 @@ export default class UserService {
           password: pass
         },
         function(data) {
-          UserService.notifyListeners('userAutheticated');
+          UserService.notifyListeners('userAuthenticated');
           resolve(data);
         },
         function(textStatus) {

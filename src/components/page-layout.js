@@ -51,7 +51,7 @@ class PageLayout extends React.Component {
       this.updateUser.bind(this)
     );
     UserService.registerListener(
-      'userAutheticated',
+      'userAuthenticated',
       this.updateUser.bind(this)
     );
   };
