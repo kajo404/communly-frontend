@@ -1,14 +1,41 @@
 import APIService from './API-service';
 
 export default class AdminService {
+  static listeners = {};
+
+  //Platform activity data completion flags
+  static receivedUserAmount = false;
+  static receivedAnnouncementAmount = false;
+  static receivedTasklistAmount = false;
+  static receivedTaskAmount = false;
+
+  //User stats data completion flags
+  static receivedStatsAnnouncements = false;
+  static receivedStatsTasklists = false;
+
   static URL() {
     return APIService.apiURL() + '/admin';
   }
 
+  static registerListener(event, fn) {
+    if (!AdminService.listeners.hasOwnProperty(event)) {
+      AdminService.listeners[event] = [];
+    }
+    AdminService.listeners[event].push(fn);
+  }
+
+  static notifyListeners(event) {
+    if (AdminService.listeners.hasOwnProperty(event)) {
+      AdminService.listeners[event].forEach(fn => fn());
+    }
+  }
+
+  /* Platform Activity */
+
   static getUserAmount() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/userAmount`,
+        `${AdminService.URL()}/amount/user`,
 
         function(data) {
           resolve(data);
@@ -23,7 +50,7 @@ export default class AdminService {
   static getAnnouncementAmount() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/announcementAmount`,
+        `${AdminService.URL()}/amount/announcement`,
 
         function(data) {
           resolve(data);
@@ -38,7 +65,7 @@ export default class AdminService {
   static getTasklistAmount() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/tasklistAmount`,
+        `${AdminService.URL()}/amount/tasklist`,
 
         function(data) {
           resolve(data);
@@ -53,7 +80,7 @@ export default class AdminService {
   static getTaskAmount() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/taskAmount`,
+        `${AdminService.URL()}/amount/task`,
 
         function(data) {
           resolve(data);
@@ -65,10 +92,23 @@ export default class AdminService {
     });
   }
 
-  static getMaxAnnouncementAmount() {
+  static receivedPlatformActivityData() {
+    if (
+      AdminService.receivedUserAmount &&
+      AdminService.receivedAnnouncementAmount &&
+      AdminService.receivedTasklistAmount &&
+      AdminService.receivedTaskAmount
+    ) {
+      AdminService.notifyListeners('receivedPlatformActivityData');
+    }
+  }
+
+  /* User Stats */
+
+  static getUserStatsAnnuoncements() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/maxAnnouncementAmount`,
+        `${AdminService.URL()}/stats/annuoncement`,
 
         function(data) {
           resolve(data);
@@ -78,5 +118,44 @@ export default class AdminService {
         }
       );
     });
+  }
+
+  static getUserStatsTasklists() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${AdminService.URL()}/stats/tasklist`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getUserStatsTasklistMembers() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${AdminService.URL()}/stats/tasklistMembers`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static receivedUserStats() {
+    if (
+      AdminService.receivedStatsAnnouncements &&
+      AdminService.receivedStatsTasklists
+    ) {
+      AdminService.notifyListeners('receivedUserStatsData');
+    }
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import UserService from '../../services/user-service';
 
-import AnnouncementIcon from 'material-ui/svg-icons/action/announcement';
+import AnnouncementIcon from 'material-ui/svg-icons/action/speaker-notes';
 import TaskAllIcon from 'material-ui/svg-icons/action/assignment-ind';
 import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
 import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
@@ -16,7 +16,7 @@ const conterDuration = 500;
 class UserActivityComponent extends Component {
   constructor(props) {
     super(props);
-    this.getActivity();
+    this.getUserActivity();
   }
 
   componentDidMount = () => {
@@ -28,37 +28,37 @@ class UserActivityComponent extends Component {
 
   animate() {
     this.animateValue(
-      'counter1',
+      'counterUA1',
       0,
       this.state.numberAnnouncements,
       conterDuration
     );
     this.animateValue(
-      'counter2',
+      'counterUA2',
       0,
       this.state.numberTasklistsAuthor,
       conterDuration
     );
     this.animateValue(
-      'counter3',
+      'counterUA3',
       0,
       this.state.numberTasklistsMember,
       conterDuration
     );
     this.animateValue(
-      'counter4',
+      'counterUA4',
       0,
       this.state.numberAssignedTasks,
       conterDuration
     );
     this.animateValue(
-      'counter5',
+      'counterUA5',
       0,
       this.state.numberAssignedTasksDone,
       conterDuration
     );
     this.animateValue(
-      'counter6',
+      'counterUA6',
       0,
       this.state.numberAssignedTasksUndone,
       conterDuration
@@ -74,8 +74,10 @@ class UserActivityComponent extends Component {
       var timer = setInterval(function() {
         current += 1;
         obj.innerHTML = current;
-        if (current == end) {
+        if (current == Math.floor(end)) {
           clearInterval(timer);
+          current += end % 1;
+          obj.innerHTML = current;
         }
       }, stepTime);
     } else {
@@ -83,7 +85,7 @@ class UserActivityComponent extends Component {
     }
   }
 
-  getActivity() {
+  getUserActivity() {
     UserService.getAnnoncements()
       .then(result => {
         var numberAnnouncements = Object.keys(result.announcements).length;
@@ -151,7 +153,7 @@ class UserActivityComponent extends Component {
   render() {
     return (
       <div className="c-userActivity-wrapper">
-        <h2>User Activity</h2>
+        <h2>Own Activity</h2>
 
         <Paper className="c-userActivity-paper" zDepth={1}>
           <div className="c-userActivity-component">
@@ -159,40 +161,40 @@ class UserActivityComponent extends Component {
             <div className="c-userActivity-componentText">
               Created Announcements
             </div>
-            <div id="counter1" className="c-userActivity-componentNumber" />
+            <div id="counterUA1" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
             <ListAuthorIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">
               Created Tasklists
             </div>
-            <div id="counter2" className="c-userActivity-componentNumber" />
+            <div id="counterUA2" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
             <ListMemberIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">
               Attended Tasklists
             </div>
-            <div id="counter3" className="c-userActivity-componentNumber" />
+            <div id="counterUA3" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
             <TaskAllIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">Assigned Tasks</div>
-            <div id="counter4" className="c-userActivity-componentNumber" />
+            <div id="counterUA4" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
             <TaskDoneIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">
               Finished Assigned Tasks
             </div>
-            <div id="counter5" className="c-userActivity-componentNumber" />
+            <div id="counterUA5" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
             <TaskUndoneIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">
               Open Assigned Tasks
             </div>
-            <div id="counter6" className="c-userActivity-componentNumber" />
+            <div id="counterUA6" className="c-userActivity-componentNumber" />
           </div>
         </Paper>
       </div>
