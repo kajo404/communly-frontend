@@ -17,7 +17,6 @@ import Announcements from './pages/announcements-page/announcements-page';
 import Profile from './pages/profile-pages/profile';
 
 import UserService from './services/user-service';
-import { grey400 } from 'material-ui/styles/colors';
 
 // This replaces the text color value on the palette
 // and then update the keys for each component that depends on it.

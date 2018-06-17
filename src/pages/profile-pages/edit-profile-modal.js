@@ -5,9 +5,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import EditIcon from 'material-ui/svg-icons/image/edit';
+
+import './profile.scss';
 
 const customModalStyle = {
-  width: '500px'
+  width: '320px'
 };
 
 export default class NewEditModal extends React.Component {
@@ -15,13 +18,10 @@ export default class NewEditModal extends React.Component {
     super(props);
 
     this.state = {
-      open: false,
-      firstname: '',
-      lastname: '',
-      email: '',
-      dateOfBirth: null,
-      password: ''
+      open: false
     };
+
+    this.getProfileData();
 
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -33,6 +33,28 @@ export default class NewEditModal extends React.Component {
     this.onBirthDateChange = this.onBirthDateChange.bind(this);
   }
 
+  getProfileData() {
+    UserService.getFullUser()
+      .then(result => {
+        this.setState({
+          firstname: result.firstname,
+          initialFirstame: result.firstname,
+          lastname: result.lastname,
+          initialLastname: result.lastname,
+          email: result.email,
+          initialEmail: result.email,
+          dateOfBirth: result.dateOfBirth,
+          initialDateOfBirth: result.dateOfBirth,
+          role: result.roles[0],
+          image: result.image
+        });
+      })
+      .catch(e => {
+        this.setState({ error: 'Username or password is wrong!' });
+        this.setState({ error: e });
+      });
+  }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -42,14 +64,17 @@ export default class NewEditModal extends React.Component {
   };
 
   submit = () => {
-    // UserService.changeUserPicture(this.state.preview)
-    //   .then(result => {
-    //     window.location = 'profile';
-    //   })
-    //   .catch(e => {
-    //     console.error(e);
-    //     this.setState({ error: e });
-    //   });
+    UserService.updateUserData(
+      this.state.lastname,
+      this.state.firstname,
+      this.state.email,
+      this.state.dateOfBirth
+    )
+      .then(this.handleClose())
+      .catch(e => {
+        console.error(e);
+        this.setState({ error: e });
+      });
   };
 
   onFirstNameChange(event) {
@@ -67,23 +92,42 @@ export default class NewEditModal extends React.Component {
   }
 
   onPasswordChange(event) {
-    this.setState({ password: event.target.value.trim() });
+    this.setState({
+      password: event.target.value.trim()
+    });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
   }
 
   onEmailChange(event) {
-    this.setState({ email: event.target.value.trim() });
+    this.setState({
+      email: event.target.value.trim()
+    });
     if (event.target.value.trim() === '') {
       this.setState({ displayError: 'none' });
     }
   }
 
   onBirthDateChange(event, date) {
-    this.setState({ dateOfBirth: date });
+    this.setState({
+      dateOfBirth: date.toISOString()
+    });
     if (date === '') {
       this.setState({ displayError: 'none' });
+    }
+  }
+
+  dataChanged() {
+    if (
+      this.state.initialFirstame !== this.state.firstname ||
+      this.state.initialLastname !== this.state.lastname ||
+      this.state.initialEmail !== this.state.email ||
+      this.state.initialDateOfBirth !== this.state.dateOfBirth
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -92,7 +136,8 @@ export default class NewEditModal extends React.Component {
       this.state.firstname === '' ||
       this.state.lastname === '' ||
       this.state.email === '' ||
-      this.state.password === ''
+      this.state.password === '' ||
+      !this.dataChanged()
     );
   }
 
@@ -109,7 +154,12 @@ export default class NewEditModal extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="Edit" primary={true} onClick={this.handleOpen} />
+        <RaisedButton
+          label="Edit"
+          primary={true}
+          onClick={this.handleOpen}
+          icon={<EditIcon />}
+        />
         <Dialog
           title="Edit Profile Details"
           actions={actions}
@@ -132,7 +182,7 @@ export default class NewEditModal extends React.Component {
             // errorText={this.getNameErrorText}
           />
           <DatePicker
-            value={this.state.dateOfBirth}
+            value={new Date(this.state.dateOfBirth)}
             onChange={this.onBirthDateChange}
             floatingLabelText="Birth Date"
             hintText="e.g 13.07.1995"
@@ -144,13 +194,6 @@ export default class NewEditModal extends React.Component {
             value={this.state.email}
             onChange={this.onEmailChange}
             // errorText={this.getEmailErrorText}
-          />
-          <TextField
-            type="password"
-            floatingLabelText="Password"
-            required={true}
-            value={this.state.password}
-            onChange={this.onPasswordChange}
           />
         </Dialog>
       </div>
