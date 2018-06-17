@@ -73,17 +73,17 @@ class UserRegistration extends React.Component {
       });
   };
 
-  onFirstNameChange = event => {
-    this.setState({ firstname: event.target.value.trim() });
+  onFirstNameChange = (event, value) => {
+    this.setState({ firstname: value.trim() });
   };
 
-  onLastNameChange = event => {
-    this.setState({ lastname: event.target.value.trim() });
+  onLastNameChange = (event, value) => {
+    this.setState({ lastname: value.trim() });
   };
 
-  onPasswordChange = event => {
-    this.setState({ password: event.target.value.trim() });
-    if (event.target.value.length < 8) {
+  onPasswordChange = (event, value) => {
+    this.setState({ password: value.trim() });
+    if (value.length < 8) {
       this.setState({
         errorTextPW: 'Your password should be at least 8 characters!'
       });
@@ -92,10 +92,10 @@ class UserRegistration extends React.Component {
     }
   };
 
-  onEmailChange = event => {
-    this.setState({ email: event.target.value.trim() });
-    const emailValid = validateEmail(event.target.value);
-    if (!emailValid && event.target.value.trim() !== '') {
+  onEmailChange = (event, value) => {
+    this.setState({ email: value.trim() });
+    const emailValid = validateEmail(value);
+    if (!emailValid && value.trim() !== '') {
       this.setState({ errorTextEmail: 'Please enter a valid email address!' });
     } else {
       this.setState({ errorTextEmail: '' });

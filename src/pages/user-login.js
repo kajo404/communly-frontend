@@ -57,19 +57,19 @@ class UserLogin extends React.Component {
       });
   };
 
-  onUserNameChange = event => {
-    this.setState({ username: event.target.value.trim() });
-    const emailValid = validateEmail(event.target.value);
-    if (!emailValid && event.target.value.trim() !== '') {
+  onUserNameChange = (event, value) => {
+    this.setState({ username: value.trim() });
+    const emailValid = validateEmail(value);
+    if (!emailValid && value.trim() !== '') {
       this.setState({ errorTextEmail: 'Please enter a valid email address!' });
     } else {
       this.setState({ errorTextEmail: '' });
     }
   };
 
-  onPasswordChange = event => {
-    this.setState({ password: event.target.value.trim() });
-    if (event.target.value.length < 8) {
+  onPasswordChange = (event, value) => {
+    this.setState({ password: value.trim() });
+    if (value.length < 8) {
       this.setState({
         errorTextPW: 'Your password should be at least 8 characters!'
       });
