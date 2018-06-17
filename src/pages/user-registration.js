@@ -114,7 +114,7 @@ class UserRegistration extends React.Component {
       this.state.email === '' ||
       this.state.password === '' ||
       this.state.dateOfBirth === null ||
-      this.state.errorText !== '' ||
+      this.state.errorTextEmail !== '' ||
       this.state.errorTextPW !== ''
     );
   }
