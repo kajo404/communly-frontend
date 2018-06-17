@@ -88,6 +88,8 @@ class UserActivityComponent extends Component {
       .then(result => {
         var numberAnnouncements = Object.keys(result.announcements).length;
         this.setState({ numberAnnouncements: numberAnnouncements });
+        UserService.receivedAnnouncements = true;
+        UserService.receivedUserActivityData();
       })
       .catch(e => {
         this.setState({ errorMessage: 'No Announcements for user!' });
@@ -98,6 +100,8 @@ class UserActivityComponent extends Component {
       .then(result => {
         var numberTasklistsAuthor = Object.keys(result.tasklists).length;
         this.setState({ numberTasklistsAuthor: numberTasklistsAuthor });
+        UserService.receivedTasklistsAuthor = true;
+        UserService.receivedUserActivityData();
       })
       .catch(e => {
         this.setState({ errorMessage: 'No Tasklists for user as author!' });
@@ -108,6 +112,8 @@ class UserActivityComponent extends Component {
       .then(result => {
         var numberTasklistsMember = Object.keys(result.tasklists).length;
         this.setState({ numberTasklistsMember: numberTasklistsMember });
+        UserService.receivedTasklistsMember = true;
+        UserService.receivedUserActivityData();
       })
       .catch(e => {
         this.setState({ errorMessage: 'No Tasklists for user as memeber!' });
@@ -133,6 +139,8 @@ class UserActivityComponent extends Component {
           numberAssignedTasksDone: numberAssignedTasksDone,
           numberAssignedTasksUndone: numberAssignedTasksUndone
         });
+        UserService.receivedTasks = true;
+        UserService.receivedUserActivityData();
       })
       .catch(e => {
         this.setState({ errorMessage: 'No assigned Tasks for user!' });
