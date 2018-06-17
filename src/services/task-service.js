@@ -34,6 +34,21 @@ export default class TaskService {
     });
   }
 
+  static assignTask(taskId, userId) {
+    return new Promise((resolve, reject) => {
+      APIService.post(
+        `${TaskService.URL()}/${taskId}/assign/${userId}`,
+        {},
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static changeTaskStatus(taskId, status) {
     return new Promise((resolve, reject) => {
       APIService.put(

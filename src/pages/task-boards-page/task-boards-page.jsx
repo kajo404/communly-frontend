@@ -21,7 +21,8 @@ class TaskBoardPage extends Component {
     currentBoardOpening: '',
     currentBoardMembers: [],
     boards: [],
-    users: []
+    users: [],
+    taskToBeAssigned: ''
   };
 
   constructor(props) {
@@ -59,9 +60,10 @@ class TaskBoardPage extends Component {
     this.setState({ addMembersOpen: true });
   };
 
-  openAssignMemberModal = (callingBoard, currentMembers) => {
+  openAssignMemberModal = (callingBoard, currentMembers, taskId) => {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
+    this.setState({ taskToBeAssigned: taskId });
     this.setState({ assignMemberOpen: true });
   };
 
@@ -162,6 +164,7 @@ class TaskBoardPage extends Component {
         />
         <AssignMemberModal
           members={this.state.currentBoardMembers}
+          task={this.state.taskToBeAssigned}
           open={this.state.assignMemberOpen}
           close={this.handleAssignMemberClose}
         />

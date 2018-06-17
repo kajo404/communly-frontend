@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import TaskService from '../../services/task-service';
 
 const customModalStyle = {
   width: '300px'
@@ -33,7 +34,15 @@ export default class AssignMemberModal extends React.Component {
   }
 
   assignMember = () => {
-    console.log('Theoretically assigned member');
+    console.log(this.props);
+    console.log(this.state.assignedMember);
+    TaskService.assignTask(this.props.task, this.state.assignedMember)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.error(err);
+      });
     this.props.close();
     //TODO: Backend post call
   };

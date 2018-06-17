@@ -18,7 +18,7 @@ class Task extends Component {
   };
 
   assignTask = () => {
-    this.props.assignMember();
+    this.props.assignMember(this.props.id);
   };
 
   getCheckboxClass() {

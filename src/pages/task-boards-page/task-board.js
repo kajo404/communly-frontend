@@ -64,10 +64,11 @@ class TaskBoard extends Component {
     );
   };
 
-  openAssignMemberModal = () => {
+  openAssignMemberModal = taskId => {
     this.props.openAssignMemberModal(
       this.props.board._id,
-      this.props.board.members
+      this.props.board.members,
+      taskId
     );
   };
 
@@ -171,7 +172,7 @@ class TaskBoard extends Component {
             iconStyle={iconStyle}
             style={addButtonStyle}
             disabled={!this.isUserAuthor()}
-            onClick={this.openAddMembersModal}
+            onClick={this.openAddMemberModal}
           >
             <ContentAdd />
           </FloatingActionButton>
