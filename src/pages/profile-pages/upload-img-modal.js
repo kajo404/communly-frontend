@@ -4,19 +4,18 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'react-avatar-edit';
 import UserService from '../../services/user-service';
+import UploadIcon from 'material-ui/svg-icons/editor/publish';
 
-const customModalStyle = {
-  width: '700px'
-};
+import './profile.scss';
 
 export default class NewUploadModal extends React.Component {
-  state = {
-    open: false,
-    preview: null
-  };
-
   constructor(props) {
     super(props);
+
+    this.state = {
+      open: false,
+      preview: null
+    };
 
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -31,14 +30,15 @@ export default class NewUploadModal extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({
+      open: false,
+      preview: null
+    });
   };
 
   handleUpload = () => {
-    UserService.changeUserPicture(this.state.preview)
-      .then(result => {
-        this.handleClose();
-      })
+    UserService.updateUserPicture(this.state.preview)
+      .then(this.handleClose())
       .catch(e => {
         console.error(e);
         this.setState({ error: e });
@@ -52,22 +52,6 @@ export default class NewUploadModal extends React.Component {
   onCrop(preview) {
     this.setState({ preview: preview });
   }
-
-  updateTitle = (event, newValue) => {
-    this.setState({ title: newValue });
-  };
-
-  updateContent = (event, newValue) => {
-    this.setState({ content: newValue });
-  };
-
-  updateVotable = () => {
-    this.setState(oldState => {
-      return {
-        isVotable: !oldState.checked
-      };
-    });
-  };
 
   get isButtonDisabled() {
     return this.state.preview === null;
@@ -84,35 +68,73 @@ export default class NewUploadModal extends React.Component {
       />
     ];
 
-    return (
-      <div>
-        <RaisedButton label="Change" primary={true} onClick={this.handleOpen} />
-        <Dialog
-          title="Upload new Profile Picture"
-          actions={actions}
-          modal={true}
-          contentStyle={customModalStyle}
-          open={this.state.open}
-        >
-          <div className="c-profile-imgSelector">
-            <Avatar
-              width={390}
-              height={295}
-              onCrop={this.onCrop}
-              onClose={this.onClose}
-            />
-            <div className="c-profile-imgPreviewContainer">
-              <h3>Preview</h3>
-              <img
-                className="c-profile-imgPreview"
-                style={{ display: this.state.preview ? 'inline' : 'none' }}
-                src={this.state.preview}
-                alt="Preview"
+    if (window.innerWidth > 700) {
+      return (
+        <div>
+          <RaisedButton
+            primary={true}
+            onClick={this.handleOpen}
+            icon={<UploadIcon />}
+          />
+          <Dialog
+            title="Upload new Profile Picture"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+            contentStyle={{
+              width: '700px'
+            }}
+            //className="c-profile-imgUpload-dialog"
+          >
+            <div className="c-profile-imgSelector">
+              <Avatar
+                height={255}
+                width={350}
+                onCrop={this.onCrop}
+                onClose={this.onClose}
+              />
+              <div className="c-profile-imgPreviewContainer">
+                <h3>Preview</h3>
+                <img
+                  className="c-profile-imgPreview"
+                  style={{ display: this.state.preview ? 'inline' : 'none' }}
+                  src={this.state.preview}
+                  alt="Preview"
+                />
+              </div>
+            </div>
+          </Dialog>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <RaisedButton
+            primary={true}
+            onClick={this.handleOpen}
+            icon={<UploadIcon />}
+          />
+          <Dialog
+            title="Upload new Profile Picture"
+            actions={actions}
+            modal={true}
+            open={this.state.open}
+            contentStyle={{
+              width: '320px'
+            }}
+            //className="c-profile-imgUpload-dialog"
+          >
+            <div className="c-profile-imgSelector">
+              <Avatar
+                height={270}
+                width={270}
+                onCrop={this.onCrop}
+                onClose={this.onClose}
               />
             </div>
-          </div>
-        </Dialog>
-      </div>
-    );
+          </Dialog>
+        </div>
+      );
+    }
   }
 }

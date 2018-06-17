@@ -41,17 +41,29 @@ class PageLayout extends React.Component {
       retrievedUser: false,
       activePage: 0
     };
+    this.updateUser();
   }
 
-  updateUserPicture() {
-    if (UserService.isAuthenticated() && !this.state.retrievedUser) {
+  componentDidMount = () => {
+    UserService.registerListener('userDataChanged', this.updateUser.bind(this));
+    UserService.registerListener(
+      'userPictureChanged',
+      this.updateUser.bind(this)
+    );
+    UserService.registerListener(
+      'userAuthenticated',
+      this.updateUser.bind(this)
+    );
+  };
+
+  updateUser() {
+    if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
-          const dataUrl = result.image;
-
           this.setState({
-            image: dataUrl,
-            retrievedUser: true
+            firstname: result.firstname,
+            lastname: result.lastname,
+            image: result.image
           });
         })
         .catch(e => {
@@ -66,6 +78,7 @@ class PageLayout extends React.Component {
         });
     }
   }
+
 
   get userName() {
     const user = UserService.getCurrentUser();
@@ -105,7 +118,6 @@ class PageLayout extends React.Component {
   };
 
   render() {
-    this.updateUserPicture();
     if (UserService.isAuthenticated()) {
       return (
         <div className="c-layout">
@@ -124,7 +136,7 @@ class PageLayout extends React.Component {
                   />
                 }
               >
-                {this.userName}
+                {this.state.firstname + ' ' + this.state.lastname}
               </ListItem>
             }
             iconElementLeft={

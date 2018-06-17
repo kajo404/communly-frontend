@@ -157,7 +157,7 @@ a {
 //Profile
 .c-profile-bar {
     opacity: 0;
-    z-index: 10000;
+    z-index: -100;
     width: 200px;
     position: absolute;
     top: 0;
@@ -192,11 +192,13 @@ a {
 }
 
 .c-profile-bar-slide-in {
+    z-index: 10000!important;
     animation: fade-in 0.5s forwards;
     -webkit-animation: fade-in 0.5s forwards;
 }
 
 .c-profile-bar-slide-out {
+    z-index: -100;
     animation: fade-out 0.5s forwards;
     -webkit-animation: fade-out 0.5s forwards;
 }
