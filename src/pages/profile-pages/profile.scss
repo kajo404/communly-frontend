@@ -1,0 +1,203 @@
+//Profile
+
+
+//------------------------------- user details
+.p-profile{
+  padding-top: 74px;
+  padding-bottom: 10px;
+}
+
+.c-userProfile-wrapper{
+  color: #314f81;
+  margin-left: 14px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.c-userDetails-paper{
+  margin-top: 10px;
+}
+
+.c-profile-img-wrapper{
+  display: inline-block;
+  width: 30%;
+  min-width: 220px;
+  height: 100%;
+  @media (max-width: 768px) {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.c-profile-img{
+  position: relative;
+  width: 206px;
+  height: 206px;
+  margin: 30px;
+  text-align: left;
+  border: 3px solid rgb(49, 79, 129);
+  border-radius: 200px;
+  vertical-align: top;
+}
+
+.p-profile-uploadButton{
+  margin-left: 90px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+  @media (max-width: 768px) {
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+.c-profile-content-wrapper{
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.c-userDetails-content{
+  position: relative;
+  display: inline-block;
+  margin: 10px 30px 40px;
+  height: auto;
+  width: auto;
+  vertical-align: top;
+  @media (max-width: 768px) {
+        margin: 20px;
+          
+      }
+}
+
+.c-userDetails-content-table{
+  margin-top: 20px;
+  line-height: 30px;
+  font-size: 20px;
+  @media (max-width: 768px) {
+        min-width: 65px;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+}
+
+.c-userDetails-content-table td{
+  min-width: 100px;
+  @media (max-width: 768px) {
+        min-width: 65px;
+    }
+}
+
+.p-profile-editButton{
+  display: inline-block;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+  @media (max-width: 768px) {
+        margin-left: 20px;
+    }
+}
+
+.p-profile-changePwButton{
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  vertical-align: bottom;
+}
+
+.c-profile-imgSelector{
+  display: flex;
+}
+
+.c-profile-imgUpload-dialog{
+  overflow: scroll;
+  @media (max-width: 768px) {
+    
+    }
+}
+
+
+.c-profile-imgPreviewContainer{
+  position: relative;
+  width: 206px;
+  height: 206px;
+  margin-left: 70px;
+  margin-top: 25px;
+  text-align: left;
+  border: 3px dashed rgb(49, 79, 129);
+  border-radius: 200px;
+  text-align: center;
+  line-height: 200px;
+  @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.c-profile-imgPreview{
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 0px;
+  top: 0px;
+}
+
+.c-profile-checkbox-showHidePw{
+  float: left;
+  width: 190px!important;
+  margin-left: -10px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+  margin-top: -15px;
+}
+
+.c-profile-changePw-message-ok{
+  color: green;
+}
+
+.c-profile-changePw-message-error{
+  color: red;
+}
+
+//------------------------------- user activity
+
+
+.c-userActivity-wrapper{
+  color: #314f81;
+  margin-left: 14px;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+
+.c-userActivity-paper{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.c-userActivity-component{
+  margin: 20px 10px;
+  max-width: 200px;
+  min-height: 200px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.c-userActivity-componentIcon{
+  width: 70px!important;
+  height: 70px!important;
+  margin: 0 65px;
+  margin-top: 15px;
+}
+
+.c-userActivity-componentText{
+  margin-top: 5px;
+}
+
+.c-userActivity-componentNumber{
+  font-size: 50px;
+  margin-top: 15px;
+}

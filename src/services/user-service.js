@@ -2,6 +2,10 @@ import APIService from './API-service';
 
 export default class UserService {
   static listeners = {};
+  static receivedAnnouncements = false;
+  static receivedTasklistsAuthor = false;
+  static receivedTasklistsMember = false;
+  static receivedTasks = false;
 
   static URL() {
     return APIService.apiURL() + '/auth';
@@ -23,6 +27,7 @@ export default class UserService {
           dateOfBirth: dateOfBirth
         },
         function(data) {
+          UserService.notifyListeners('userAuthenticated');
           resolve(data);
         },
         function(errorCode) {
@@ -41,6 +46,7 @@ export default class UserService {
           password: pass
         },
         function(data) {
+          UserService.notifyListeners('userAuthenticated');
           resolve(data);
         },
         function(textStatus) {
@@ -81,7 +87,6 @@ export default class UserService {
     return new Promise((resolve, reject) => {
       APIService.get(
         `${UserService.URL()}/me`,
-
         function(data) {
           resolve(data);
         },
@@ -92,9 +97,47 @@ export default class UserService {
     });
   }
 
-  static changeUserPicture(fileData) {
+  static updateUserData(lastname, firstname, email, dateOfBirth) {
     return new Promise((resolve, reject) => {
-      APIService.post(
+      APIService.put(
+        `${UserService.usersURL()}/data`,
+        {
+          lastname: lastname,
+          firstname: firstname,
+          email: email,
+          dateOfBirth: dateOfBirth
+        },
+        function(data) {
+          UserService.notifyListeners('userDataChanged');
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static updatePassword(password) {
+    return new Promise((resolve, reject) => {
+      APIService.put(
+        `${UserService.usersURL()}/password`,
+        {
+          password: password
+        },
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static updateUserPicture(fileData) {
+    return new Promise((resolve, reject) => {
+      APIService.put(
         `${UserService.usersURL()}/picture`,
         {
           imageData: fileData
@@ -137,6 +180,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasks`,
 
         function(data) {
+          UserService.receivedTasks = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -152,6 +197,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/author`,
 
         function(data) {
+          UserService.receivedTasklistsAuthor = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -167,6 +214,8 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/member`,
 
         function(data) {
+          UserService.receivedTasklistsMember = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -182,6 +231,8 @@ export default class UserService {
         `${UserService.usersURL()}/annoncements`,
 
         function(data) {
+          UserService.receivedAnnouncements = true;
+          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -189,5 +240,16 @@ export default class UserService {
         }
       );
     });
+  }
+
+  static receivedUserActivityData() {
+    if (
+      UserService.receivedAnnouncements &&
+      UserService.receivedTasklistsAuthor &&
+      UserService.receivedTasklistsMember &&
+      UserService.receivedTasks
+    ) {
+      UserService.notifyListeners('receivedUserActivityData');
+    }
   }
 }
