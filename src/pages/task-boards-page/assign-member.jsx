@@ -25,44 +25,18 @@ export default class AssignMemberModal extends React.Component {
     super(props);
 
     this.state = {
-      open: true,
-      checkboxes: [
-        'Felix',
-        'Peter',
-        'Lara',
-        'Yasna',
-        'Huhu',
-        'Felix',
-        'Peter',
-        'Lara',
-        'Yasna',
-        'Huhu',
-        'Test',
-        'Hallo',
-        'Yasna',
-        'Huhu',
-        'Test'
-      ],
+      open: false,
       assignedMember: ''
     };
 
     this.onChange = this.onChange.bind(this);
   }
 
-  addMembersToBoard = () => {
-    console.log(
-      'Theoretically added members to taskboard:',
-      console.log(
-        this.state.checkboxes.filter(member => member.checked === true)
-      )
-    );
-    this.props.handleClose();
+  assignMember = () => {
+    console.log('Theoretically assigned member');
+    this.props.close();
     //TODO: Backend post call
   };
-
-  updateMembers() {
-    //TODO: Add member to the choice popover (get them from boards)
-  }
 
   onChange(event, selectedValue) {
     this.setState({ assignedMember: selectedValue });
@@ -74,16 +48,12 @@ export default class AssignMemberModal extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton
-        label="Cancel"
-        primary={true}
-        onClick={this.props.handleClose}
-      />,
+      <FlatButton label="Cancel" primary={true} onClick={this.props.close} />,
       <RaisedButton
         label="Assign task"
         disabled={this.buttonDisabled}
         primary={true}
-        onClick={this.addMembersToBoard}
+        onClick={this.assignMember}
       />
     ];
 
@@ -93,7 +63,7 @@ export default class AssignMemberModal extends React.Component {
           actions={actions}
           modal={true}
           contentStyle={customModalStyle}
-          open={true}
+          open={this.props.open}
         >
           <span style={headlineStyle}> Choose your task assignee: </span>
           <RadioButtonGroup
@@ -101,11 +71,11 @@ export default class AssignMemberModal extends React.Component {
             onChange={this.onChange}
             style={listStyle}
           >
-            {this.state.checkboxes.map((member, index) => (
+            {this.props.members.map((member, index) => (
               <RadioButton
                 key={index}
-                label={member}
-                value={member}
+                label={member.firstname + ' ' + member.lastname}
+                value={member._id}
                 checkedIcon={<ActionFavorite style={{ color: '#F44336' }} />}
                 uncheckedIcon={<ActionFavoriteBorder />}
               />

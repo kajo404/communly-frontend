@@ -18,7 +18,7 @@ class Task extends Component {
   };
 
   assignTask = () => {
-    console.log('task theoretically assigned');
+    this.props.assignMember();
   };
 
   getCheckboxClass() {

@@ -64,6 +64,13 @@ class TaskBoard extends Component {
     );
   };
 
+  openAssignMemberModal = () => {
+    this.props.openAssignMemberModal(
+      this.props.board._id,
+      this.props.board.members
+    );
+  };
+
   openDeleteConfirmationModal = () => {
     this.props.openDeleteConfirmationModal(this.props.board._id);
   };
@@ -183,6 +190,7 @@ class TaskBoard extends Component {
               value={task.name}
               done={task.isDone}
               updateView={this.updateTasks}
+              assignMember={this.openAssignMemberModal}
             />
           ))}
         </div>
