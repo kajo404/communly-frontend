@@ -172,7 +172,7 @@ class TaskBoard extends Component {
             iconStyle={iconStyle}
             style={addButtonStyle}
             disabled={!this.isUserAuthor()}
-            onClick={this.openAddMemberModal}
+            onClick={this.openAddMembersModal}
           >
             <ContentAdd />
           </FloatingActionButton>
