@@ -26,14 +26,57 @@ class UserDetailComponent extends Component {
   }
 
   test() {
-    AdminService.getUserAmount()
-      .then(result => {
-        console.log(result);
-      })
-      .catch(e => {
-        this.setState({ error: 'test Error' });
-        this.setState({ error: e });
-      });
+    if (UserService.isUserAdmin()) {
+      AdminService.getUserAmount()
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState({ error: 'test Error' });
+          this.setState({ error: e });
+        });
+
+      AdminService.getAnnouncementAmount()
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState({ error: 'test Error' });
+          this.setState({ error: e });
+        });
+
+      AdminService.getTasklistAmount()
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState({ error: 'test Error' });
+          this.setState({ error: e });
+        });
+
+      AdminService.getTaskAmount()
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState({ error: 'test Error' });
+          this.setState({ error: e });
+        });
+
+      AdminService.getMaxAnnouncementAmount()
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+          this.setState({ error: 'test Error' });
+          this.setState({ error: e });
+        });
+    }
   }
 
   componentDidMount = () => {
