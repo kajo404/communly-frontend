@@ -101,11 +101,15 @@ export default class APIService {
   }
 
   static post(url, data, onSuccess, onError) {
-    fetch(url, {
+    const options = {
       method: 'POST',
-      headers: APIService.header(),
-      body: JSON.stringify(data)
-    })
+      headers: APIService.header()
+    };
+    if (data) {
+      options.body = JSON.stringify(data);
+    }
+
+    fetch(url, options)
       .then(resp => {
         if (resp.ok) {
           return resp.json();
