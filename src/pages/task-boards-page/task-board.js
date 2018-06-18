@@ -190,6 +190,7 @@ class TaskBoard extends Component {
               id={task._id}
               value={task.name}
               done={task.isDone}
+              assigned={task.assignee}
               updateView={this.updateTasks}
               assignMember={this.openAssignMemberModal}
             />
