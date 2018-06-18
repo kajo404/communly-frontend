@@ -34,17 +34,14 @@ export default class AssignMemberModal extends React.Component {
   }
 
   assignMember = () => {
-    console.log(this.props);
-    console.log(this.state.assignedMember);
     TaskService.assignTask(this.props.task, this.state.assignedMember)
       .then(result => {
-        console.log(result);
+        this.props.close();
       })
       .catch(err => {
         console.error(err);
+        this.props.close();
       });
-    this.props.close();
-    //TODO: Backend post call
   };
 
   onChange(event, selectedValue) {
