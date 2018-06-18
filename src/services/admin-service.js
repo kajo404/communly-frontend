@@ -11,7 +11,11 @@ export default class AdminService {
 
   //User stats data completion flags
   static receivedStatsAnnouncements = false;
-  static receivedStatsTasklists = false;
+  static receivedStatsUserTasklists = false;
+  static receivedStatsMembersTasklists = false;
+  static receivedStatsTasks = false;
+  static receivedStatsDoneTasks = false;
+  static receivedStatsUndoneTasks = false;
 
   static URL() {
     return APIService.apiURL() + '/admin';
@@ -150,10 +154,59 @@ export default class AdminService {
     });
   }
 
+  static getUserStatsTasks() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${AdminService.URL()}/stats/task`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getUserStatsDoneTasks() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${AdminService.URL()}/stats/doneTask`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
+  static getUserStatsUndoneTasks() {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${AdminService.URL()}/stats/undoneTask`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static receivedUserStats() {
     if (
       AdminService.receivedStatsAnnouncements &&
-      AdminService.receivedStatsTasklists
+      AdminService.receivedStatsUserTasklists &&
+      AdminService.receivedStatsMembersTasklists &&
+      AdminService.receivedStatsTasks &&
+      AdminService.receivedStatsDoneTasks &&
+      AdminService.receivedStatsUndoneTasks
     ) {
       AdminService.notifyListeners('receivedUserStatsData');
     }

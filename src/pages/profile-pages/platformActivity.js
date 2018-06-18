@@ -62,13 +62,13 @@ class PlatformActivityComponent extends Component {
       var current = start;
       var stepTime = Math.abs(Math.floor(duration / range));
       var timer = setInterval(function() {
-        current += 1;
         obj.innerHTML = current;
         if (current == Math.floor(end)) {
           clearInterval(timer);
           current += end % 1;
           obj.innerHTML = current;
         }
+        current += 1;
       }, stepTime);
     } else {
       obj.innerHTML = 0;
