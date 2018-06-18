@@ -32,8 +32,6 @@ class Announcements extends React.Component {
   constructor(props) {
     super(props);
     this.updateAnnouncements();
-
-    this.savedNewAnnouncement = this.savedNewAnnouncement.bind(this);
   }
 
   // Getters
@@ -61,15 +59,11 @@ class Announcements extends React.Component {
   }
 
   // Functionality
-  updateAnnouncements() {
+  updateAnnouncements = () => {
     AnnouncementsService.getAnnouncements()
       .then(data => this.filterAnnouncements(data.announcements))
       .catch(error => console.error(error));
-  }
-
-  savedNewAnnouncement() {
-    this.updateAnnouncements();
-  }
+  };
 
   filterAnnouncements(announcements) {
     const adminAnnouncementsFiltered = announcements.filter(announcement => {
@@ -113,6 +107,7 @@ class Announcements extends React.Component {
                 {this.state.adminAnnouncements.map((announcement, index) => (
                   <AnnouncementComponent
                     announcement={announcement}
+                    updateAnnouncements={this.updateAnnouncements}
                     key={index}
                   />
                 ))}
@@ -130,6 +125,7 @@ class Announcements extends React.Component {
                 {this.state.normalAnnouncements.map((announcement, index) => (
                   <AnnouncementComponent
                     announcement={announcement}
+                    updateAnnouncements={this.updateAnnouncements}
                     key={index}
                   />
                 ))}
@@ -139,7 +135,7 @@ class Announcements extends React.Component {
         </div>
         <div className="p-announcements-add-button">
           <NewAnnouncementModal
-            savedNewAnnouncement={this.savedNewAnnouncement}
+            updateAnnouncements={this.updateAnnouncements}
           />
         </div>
       </div>
