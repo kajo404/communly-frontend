@@ -161,6 +161,9 @@ class TaskBoard extends Component {
           </div>
           <TextField
             className="c-text-input-title"
+            multiLine={true}
+            rows={1}
+            rowsMax={3}
             id="title"
             ref={this.textInput}
             readOnly={!this.isUserAuthor()}
