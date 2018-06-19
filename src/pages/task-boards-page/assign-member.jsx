@@ -36,7 +36,6 @@ export default class AssignMemberModal extends React.Component {
   assignMember = () => {
     TaskService.assignTask(this.props.task._id, this.state.assignedMember)
       .then(result => {
-        this.props.update();
         this.props.updateTasks();
         this.props.close();
       })

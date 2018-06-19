@@ -179,7 +179,6 @@ class TaskBoardPage extends Component {
           task={this.state.currentTask}
           open={this.state.assignMemberOpen}
           close={this.handleAssignMemberClose}
-          update={this.updateBoards}
           updateTasks={this.updateTasks}
         />
       </div>
