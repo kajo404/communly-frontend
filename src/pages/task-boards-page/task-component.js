@@ -47,6 +47,7 @@ class Task extends Component {
         {this.showAvatar() ? (
           <i className="c-task_face-icon">
             <Avatar
+              className={this.getCheckboxClass()}
               src={this.props.assigned.image}
               size={20}
               style={avatarStyles}
