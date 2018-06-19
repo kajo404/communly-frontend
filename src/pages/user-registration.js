@@ -176,8 +176,6 @@ class UserRegistration extends React.Component {
           onClick={this.onSubmit}
           disabled={this.isButtonDisabled}
         />
-        <br />
-        <br />
         <Link to={'/login'} className="p-reg__login-link">
           Just login?
         </Link>

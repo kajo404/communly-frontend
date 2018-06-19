@@ -18,3 +18,9 @@
   color: red;
 }
 
+/* FIREFOX RESETS */
+input:invalid,
+input:required {
+  box-shadow: none;
+  outline: none;
+}
