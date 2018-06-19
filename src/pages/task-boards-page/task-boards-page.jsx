@@ -119,6 +119,10 @@ class TaskBoardPage extends Component {
       .catch(error => console.error(error));
   };
 
+  closeSnackbar = () => {
+    this.setState({ snackbarOpen: false });
+  };
+
   handleOpen = () => {
     this.setState({ modalOpen: true });
   };

@@ -63,7 +63,12 @@ export default class AssignMemberModal extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton label="Cancel" primary={true} onClick={this.props.close} />,
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        style={{ marginRight: '7px' }}
+        onClick={this.props.close}
+      />,
       <RaisedButton
         label="Assign task"
         disabled={this.buttonDisabled}
