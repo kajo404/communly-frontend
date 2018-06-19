@@ -53,7 +53,10 @@ class TaskBoard extends Component {
     };
 
     TaskBoardService.createTask(newTask)
-      .then(response => this.updateTasks())
+      .then(response => {
+        this.updateTasks();
+        this.props.updateView();
+      })
       .catch(error => console.error(error));
   };
 
