@@ -71,7 +71,8 @@ class TaskBoard extends Component {
     this.props.openAssignMemberModal(
       this.props.board._id,
       this.props.board.members,
-      taskId
+      taskId,
+      this.updateTasks
     );
   };
 

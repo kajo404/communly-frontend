@@ -25,7 +25,6 @@ class TaskBoardPage extends Component {
     taskToBeAssigned: '',
     currentTask: {}
   };
-
   constructor(props) {
     super(props);
     this.updateBoards();
@@ -61,7 +60,12 @@ class TaskBoardPage extends Component {
     this.setState({ addMembersOpen: true });
   };
 
-  openAssignMemberModal = (callingBoard, currentMembers, taskId) => {
+  openAssignMemberModal = (
+    callingBoard,
+    currentMembers,
+    taskId,
+    updateTasks
+  ) => {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
     this.state.boards.map(tasklist => {
@@ -72,6 +76,7 @@ class TaskBoardPage extends Component {
     });
     this.setState({ taskToBeAssigned: taskId });
     this.setState({ assignMemberOpen: true });
+    this.updateTasks = updateTasks;
   };
 
   // This gets called by the board that has added new members
@@ -174,6 +179,8 @@ class TaskBoardPage extends Component {
           task={this.state.currentTask}
           open={this.state.assignMemberOpen}
           close={this.handleAssignMemberClose}
+          update={this.updateBoards}
+          updateTasks={this.updateTasks}
         />
       </div>
     );
