@@ -38,7 +38,7 @@ class Task extends Component {
     return (
       <li className="c-list-item">
         <Checkbox
-          style={{ width: 'calc(100% - 30px)' }}
+          style={{ width: 'calc(100% - 70px)' }}
           className={this.getCheckboxClass()}
           checked={this.props.done}
           onCheck={this.updateCheck}
