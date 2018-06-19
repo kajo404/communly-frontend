@@ -48,9 +48,15 @@ class UserLogin extends React.Component {
         this.props.history.push('/announcements');
       })
       .catch(errorCode => {
+        let errorText = '';
+        if (typeof ERROR_CODES[errorCode] === 'undefined') {
+          errorText = errorCode;
+        } else {
+          errorText = ERROR_CODES[errorCode];
+        }
         this.setState({
           errorBar: {
-            message: ERROR_CODES[errorCode],
+            message: errorText,
             open: true
           }
         });

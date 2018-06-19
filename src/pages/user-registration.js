@@ -63,7 +63,12 @@ class UserRegistration extends React.Component {
       })
 
       .catch(errorCode => {
-        const errorText = ERROR_CODES[errorCode];
+        let errorText = '';
+        if (typeof ERROR_CODES[errorCode] === 'undefined') {
+          errorText = errorCode;
+        } else {
+          errorText = ERROR_CODES[errorCode];
+        }
         this.setState({
           errorBar: {
             message: errorText,
