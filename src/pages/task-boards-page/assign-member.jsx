@@ -34,7 +34,7 @@ export default class AssignMemberModal extends React.Component {
   }
 
   assignMember = () => {
-    TaskService.assignTask(this.props.task, this.state.assignedMember)
+    TaskService.assignTask(this.props.task._id, this.state.assignedMember)
       .then(result => {
         this.props.close();
       })
@@ -51,6 +51,14 @@ export default class AssignMemberModal extends React.Component {
   get buttonDisabled() {
     return !this.state.assignedMember;
   }
+
+  currentAssigned = () => {
+    if (typeof this.props.task.assignee !== 'undefined') {
+      return this.props.task.assignee._id;
+    } else {
+      return '';
+    }
+  };
 
   render() {
     const actions = [
@@ -76,6 +84,7 @@ export default class AssignMemberModal extends React.Component {
             name="members"
             onChange={this.onChange}
             style={listStyle}
+            defaultSelected={this.currentAssigned()}
           >
             {this.props.members.map((member, index) => (
               <RadioButton

@@ -22,7 +22,8 @@ class TaskBoardPage extends Component {
     currentBoardMembers: [],
     boards: [],
     users: [],
-    taskToBeAssigned: ''
+    taskToBeAssigned: '',
+    currentTask: {}
   };
 
   constructor(props) {
@@ -63,6 +64,12 @@ class TaskBoardPage extends Component {
   openAssignMemberModal = (callingBoard, currentMembers, taskId) => {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
+    this.state.boards.map(tasklist => {
+      const task = tasklist.tasks.find(task => task._id == taskId);
+      if (typeof task !== 'undefined') {
+        this.setState({ currentTask: task });
+      }
+    });
     this.setState({ taskToBeAssigned: taskId });
     this.setState({ assignMemberOpen: true });
   };
@@ -164,7 +171,7 @@ class TaskBoardPage extends Component {
         />
         <AssignMemberModal
           members={this.state.currentBoardMembers}
-          task={this.state.taskToBeAssigned}
+          task={this.state.currentTask}
           open={this.state.assignMemberOpen}
           close={this.handleAssignMemberClose}
         />
