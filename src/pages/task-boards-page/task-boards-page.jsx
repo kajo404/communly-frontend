@@ -9,21 +9,22 @@ import AddMemberModal from './add-member';
 import DeleteBoardConfirmation from './delete-confirmation';
 import UserService from '../../services/user-service';
 import Snackbar from 'material-ui/Snackbar';
-import { request } from 'https';
 
 class TaskBoardPage extends Component {
   taskBoardsSubscription;
   state = {
     modalOpen: false,
     addMembersOpen: false,
+    assignMemberOpen: false,
     deleteBoardOpen: false,
     snackbarOpen: false,
     currentBoardOpening: '',
     currentBoardMembers: [],
     boards: [],
-    users: []
+    users: [],
+    taskToBeAssigned: '',
+    currentTask: {}
   };
-
   constructor(props) {
     super(props);
     this.updateBoards();
@@ -44,6 +45,10 @@ class TaskBoardPage extends Component {
     this.setState({ deleteBoardOpen: false });
   };
 
+  handleAssignMemberClose = () => {
+    this.setState({ assignMemberOpen: false });
+  };
+
   openDeleteBoardModal = callingBoard => {
     this.setState({ currentBoardOpening: callingBoard });
     this.setState({ deleteBoardOpen: true });
@@ -53,6 +58,25 @@ class TaskBoardPage extends Component {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
     this.setState({ addMembersOpen: true });
+  };
+
+  openAssignMemberModal = (
+    callingBoard,
+    currentMembers,
+    taskId,
+    updateTasks
+  ) => {
+    this.setState({ currentBoardMembers: currentMembers });
+    this.setState({ currentBoardOpening: callingBoard });
+    this.state.boards.map(tasklist => {
+      const task = tasklist.tasks.find(task => task._id == taskId);
+      if (typeof task !== 'undefined') {
+        this.setState({ currentTask: task });
+      }
+    });
+    this.setState({ taskToBeAssigned: taskId });
+    this.setState({ assignMemberOpen: true });
+    this.updateTasks = updateTasks;
   };
 
   // This gets called by the board that has added new members
@@ -95,6 +119,10 @@ class TaskBoardPage extends Component {
       .catch(error => console.error(error));
   };
 
+  closeSnackbar = () => {
+    this.setState({ snackbarOpen: false });
+  };
+
   handleOpen = () => {
     this.setState({ modalOpen: true });
   };
@@ -117,6 +145,7 @@ class TaskBoardPage extends Component {
               openDeleteConfirmationModal={this.openDeleteBoardModal}
               setCurrentBoardMembers={this.setCurrentBoardMembers}
               updateBoardTitle={this.updateBoardTitle}
+              openAssignMemberModal={this.openAssignMemberModal}
             />
           ))}
         </div>
@@ -149,7 +178,13 @@ class TaskBoardPage extends Component {
           autoHideDuration={3000}
           onRequestClose={this.closeSnackbar}
         />
-        {/* <AssignMemberModal /> */}
+        <AssignMemberModal
+          members={this.state.currentBoardMembers}
+          task={this.state.currentTask}
+          open={this.state.assignMemberOpen}
+          close={this.handleAssignMemberClose}
+          updateTasks={this.updateTasks}
+        />
       </div>
     );
   }
