@@ -41,7 +41,7 @@ class App extends Component {
             if (UserService.isAuthenticated()) {
               return <Redirect to={'/announcements'} />;
             } else {
-              return <Redirect to={'/login'} />;
+              return <Redirect to={'/registration'} />;
             }
           },
           path: '/',

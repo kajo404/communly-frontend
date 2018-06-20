@@ -9,6 +9,14 @@ import Snackbar from 'material-ui/Snackbar';
 import { validateEmail } from '../services/email-validator';
 import logo from './../assets/logo.png';
 import './registration.scss';
+import AnnouncementIcon from 'material-ui/svg-icons/action/announcement';
+import TaskAllIcon from 'material-ui/svg-icons/action/assignment-ind';
+import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
+import TaskUndoneIcon, {
+  ActionAssignmentLate
+} from 'material-ui/svg-icons/action/assignment-late';
+import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
+import ListMemberIcon from 'material-ui/svg-icons/av/playlist-add-check';
 
 const buttonStyles = {
   position: 'relative'
@@ -148,24 +156,52 @@ class UserRegistration extends React.Component {
             src={logo}
             alt="communly logo"
           />
-          <p className="big-size">
+          <h1 className="p-registration__headline margin">
             This is <span className="c-registration__heading"> communly </span>
-          </p>
-          <p className="big-size-margin">
-            {' '}
-            The best student dormitory management app{' '}
-          </p>
-
+          </h1>
           <p className="light">
             {' '}
-            Out application is a simple and intuitive web-based tool that allows
+            Our application is a simple and intuitive web-based tool that allows
             living communities of an arbitrary size to plan and organize their
-            cohabitation by providing services such as an announcement page with
-            a voting option, shared task boards and task assigining for
-            responisbility management and tracking of the community activity in
-            terms of competed tasks. <br />{' '}
-            <span className="lila-color">Just try it out! </span>{' '}
+            cohabitation and track their activities.
+            <span className="lila-color"> Just try it out! </span>{' '}
           </p>
+          <div className="p-registration__icons">
+            <div className="p-registration__icon-wrapper">
+              <span className="c-icon__description"> Announcements</span>
+              <AnnouncementIcon
+                color="#f5f5f5"
+                className="p-registration__icon"
+              />
+            </div>
+            <div className="p-registration__icon-wrapper">
+              <span className="c-icon__description"> Task Lists </span>
+              <div>
+                <ListAuthorIcon
+                  color="#f5f5f5"
+                  className="p-registration__icon"
+                />
+                <ListMemberIcon
+                  color="#f5f5f5"
+                  className="p-registration__icon"
+                />
+              </div>
+            </div>
+            <div className="p-registration__icon-wrapper wider-icons">
+              <span className="c-icon__description"> Activity tracking </span>
+              <div>
+                <TaskAllIcon color="#f5f5f5" className="p-registration__icon" />
+                <TaskDoneIcon
+                  color="#f5f5f5"
+                  className="p-registration__icon"
+                />
+                <TaskUndoneIcon
+                  color="#f5f5f5"
+                  className="p-registration__icon"
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div className="p-registration__form">
           <p className="dark-form-text">
