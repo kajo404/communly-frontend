@@ -204,6 +204,8 @@ class PageLayout extends React.Component {
           <div className="c-layout__content">{this.props.children}</div>
         </div>
       );
+    } else if (window.location.pathname === '/registration') {
+      return <div className="c-layout">{this.props.children}</div>;
     } else {
       return (
         <div className="c-layout">

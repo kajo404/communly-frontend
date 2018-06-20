@@ -7,10 +7,18 @@ import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import { validateEmail } from '../services/email-validator';
+import logo from './../assets/logo.png';
 
 const buttonStyles = {
-  position: 'relative',
-  marginTop: '30px'
+  position: 'relative'
+};
+
+const underlineStyle = {
+  borderColor: '#314f81'
+};
+
+const floatingLabelStyle = {
+  color: '#314f81'
 };
 
 const ERROR_CODES = {
@@ -132,67 +140,102 @@ class UserRegistration extends React.Component {
 
   render() {
     return (
-      <div className="p-user-login__content">
-        <TextField
-          floatingLabelText="First Name"
-          required={true}
-          value={this.state.firstname}
-          onChange={this.onFirstNameChange}
-        />
-        <TextField
-          floatingLabelText="Last Name"
-          required={true}
-          value={this.state.lastname}
-          onChange={this.onLastNameChange}
-        />
-        <DatePicker
-          required={true}
-          value={this.state.dateOfBirth}
-          onChange={this.onBirthDateChange}
-          floatingLabelText="Birth Date"
-          hintText="e.g 13.07.1995"
-        />
-        <TextField
-          type="email"
-          floatingLabelText="Email (Future username)"
-          required={true}
-          value={this.state.email}
-          onChange={this.onEmailChange}
-          errorText={this.state.errorTextEmail}
-        />
-        <TextField
-          type="password"
-          floatingLabelText="Password"
-          required={true}
-          value={this.state.password}
-          onChange={this.onPasswordChange}
-          errorText={this.state.errorTextPW}
-        />
-        <RaisedButton
-          label="REGISTER"
-          labelStyle={buttonStyles}
-          primary={true}
-          className="c-login__button"
-          onClick={this.onSubmit}
-          disabled={this.isButtonDisabled}
-        />
-        <Link to={'/login'} className="p-reg__login-link">
-          Just login?
-        </Link>
-        <br />
-        <br />
-        <div
-          className="c-loginError"
-          style={{ display: this.state.displayError }}
-        >
-          {this.state.error}
+      <div className="p-registration__content">
+        <div className="p-registration__left">
+          <img
+            className="c-registration__logo"
+            src={logo}
+            alt="communly logo"
+          />
+          <p className="big-size">
+            This is <span className="c-lila"> communly </span>
+          </p>
+          <p className="big-size-margin">
+            {' '}
+            The best student dormitory management app{' '}
+          </p>
+
+          <p className="light">
+            {' '}
+            Out application is a simple and intuitive web-based tool that allows
+            living communities of an arbitrary size to plan and organize their
+            cohabitation by providing services such as an announcement page with
+            a voting option, shared task boards and task assigining for
+            responisbility management and tracking of the community activity in
+            terms of competed tasks. <br />{' '}
+            <span className="lila-color">Just try it out! </span>{' '}
+          </p>
         </div>
-        <Snackbar
-          open={this.state.errorBar.open}
-          message={this.state.errorBar.message}
-          autoHideDuration={3000}
-          onRequestClose={this.closeSnackbar}
-        />
+        <div className="p-registration__form">
+          <p className="dark-form-text">
+            {' '}
+            Register now - it's <span className="uppercase">free</span>!
+          </p>
+
+          <TextField
+            floatingLabelText="First Name"
+            required={true}
+            value={this.state.firstname}
+            onChange={this.onFirstNameChange}
+            underlineStyle={underlineStyle}
+            floatingLabelStyle={floatingLabelStyle}
+          />
+          <TextField
+            floatingLabelText="Last Name"
+            required={true}
+            value={this.state.lastname}
+            onChange={this.onLastNameChange}
+            underlineStyle={underlineStyle}
+            floatingLabelStyle={floatingLabelStyle}
+          />
+          <DatePicker
+            required={true}
+            value={this.state.dateOfBirth}
+            onChange={this.onBirthDateChange}
+            floatingLabelText="Birth Date"
+            hintText="e.g 13.07.1995"
+            underlineStyle={underlineStyle}
+            floatingLabelStyle={floatingLabelStyle}
+          />
+          <TextField
+            type="email"
+            floatingLabelText="Email (Future username)"
+            required={true}
+            value={this.state.email}
+            onChange={this.onEmailChange}
+            errorText={this.state.errorTextEmail}
+            underlineStyle={underlineStyle}
+            floatingLabelStyle={floatingLabelStyle}
+          />
+          <TextField
+            type="password"
+            floatingLabelText="Password"
+            required={true}
+            value={this.state.password}
+            onChange={this.onPasswordChange}
+            errorText={this.state.errorTextPW}
+            underlineStyle={underlineStyle}
+            floatingLabelStyle={floatingLabelStyle}
+          />
+          <div className="c-registration__button-wrapper">
+            <RaisedButton
+              label="REGISTER"
+              labelStyle={buttonStyles}
+              primary={true}
+              onClick={this.onSubmit}
+              disabled={this.isButtonDisabled}
+            />
+            <Link to={'/login'} className="p-reg__login-link">
+              Just login?
+            </Link>
+          </div>
+          <Snackbar
+            open={this.state.errorBar.open}
+            message={this.state.errorBar.message}
+            autoHideDuration={3000}
+            onRequestClose={this.closeSnackbar}
+          />
+        </div>
       </div>
     );
   }
