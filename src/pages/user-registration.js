@@ -8,6 +8,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 import { validateEmail } from '../services/email-validator';
 import logo from './../assets/logo.png';
+import './registration.scss';
 
 const buttonStyles = {
   position: 'relative'
@@ -148,7 +149,7 @@ class UserRegistration extends React.Component {
             alt="communly logo"
           />
           <p className="big-size">
-            This is <span className="c-lila"> communly </span>
+            This is <span className="c-registration__heading"> communly </span>
           </p>
           <p className="big-size-margin">
             {' '}
