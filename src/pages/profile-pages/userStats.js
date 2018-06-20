@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import AdminService from '../../services/admin-service';
+import UserService from '../../services/user-service';
 
 import MaxIcon from 'material-ui/svg-icons/editor/vertical-align-top';
 import AvgIcon from 'material-ui/svg-icons/editor/vertical-align-center';
@@ -11,7 +12,7 @@ import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
 import ListMemberIcon from 'material-ui/svg-icons/av/playlist-add-check';
 import TaskAllIcon from 'material-ui/svg-icons/action/assignment-ind';
 import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
-import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
+import TaskOpenIcon from 'material-ui/svg-icons/action/assignment-late';
 
 import './profile.scss';
 
@@ -32,143 +33,123 @@ class UserStatsComponent extends Component {
 
   animate() {
     //Annoncements
-    this.animateValue(
+    UserService.animateValue(
       'counterUS1',
       0,
       this.state.maxUserAnnouncements,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS2',
       0,
       this.state.avgUserAnnouncements,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS3',
       0,
       this.state.minUserAnnouncements,
       conterDuration
     );
     //Tasklists
-    this.animateValue(
+    UserService.animateValue(
       'counterUS4',
       0,
       this.state.maxUserTasklists,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS5',
       0,
       this.state.avgUserTasklists,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS6',
       0,
       this.state.minUserTasklists,
       conterDuration
     );
     //Tasklist members
-    this.animateValue(
+    UserService.animateValue(
       'counterUS7',
       0,
       this.state.maxMembersTasklists,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS8',
       0,
       this.state.avgMembersTasklists,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS9',
       0,
       this.state.minMembersTasklists,
       conterDuration
     );
     //Tasks
-    this.animateValue(
+    UserService.animateValue(
       'counterUS10',
       0,
       this.state.maxAssignedTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS11',
       0,
       this.state.avgAssignedTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS12',
       0,
       this.state.minAssignedTasks,
       conterDuration
     );
     //done Tasks
-    this.animateValue(
+    UserService.animateValue(
       'counterUS13',
       0,
       this.state.maxAssignedDoneTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS14',
       0,
       this.state.avgAssignedDoneTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS15',
       0,
       this.state.minAssignedDoneTasks,
       conterDuration
     );
-    //undone Tasks
-    this.animateValue(
+    //open Tasks
+    UserService.animateValue(
       'counterUS16',
       0,
-      this.state.maxAssignedUndoneTasks,
+      this.state.maxAssignedOpenTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS17',
       0,
-      this.state.avgAssignedUndoneTasks,
+      this.state.avgAssignedOpenTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUS18',
       0,
-      this.state.minAssignedUndoneTasks,
+      this.state.minAssignedOpenTasks,
       conterDuration
     );
-  }
-
-  animateValue(id, start, end, duration) {
-    var obj = document.getElementById(id);
-    if (end > 0 && end > start) {
-      var range = end - start;
-      var current = start;
-      var stepTime = Math.abs(Math.floor(duration / range));
-      var timer = setInterval(function() {
-        obj.innerHTML = current;
-        if (current == Math.floor(end)) {
-          clearInterval(timer);
-          current += end % 1;
-          obj.innerHTML = current;
-        }
-        current += 1;
-      }, stepTime);
-    } else {
-      obj.innerHTML = 0;
-    }
   }
 
   getUserStats() {
-    AdminService.getUserStatsAnnuoncements()
+    AdminService.getUserStatsAnnouncements()
       .then(result => {
         this.setState({
           maxUserAnnouncements: result.maxUserAnnouncements,
@@ -221,7 +202,6 @@ class UserStatsComponent extends Component {
 
     AdminService.getUserStatsTasks()
       .then(result => {
-        console.log(result);
         this.setState({
           maxAssignedTasks: result.maxAssignedTasks,
           avgAssignedTasks: result.avgAssignedTasks,
@@ -239,7 +219,6 @@ class UserStatsComponent extends Component {
 
     AdminService.getUserStatsDoneTasks()
       .then(result => {
-        console.log(result);
         this.setState({
           maxAssignedDoneTasks: result.maxAssignedDoneTasks,
           avgAssignedDoneTasks: result.avgAssignedDoneTasks,
@@ -255,20 +234,19 @@ class UserStatsComponent extends Component {
         this.setState({ error: e });
       });
 
-    AdminService.getUserStatsUndoneTasks()
+    AdminService.getUserStatsOpenTasks()
       .then(result => {
-        console.log(result);
         this.setState({
-          maxAssignedUndoneTasks: result.maxAssignedUndoneTasks,
-          avgAssignedUndoneTasks: result.avgAssignedUndoneTasks,
-          minAssignedUndoneTasks: result.minAssignedUndoneTasks
+          maxAssignedOpenTasks: result.maxAssignedOpenTasks,
+          avgAssignedOpenTasks: result.avgAssignedOpenTasks,
+          minAssignedOpenTasks: result.minAssignedOpenTasks
         });
-        AdminService.receivedStatsUndoneTasks = true;
+        AdminService.receivedStatsOpenTasks = true;
         AdminService.receivedUserStats();
       })
       .catch(e => {
         this.setState({
-          errorMessage: 'User Stats undone tasks not received'
+          errorMessage: 'User Stats open tasks not received'
         });
         this.setState({ error: e });
       });
@@ -383,9 +361,9 @@ class UserStatsComponent extends Component {
             </div>
           </div>
           <div className="c-userStats-component">
-            <TaskUndoneIcon className="c-userStats-componentIcon" />
+            <TaskOpenIcon className="c-userStats-componentIcon" />
             <div className="c-userStats-componentTitle">
-              Assigned Undone Tasks
+              Assigned Open Tasks
             </div>
             <div className="c-userStats-componentpart">
               <div className="c-userStats-Description">Max</div>

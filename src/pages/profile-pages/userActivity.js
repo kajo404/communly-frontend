@@ -19,70 +19,52 @@ class UserActivityComponent extends Component {
     this.getUserActivity();
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     UserService.registerListener(
       'receivedUserActivityData',
       this.animate.bind(this)
     );
-  };
+  }
 
   animate() {
-    this.animateValue(
+    console.log('UA');
+    console.log(this.state.numberAnnouncements);
+    UserService.animateValue(
       'counterUA1',
       0,
       this.state.numberAnnouncements,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUA2',
       0,
       this.state.numberTasklistsAuthor,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUA3',
       0,
       this.state.numberTasklistsMember,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUA4',
       0,
       this.state.numberAssignedTasks,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUA5',
       0,
       this.state.numberAssignedTasksDone,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterUA6',
       0,
       this.state.numberAssignedTasksUndone,
       conterDuration
     );
-  }
-
-  animateValue(id, start, end, duration) {
-    var obj = document.getElementById(id);
-    if (end > 0 && end > start) {
-      var range = end - start;
-      var current = start;
-      var stepTime = Math.abs(Math.floor(duration / range));
-      var timer = setInterval(function() {
-        obj.innerHTML = current;
-        if (current == Math.floor(end)) {
-          clearInterval(timer);
-          current += end % 1;
-          obj.innerHTML = current;
-        }
-        current += 1;
-      }, stepTime);
-    } else {
-      obj.innerHTML = 0;
-    }
   }
 
   getUserActivity() {

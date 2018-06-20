@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import AdminService from '../../services/admin-service';
+import UserService from '../../services/user-service';
 
 import UserIcon from 'material-ui/svg-icons/action/account-box';
 import AnnouncementIcon from 'material-ui/svg-icons/action/speaker-notes';
@@ -27,52 +28,42 @@ class PlatformActivityComponent extends Component {
   };
 
   animate() {
-    this.animateValue('counterPA1', 0, this.state.userAmount, conterDuration);
-    this.animateValue(
+    UserService.animateValue(
+      'counterPA1',
+      0,
+      this.state.userAmount,
+      conterDuration
+    );
+    UserService.animateValue(
       'counterPA2',
       0,
       this.state.announcementAmount,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterPA3',
       0,
       this.state.tasklistAmount,
       conterDuration
     );
-    this.animateValue('counterPA4', 0, this.state.taskAmount, conterDuration);
-    this.animateValue(
+    UserService.animateValue(
+      'counterPA4',
+      0,
+      this.state.taskAmount,
+      conterDuration
+    );
+    UserService.animateValue(
       'counterPA5',
       0,
       this.state.doneTaskAmount,
       conterDuration
     );
-    this.animateValue(
+    UserService.animateValue(
       'counterPA6',
       0,
       this.state.undoneTaskAmount,
       conterDuration
     );
-  }
-
-  animateValue(id, start, end, duration) {
-    var obj = document.getElementById(id);
-    if (end > 0 && end > start) {
-      var range = end - start;
-      var current = start;
-      var stepTime = Math.abs(Math.floor(duration / range));
-      var timer = setInterval(function() {
-        obj.innerHTML = current;
-        if (current == Math.floor(end)) {
-          clearInterval(timer);
-          current += end % 1;
-          obj.innerHTML = current;
-        }
-        current += 1;
-      }, stepTime);
-    } else {
-      obj.innerHTML = 0;
-    }
   }
 
   getPlatformActivity() {

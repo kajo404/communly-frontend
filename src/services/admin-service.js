@@ -15,7 +15,7 @@ export default class AdminService {
   static receivedStatsMembersTasklists = false;
   static receivedStatsTasks = false;
   static receivedStatsDoneTasks = false;
-  static receivedStatsUndoneTasks = false;
+  static receivedStatsOpenTasks = false;
 
   static URL() {
     return APIService.apiURL() + '/admin';
@@ -104,15 +104,19 @@ export default class AdminService {
       AdminService.receivedTaskAmount
     ) {
       AdminService.notifyListeners('receivedPlatformActivityData');
+      AdminService.receivedUserAmount = false;
+      AdminService.receivedAnnouncementAmount = false;
+      AdminService.receivedTasklistAmount = false;
+      AdminService.receivedTaskAmount = false;
     }
   }
 
   /* User Stats */
 
-  static getUserStatsAnnuoncements() {
+  static getUserStatsAnnouncements() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/stats/annuoncement`,
+        `${AdminService.URL()}/stats/announcement`,
 
         function(data) {
           resolve(data);
@@ -184,10 +188,10 @@ export default class AdminService {
     });
   }
 
-  static getUserStatsUndoneTasks() {
+  static getUserStatsOpenTasks() {
     return new Promise((resolve, reject) => {
       APIService.get(
-        `${AdminService.URL()}/stats/undoneTask`,
+        `${AdminService.URL()}/stats/openTask`,
 
         function(data) {
           resolve(data);
@@ -206,9 +210,15 @@ export default class AdminService {
       AdminService.receivedStatsMembersTasklists &&
       AdminService.receivedStatsTasks &&
       AdminService.receivedStatsDoneTasks &&
-      AdminService.receivedStatsUndoneTasks
+      AdminService.receivedStatsOpenTasks
     ) {
       AdminService.notifyListeners('receivedUserStatsData');
+      AdminService.receivedStatsAnnouncements = false;
+      AdminService.receivedStatsUserTasklists = false;
+      AdminService.receivedStatsMembersTasklists = false;
+      AdminService.receivedStatsTasks = false;
+      AdminService.receivedStatsDoneTasks = false;
+      AdminService.receivedStatsOpenTasks = false;
     }
   }
 }

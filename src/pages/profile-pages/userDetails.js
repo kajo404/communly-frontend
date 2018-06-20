@@ -4,7 +4,6 @@ import NewUploadModal from './upload-img-modal';
 import NewEditModal from './edit-profile-modal';
 import NewChangePwModal from './change-password-modal';
 import UserService from '../../services/user-service';
-import AdminService from '../../services/admin-service';
 
 import './profile.scss';
 
