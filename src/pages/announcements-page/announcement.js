@@ -18,7 +18,7 @@ class AnnouncementComponent extends Component {
   render() {
     return (
       <Paper className="c-announcement-paper" zDepth={1}>
-        <div className="c-announcement-content">
+        <div className="c-announcement-content c-announcements-title">
           <h3>{this.props.announcement.title}</h3>
         </div>
         <hr />
