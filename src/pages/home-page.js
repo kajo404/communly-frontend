@@ -267,7 +267,9 @@ class HomePage extends React.Component {
             <div className="p-registration__form">
               <p className="dark-form-text">
                 {' '}
-                Register now - it's <span className="uppercase">free</span>!
+                <h4 className="c-bold-text">
+                  Register now - it's <span className="uppercase">free</span>!
+                </h4>
               </p>
 
               <TextField
@@ -333,6 +335,10 @@ class HomePage extends React.Component {
             </div>
           ) : (
             <div className="p-registration__form p-registration__form-login">
+              <p className="dark-form-text">
+                {' '}
+                <h4>Login</h4>
+              </p>
               <TextField
                 floatingLabelText="Email"
                 required={true}
@@ -382,24 +388,24 @@ class HomePage extends React.Component {
               />
               <p className="c-icon__description">
                 {' '}
-                Announcements <br /> invidunt ut labore et dolore magna aliquyam
-                erat, sed diam voluptua. At vero eos et accusam et justo duo
-                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat
+                <h3 className="c-bold-text">Announcements</h3> <br /> Easily
+                share important information with your residents. Get a feeling
+                about your residents opinion towards an announcement and make
+                decisions by using the vote functionality. Communicating
+                important information has never been so easy!
               </p>
             </div>
             <div className="p-registration__icon-wrapper">
               <p className="c-icon__description">
                 {' '}
-                Task Lists <br /> Lorem ipsum dolor sited diam nonumy eirmod
-                tempor invidunt ut labore et dolore magna aliquyam erat, sed
-                diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat
+                <h3 className="c-bold-text">Task Lists</h3> <br /> Lorem ipsum
+                dolor sited diam nonumy eirmod tempor invidunt ut labore et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                accusam et justo duo dolores et ea rebum. Stet clita kasd
+                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat
               </p>
               <div className="margin-left">
                 <ListAuthorIcon
@@ -425,13 +431,14 @@ class HomePage extends React.Component {
               </div>
               <span className="c-icon__description">
                 {' '}
-                Activity tracking <br /> Lorem ipsum dolor sit amet, consetirmod
-                tempor invidunt ut labore et dolore magna aliquyam erat, sed
-                diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-                consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                invidunt ut labore et dolore magna aliquyam erat{' '}
+                <h3 className="c-bold-text">Activity tracking</h3> <br /> Lorem
+                ipsum dolor sit amet, consetirmod tempor invidunt ut labore et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+                accusam et justo duo dolores et ea rebum. Stet clita kasd
+                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+                aliquyam erat{' '}
               </span>
             </div>
           </div>
