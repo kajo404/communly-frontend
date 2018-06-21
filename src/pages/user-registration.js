@@ -149,28 +149,105 @@ class UserRegistration extends React.Component {
 
   render() {
     return (
-      <div className="p-registration__content">
-        <div className="p-registration__left">
-          <img
-            className="c-registration__logo"
-            src={logo}
-            alt="communly logo"
-          />
-          <h1 className="p-registration__headline margin">
-            This is <span className="c-registration__heading"> communly </span>
-          </h1>
-          <p className="light">
-            {' '}
-            Our application is a simple and intuitive web-based tool that allows
-            living communities of an arbitrary size to plan and organize their
-            cohabitation and track their activities.
-            <span className="lila-color"> Just try it out! </span>{' '}
-          </p>
+      <div className="p-registration__page">
+        <div className="p-registration__content">
+          <div className="p-registration__left">
+            <img
+              className="c-registration__logo"
+              src={logo}
+              alt="communly logo"
+            />
+            <h1 className="p-registration__headline margin">
+              This is{' '}
+              <span className="c-registration__heading"> communly </span>
+            </h1>
+            <p className="light">
+              {' '}
+              Our application is a simple and intuitive web-based tool that
+              allows living communities of an arbitrary size to plan and
+              organize their cohabitation and track their activities.
+              <span className="lila-color"> Just try it out! </span>{' '}
+            </p>
+            <p className="c-offer-text"> Check out what we offer </p>{' '}
+            <div className="c-registration__arrow bounce" />
+          </div>
+          <div className="p-registration__form">
+            <p className="dark-form-text">
+              {' '}
+              Register now - it's <span className="uppercase">free</span>!
+            </p>
+
+            <TextField
+              floatingLabelText="First Name"
+              required={true}
+              value={this.state.firstname}
+              onChange={this.onFirstNameChange}
+              underlineStyle={underlineStyle}
+              floatingLabelStyle={floatingLabelStyle}
+            />
+            <TextField
+              floatingLabelText="Last Name"
+              required={true}
+              value={this.state.lastname}
+              onChange={this.onLastNameChange}
+              underlineStyle={underlineStyle}
+              floatingLabelStyle={floatingLabelStyle}
+            />
+            <DatePicker
+              required={true}
+              value={this.state.dateOfBirth}
+              onChange={this.onBirthDateChange}
+              floatingLabelText="Birth Date"
+              hintText="e.g 13.07.1995"
+              underlineStyle={underlineStyle}
+              floatingLabelStyle={floatingLabelStyle}
+            />
+            <TextField
+              type="email"
+              floatingLabelText="Email (Future username)"
+              required={true}
+              value={this.state.email}
+              onChange={this.onEmailChange}
+              errorText={this.state.errorTextEmail}
+              underlineStyle={underlineStyle}
+              floatingLabelStyle={floatingLabelStyle}
+            />
+            <TextField
+              type="password"
+              floatingLabelText="Password"
+              required={true}
+              value={this.state.password}
+              onChange={this.onPasswordChange}
+              errorText={this.state.errorTextPW}
+              underlineStyle={underlineStyle}
+              floatingLabelStyle={floatingLabelStyle}
+            />
+            <div className="c-registration__button-wrapper">
+              <RaisedButton
+                label="REGISTER"
+                labelStyle={buttonStyles}
+                primary={true}
+                onClick={this.onSubmit}
+                disabled={this.isButtonDisabled}
+              />
+              <Link to={'/login'} className="p-reg__login-link">
+                Just login?
+              </Link>
+            </div>
+            <Snackbar
+              open={this.state.errorBar.open}
+              message={this.state.errorBar.message}
+              autoHideDuration={3000}
+              onRequestClose={this.closeSnackbar}
+            />
+          </div>
+        </div>
+        <div className="p-registration__services">
           <div className="p-registration__icons">
             <div className="p-registration__icon-wrapper">
               <span className="c-icon__description"> Announcements</span>
               <AnnouncementIcon
-                color="#f5f5f5"
+                color="#314f81"
                 className="p-registration__icon"
               />
             </div>
@@ -178,11 +255,11 @@ class UserRegistration extends React.Component {
               <span className="c-icon__description"> Task Lists </span>
               <div>
                 <ListAuthorIcon
-                  color="#f5f5f5"
+                  color="#314f81"
                   className="p-registration__icon"
                 />
                 <ListMemberIcon
-                  color="#f5f5f5"
+                  color="#314f81"
                   className="p-registration__icon"
                 />
               </div>
@@ -192,86 +269,16 @@ class UserRegistration extends React.Component {
               <div>
                 <TaskAllIcon color="#f5f5f5" className="p-registration__icon" />
                 <TaskDoneIcon
-                  color="#f5f5f5"
+                  color="#314f81"
                   className="p-registration__icon"
                 />
                 <TaskUndoneIcon
-                  color="#f5f5f5"
+                  color="#314f81"
                   className="p-registration__icon"
                 />
               </div>
             </div>
           </div>
-        </div>
-        <div className="p-registration__form">
-          <p className="dark-form-text">
-            {' '}
-            Register now - it's <span className="uppercase">free</span>!
-          </p>
-
-          <TextField
-            floatingLabelText="First Name"
-            required={true}
-            value={this.state.firstname}
-            onChange={this.onFirstNameChange}
-            underlineStyle={underlineStyle}
-            floatingLabelStyle={floatingLabelStyle}
-          />
-          <TextField
-            floatingLabelText="Last Name"
-            required={true}
-            value={this.state.lastname}
-            onChange={this.onLastNameChange}
-            underlineStyle={underlineStyle}
-            floatingLabelStyle={floatingLabelStyle}
-          />
-          <DatePicker
-            required={true}
-            value={this.state.dateOfBirth}
-            onChange={this.onBirthDateChange}
-            floatingLabelText="Birth Date"
-            hintText="e.g 13.07.1995"
-            underlineStyle={underlineStyle}
-            floatingLabelStyle={floatingLabelStyle}
-          />
-          <TextField
-            type="email"
-            floatingLabelText="Email (Future username)"
-            required={true}
-            value={this.state.email}
-            onChange={this.onEmailChange}
-            errorText={this.state.errorTextEmail}
-            underlineStyle={underlineStyle}
-            floatingLabelStyle={floatingLabelStyle}
-          />
-          <TextField
-            type="password"
-            floatingLabelText="Password"
-            required={true}
-            value={this.state.password}
-            onChange={this.onPasswordChange}
-            errorText={this.state.errorTextPW}
-            underlineStyle={underlineStyle}
-            floatingLabelStyle={floatingLabelStyle}
-          />
-          <div className="c-registration__button-wrapper">
-            <RaisedButton
-              label="REGISTER"
-              labelStyle={buttonStyles}
-              primary={true}
-              onClick={this.onSubmit}
-              disabled={this.isButtonDisabled}
-            />
-            <Link to={'/login'} className="p-reg__login-link">
-              Just login?
-            </Link>
-          </div>
-          <Snackbar
-            open={this.state.errorBar.open}
-            message={this.state.errorBar.message}
-            autoHideDuration={3000}
-            onRequestClose={this.closeSnackbar}
-          />
         </div>
       </div>
     );
