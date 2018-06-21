@@ -10,9 +10,8 @@ import {
 } from 'react-router-dom';
 
 import TaskBoardPage from './pages/task-boards-page/task-boards-page';
-import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
-import UserRegistration from './pages/user-registration';
+import HomePage from './pages/home-page';
 import Announcements from './pages/announcements-page/announcements-page';
 import Profile from './pages/profile-pages/profile';
 
@@ -41,19 +40,15 @@ class App extends Component {
             if (UserService.isAuthenticated()) {
               return <Redirect to={'/announcements'} />;
             } else {
-              return <Redirect to={'/registration'} />;
+              return <Redirect to={'/home'} />;
             }
           },
           path: '/',
           exact: true
         },
         {
-          component: UserLogin,
-          path: '/login'
-        },
-        {
-          component: UserRegistration,
-          path: '/registration'
+          component: HomePage,
+          path: '/home'
         },
         {
           render: props => {

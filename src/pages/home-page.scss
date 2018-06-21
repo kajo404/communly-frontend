@@ -70,6 +70,10 @@
   }
 }
 
+.p-registration__form.p-registration__form--login {
+  margin-top: -50px;
+}
+
 .p-registration__left {
   display: flex;
   flex-direction: column;
@@ -106,7 +110,7 @@
 
 .c-registration__logo {
   margin-top: 20px;
-  margin-bottom: 140px;
+  margin-bottom: 219px;
   width: 200px;
   @media (max-width: 387px) {
     margin-bottom: 30px;
