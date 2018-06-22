@@ -10,6 +10,7 @@ import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
+import List from 'material-ui/List';
 
 import logo from './../assets/logo.png';
 import UserService from '../services/user-service';
@@ -198,6 +199,14 @@ class PageLayout extends React.Component {
               />
             </Menu>
             <Divider inset={true} />
+            <List>
+              {this.state.users.map(user => (
+                <ListItem
+                  primaryText={user.firstname + ' ' + user.lastname}
+                  leftAvatar={<Avatar src={user.image} />}
+                />
+              ))}
+            </List>
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
             <Link to="/profile" onClick={this.showHideProfile}>
