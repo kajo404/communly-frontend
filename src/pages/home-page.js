@@ -398,14 +398,12 @@ class HomePage extends React.Component {
             <div className="p-registration__icon-wrapper">
               <p className="c-icon__description">
                 {' '}
-                <h3 className="c-bold-text">Task Lists</h3> <br /> Lorem ipsum
-                dolor sited diam nonumy eirmod tempor invidunt ut labore et
-                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat
+                <h3 className="c-bold-text">Task Lists</h3> <br />
+                Create Task Lists and share them with your fellow residents.
+                Assign responsibilities to let others know what they should be
+                doing. When a task has been completed you can let others know by
+                marking it as done. Sign up now and start organizing your next
+                event!
               </p>
               <div className="margin-left">
                 <ListAuthorIcon
