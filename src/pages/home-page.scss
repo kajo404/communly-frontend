@@ -110,7 +110,7 @@
 
 .c-registration__logo {
   margin-top: 20px;
-  margin-bottom: 219px;
+  margin-bottom: 40%;
   width: 200px;
   @media (max-width: 387px) {
     margin-bottom: 30px;
@@ -316,4 +316,26 @@
 
 .c-bold-text {
   font-weight: bold;
+}
+
+.c-team-members {
+  margin: 3em 1em 0.5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.c-team-member {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  color: #c8d4ea;
+  text-align: center;
+}
+
+.c-team-member-photo {
+  border: 2px solid #c8d4ea;
+  margin-bottom: 0.15em;
 }

@@ -3,6 +3,10 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import './home-page.scss';
 import logo from './../assets/logo.png';
+import eric from './../assets/eric.png';
+import yasna from './../assets/yasna.png';
+import lara from './../assets/lara.jpeg';
+import jonas from './../assets/jonas.png';
 
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
@@ -14,6 +18,7 @@ import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
 import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
 import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
 import ListMemberIcon from 'material-ui/svg-icons/av/playlist-add-check';
+import Avatar from 'material-ui/Avatar';
 
 const buttonStyles = {
   position: 'relative'
@@ -445,6 +450,32 @@ class HomePage extends React.Component {
         <div className="p-registration__team">
           <div className="p-registration__team-wrapper">
             <h2 className="c-team-headline"> Our Team </h2>
+            <div className="c-team-members">
+              <div className="c-team-member">
+                <Avatar src={eric} size={200} className="c-team-member-photo" />
+                Eric Luyken
+              </div>
+              <div className="c-team-member">
+                <Avatar
+                  src={yasna}
+                  size={200}
+                  className="c-team-member-photo"
+                />
+                Yasna Mindilikova
+              </div>
+              <div className="c-team-member">
+                <Avatar src={lara} size={200} className="c-team-member-photo" />
+                Lara Marie Reimer
+              </div>
+              <div className="c-team-member">
+                <Avatar
+                  src={jonas}
+                  size={200}
+                  className="c-team-member-photo"
+                />
+                Jonas Kaltenbach
+              </div>
+            </div>
           </div>
         </div>
         <Snackbar
