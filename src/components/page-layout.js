@@ -68,6 +68,10 @@ class PageLayout extends React.Component {
       'userPictureChanged',
       this.getAllUsers.bind(this)
     );
+    UserService.registerListener(
+      'userAuthenticated',
+      this.getAllUsers.bind(this)
+    );
   };
 
   componentWillUnmount() {
