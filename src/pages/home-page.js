@@ -265,12 +265,12 @@ class HomePage extends React.Component {
           </div>
           {this.state.registrationForm ? (
             <div className="p-registration__form">
-              <p className="dark-form-text">
+              <div className="dark-form-text">
                 {' '}
                 <h4 className="c-bold-text">
                   Register now - it's <span className="uppercase">free</span>!
                 </h4>
-              </p>
+              </div>
 
               <TextField
                 floatingLabelText="First Name"
@@ -335,10 +335,10 @@ class HomePage extends React.Component {
             </div>
           ) : (
             <div className="p-registration__form p-registration__form-login">
-              <p className="dark-form-text">
+              <div className="dark-form-text">
                 {' '}
                 <h4>Login</h4>
-              </p>
+              </div>
               <TextField
                 floatingLabelText="Email"
                 required={true}
@@ -386,17 +386,17 @@ class HomePage extends React.Component {
                 color="#314f81"
                 className="p-registration__icon margin-right"
               />
-              <p className="c-icon__description">
+              <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Announcements</h3> <br /> Easily
                 share important information with your residents. Get a feeling
                 about your residents opinion towards an announcement and make
                 decisions by using the vote functionality. Communicating
                 important information has never been so easy!
-              </p>
+              </div>
             </div>
             <div className="p-registration__icon-wrapper">
-              <p className="c-icon__description">
+              <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Task Lists</h3> <br />
                 Create Task Lists and share them with your fellow residents.
@@ -404,7 +404,7 @@ class HomePage extends React.Component {
                 doing. When a task has been completed you can let others know by
                 marking it as done. Sign up now and start organizing your next
                 event!
-              </p>
+              </div>
               <div className="margin-left">
                 <ListAuthorIcon
                   color="#314f81"
@@ -427,7 +427,7 @@ class HomePage extends React.Component {
                   className="p-registration__icon"
                 />
               </div>
-              <span className="c-icon__description">
+              <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Activity tracking</h3> <br /> Lorem
                 ipsum dolor sit amet, consetirmod tempor invidunt ut labore et
@@ -437,7 +437,7 @@ class HomePage extends React.Component {
                 amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
                 sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
                 aliquyam erat{' '}
-              </span>
+              </div>
             </div>
           </div>
         </div>
