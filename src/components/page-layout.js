@@ -9,6 +9,7 @@ import Menu from 'material-ui/Menu';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 
 import logo from './../assets/logo.png';
 import UserService from '../services/user-service';
@@ -39,7 +40,8 @@ class PageLayout extends React.Component {
     this.state = {
       showUser: true,
       retrievedUser: false,
-      activePage: 0
+      activePage: 0,
+      users: []
     };
     this.updateUser();
   }
