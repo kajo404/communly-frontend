@@ -36,6 +36,7 @@ const logoutButtonStyle = {
   width: '220px'
 };
 class PageLayout extends React.Component {
+  _mounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -45,9 +46,11 @@ class PageLayout extends React.Component {
       users: []
     };
     this.updateUser();
+    this.getAllUsers();
   }
 
   componentDidMount = () => {
+    this._mounted = true;
     UserService.registerListener('userDataChanged', this.updateUser.bind(this));
     UserService.registerListener(
       'userPictureChanged',
@@ -57,7 +60,32 @@ class PageLayout extends React.Component {
       'userAuthenticated',
       this.updateUser.bind(this)
     );
+    UserService.registerListener(
+      'userDataChanged',
+      this.getAllUsers.bind(this)
+    );
+    UserService.registerListener(
+      'userPictureChanged',
+      this.getAllUsers.bind(this)
+    );
   };
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  getAllUsers() {
+    if (UserService.isAuthenticated()) {
+      UserService.getAllUsers().then(result => {
+        if (this._mounted) {
+          this.setState({
+            users: result.users
+          });
+        }
+        console.log(this.state);
+      });
+    }
+  }
 
   updateUser() {
     if (UserService.isAuthenticated()) {
@@ -200,10 +228,11 @@ class PageLayout extends React.Component {
             </Menu>
             <Divider inset={true} />
             <List>
-              {this.state.users.map(user => (
+              {this.state.users.map((user, key) => (
                 <ListItem
                   primaryText={user.firstname + ' ' + user.lastname}
                   leftAvatar={<Avatar src={user.image} />}
+                  key={key}
                 />
               ))}
             </List>
