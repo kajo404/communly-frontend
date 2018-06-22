@@ -178,6 +178,7 @@ class PageLayout extends React.Component {
             style={appBarStyle}
           />
           <div className="c-side-bar">
+            <h2 className="c-side-bar__text">Wohnheim Communly</h2>
             <Menu
               selectedMenuItemStyle={selectedStyles}
               onItemClick={this.changeActivePage}
@@ -194,6 +195,7 @@ class PageLayout extends React.Component {
                 value={1}
               />
             </Menu>
+            <Divider inset={true} />
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
             <Link to="/profile" onClick={this.showHideProfile}>
