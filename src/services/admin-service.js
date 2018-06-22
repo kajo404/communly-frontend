@@ -30,7 +30,9 @@ export default class AdminService {
 
   static notifyListeners(event) {
     if (AdminService.listeners.hasOwnProperty(event)) {
-      AdminService.listeners[event].forEach(fn => fn());
+      AdminService.listeners[event][AdminService.listeners[event].length - 1](
+        fn => fn()
+      );
     }
   }
 

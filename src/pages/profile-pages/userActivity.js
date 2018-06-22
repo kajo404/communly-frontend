@@ -5,13 +5,11 @@ import UserService from '../../services/user-service';
 import AnnouncementIcon from 'material-ui/svg-icons/action/speaker-notes';
 import TaskAllIcon from 'material-ui/svg-icons/action/assignment-ind';
 import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
-import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
+import TaskOpenIcon from 'material-ui/svg-icons/action/assignment-late';
 import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
 import ListMemberIcon from 'material-ui/svg-icons/av/playlist-add-check';
 
 import './profile.scss';
-
-const conterDuration = 500;
 
 class UserActivityComponent extends Component {
   constructor(props) {
@@ -27,43 +25,19 @@ class UserActivityComponent extends Component {
   }
 
   animate() {
-    console.log('UA');
-    console.log(this.state.numberAnnouncements);
-    UserService.animateValue(
-      'counterUA1',
-      0,
-      this.state.numberAnnouncements,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUA2',
-      0,
-      this.state.numberTasklistsAuthor,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUA3',
-      0,
-      this.state.numberTasklistsMember,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUA4',
-      0,
-      this.state.numberAssignedTasks,
-      conterDuration
-    );
+    UserService.animateValue('counterUA1', 0, this.state.numberAnnouncements);
+    UserService.animateValue('counterUA2', 0, this.state.numberTasklistsAuthor);
+    UserService.animateValue('counterUA3', 0, this.state.numberTasklistsMember);
+    UserService.animateValue('counterUA4', 0, this.state.numberAssignedTasks);
     UserService.animateValue(
       'counterUA5',
       0,
-      this.state.numberAssignedTasksDone,
-      conterDuration
+      this.state.numberAssignedTasksDone
     );
     UserService.animateValue(
       'counterUA6',
       0,
-      this.state.numberAssignedTasksUndone,
-      conterDuration
+      this.state.numberAssignedTasksOpen
     );
   }
 
@@ -115,13 +89,13 @@ class UserActivityComponent extends Component {
           }
         });
 
-        var numberAssignedTasksUndone =
+        var numberAssignedTasksOpen =
           numberAssignedTasks - numberAssignedTasksDone;
 
         this.setState({
           numberAssignedTasks: numberAssignedTasks,
           numberAssignedTasksDone: numberAssignedTasksDone,
-          numberAssignedTasksUndone: numberAssignedTasksUndone
+          numberAssignedTasksOpen: numberAssignedTasksOpen
         });
         UserService.receivedTasks = true;
         UserService.receivedUserActivityData();
@@ -172,7 +146,7 @@ class UserActivityComponent extends Component {
             <div id="counterUA5" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
-            <TaskUndoneIcon className="c-userActivity-componentIcon" />
+            <TaskOpenIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">
               Open Assigned Tasks
             </div>

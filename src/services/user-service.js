@@ -162,7 +162,10 @@ export default class UserService {
 
   static notifyListeners(event) {
     if (UserService.listeners.hasOwnProperty(event)) {
-      UserService.listeners[event][0](fn => fn());
+      //use newest listener
+      UserService.listeners[event][UserService.listeners[event].length - 1](
+        fn => fn()
+      );
     }
   }
 
@@ -241,7 +244,6 @@ export default class UserService {
       UserService.receivedTasklistsMember &&
       UserService.receivedTasks
     ) {
-      console.log('Called!');
       UserService.notifyListeners('receivedUserActivityData');
       UserService.receivedAnnouncements = false;
       UserService.receivedTasklistsAuthor = false;
@@ -250,16 +252,16 @@ export default class UserService {
     }
   }
 
-  static animateValue(id, start, end, duration) {
+  static animateValue(id, start, end) {
     var obj = document.getElementById(id);
     if (end > 0 && end > start) {
       var range = end - start;
       var current = start;
-      var stepTime = Math.abs(Math.floor(duration / range));
+      var stepTime = Math.abs(Math.floor(500 / range));
       var timer = setInterval(function() {
         obj.innerHTML = current;
 
-        if (current == Math.floor(end)) {
+        if (current === Math.floor(end)) {
           clearInterval(timer);
           obj.innerHTML = end;
         }

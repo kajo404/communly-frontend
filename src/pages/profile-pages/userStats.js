@@ -16,8 +16,6 @@ import TaskOpenIcon from 'material-ui/svg-icons/action/assignment-late';
 
 import './profile.scss';
 
-const conterDuration = 500;
-
 class UserStatsComponent extends Component {
   constructor(props) {
     super(props);
@@ -33,119 +31,29 @@ class UserStatsComponent extends Component {
 
   animate() {
     //Annoncements
-    UserService.animateValue(
-      'counterUS1',
-      0,
-      this.state.maxUserAnnouncements,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS2',
-      0,
-      this.state.avgUserAnnouncements,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS3',
-      0,
-      this.state.minUserAnnouncements,
-      conterDuration
-    );
+    UserService.animateValue('counterUS1', 0, this.state.maxUserAnnouncements);
+    UserService.animateValue('counterUS2', 0, this.state.avgUserAnnouncements);
+    UserService.animateValue('counterUS3', 0, this.state.minUserAnnouncements);
     //Tasklists
-    UserService.animateValue(
-      'counterUS4',
-      0,
-      this.state.maxUserTasklists,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS5',
-      0,
-      this.state.avgUserTasklists,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS6',
-      0,
-      this.state.minUserTasklists,
-      conterDuration
-    );
+    UserService.animateValue('counterUS4', 0, this.state.maxUserTasklists);
+    UserService.animateValue('counterUS5', 0, this.state.avgUserTasklists);
+    UserService.animateValue('counterUS6', 0, this.state.minUserTasklists);
     //Tasklist members
-    UserService.animateValue(
-      'counterUS7',
-      0,
-      this.state.maxMembersTasklists,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS8',
-      0,
-      this.state.avgMembersTasklists,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS9',
-      0,
-      this.state.minMembersTasklists,
-      conterDuration
-    );
+    UserService.animateValue('counterUS7', 0, this.state.maxMembersTasklists);
+    UserService.animateValue('counterUS8', 0, this.state.avgMembersTasklists);
+    UserService.animateValue('counterUS9', 0, this.state.minMembersTasklists);
     //Tasks
-    UserService.animateValue(
-      'counterUS10',
-      0,
-      this.state.maxAssignedTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS11',
-      0,
-      this.state.avgAssignedTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS12',
-      0,
-      this.state.minAssignedTasks,
-      conterDuration
-    );
+    UserService.animateValue('counterUS10', 0, this.state.maxAssignedTasks);
+    UserService.animateValue('counterUS11', 0, this.state.avgAssignedTasks);
+    UserService.animateValue('counterUS12', 0, this.state.minAssignedTasks);
     //done Tasks
-    UserService.animateValue(
-      'counterUS13',
-      0,
-      this.state.maxAssignedDoneTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS14',
-      0,
-      this.state.avgAssignedDoneTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS15',
-      0,
-      this.state.minAssignedDoneTasks,
-      conterDuration
-    );
+    UserService.animateValue('counterUS13', 0, this.state.maxAssignedDoneTasks);
+    UserService.animateValue('counterUS14', 0, this.state.avgAssignedDoneTasks);
+    UserService.animateValue('counterUS15', 0, this.state.minAssignedDoneTasks);
     //open Tasks
-    UserService.animateValue(
-      'counterUS16',
-      0,
-      this.state.maxAssignedOpenTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS17',
-      0,
-      this.state.avgAssignedOpenTasks,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterUS18',
-      0,
-      this.state.minAssignedOpenTasks,
-      conterDuration
-    );
+    UserService.animateValue('counterUS16', 0, this.state.maxAssignedOpenTasks);
+    UserService.animateValue('counterUS17', 0, this.state.avgAssignedOpenTasks);
+    UserService.animateValue('counterUS18', 0, this.state.minAssignedOpenTasks);
   }
 
   getUserStats() {

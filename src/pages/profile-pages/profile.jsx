@@ -8,24 +8,19 @@ import UserStatsComponent from './userStats';
 import UserService from '../../services/user-service';
 
 class Profile extends React.Component {
+  get isAdmin() {
+    return UserService.isUserAdmin();
+  }
+
   render() {
-    if (UserService.isUserAdmin()) {
-      return (
-        <div className="p-profile">
-          <UserDetailComponent />
-          <UserActivityComponent />
-          <PlatformActivityComponent />
-          <UserStatsComponent />
-        </div>
-      );
-    } else {
-      return (
-        <div className="p-profile">
-          <UserDetailComponent />
-          <UserActivityComponent />
-        </div>
-      );
-    }
+    return (
+      <div className="p-profile">
+        <UserDetailComponent />
+        <UserActivityComponent />
+        {this.isAdmin ? <PlatformActivityComponent /> : null}
+        {this.isAdmin ? <UserStatsComponent /> : null}
+      </div>
+    );
   }
 }
 

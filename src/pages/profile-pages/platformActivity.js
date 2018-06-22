@@ -7,12 +7,10 @@ import UserIcon from 'material-ui/svg-icons/action/account-box';
 import AnnouncementIcon from 'material-ui/svg-icons/action/speaker-notes';
 import TaskAllIcon from 'material-ui/svg-icons/action/assignment';
 import TaskDoneIcon from 'material-ui/svg-icons/action/assignment-turned-in';
-import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
+import TaskOpenIcon from 'material-ui/svg-icons/action/assignment-late';
 import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
 
 import './profile.scss';
-
-const conterDuration = 500;
 
 class PlatformActivityComponent extends Component {
   constructor(props) {
@@ -20,50 +18,21 @@ class PlatformActivityComponent extends Component {
     this.getPlatformActivity();
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     AdminService.registerListener(
       'receivedPlatformActivityData',
       this.animate.bind(this)
     );
-  };
+    this.getPlatformActivity();
+  }
 
   animate() {
-    UserService.animateValue(
-      'counterPA1',
-      0,
-      this.state.userAmount,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterPA2',
-      0,
-      this.state.announcementAmount,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterPA3',
-      0,
-      this.state.tasklistAmount,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterPA4',
-      0,
-      this.state.taskAmount,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterPA5',
-      0,
-      this.state.doneTaskAmount,
-      conterDuration
-    );
-    UserService.animateValue(
-      'counterPA6',
-      0,
-      this.state.undoneTaskAmount,
-      conterDuration
-    );
+    UserService.animateValue('counterPA1', 0, this.state.userAmount);
+    UserService.animateValue('counterPA2', 0, this.state.announcementAmount);
+    UserService.animateValue('counterPA3', 0, this.state.tasklistAmount);
+    UserService.animateValue('counterPA4', 0, this.state.taskAmount);
+    UserService.animateValue('counterPA5', 0, this.state.doneTaskAmount);
+    UserService.animateValue('counterPA6', 0, this.state.openTaskAmount);
   }
 
   getPlatformActivity() {
@@ -105,7 +74,7 @@ class PlatformActivityComponent extends Component {
         this.setState({
           taskAmount: result.taskAmount,
           doneTaskAmount: result.doneTaskAmount,
-          undoneTaskAmount: result.undoneTaskAmount
+          openTaskAmount: result.openTaskAmount
         });
         AdminService.receivedTaskAmount = true;
         AdminService.receivedPlatformActivityData();
@@ -152,7 +121,7 @@ class PlatformActivityComponent extends Component {
             <div id="counterPA5" className="c-userActivity-componentNumber" />
           </div>
           <div className="c-userActivity-component">
-            <TaskUndoneIcon className="c-userActivity-componentIcon" />
+            <TaskOpenIcon className="c-userActivity-componentIcon" />
             <div className="c-userActivity-componentText">Open Tasks</div>
             <div id="counterPA6" className="c-userActivity-componentNumber" />
           </div>
