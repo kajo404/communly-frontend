@@ -19,6 +19,7 @@ import TaskUndoneIcon from 'material-ui/svg-icons/action/assignment-late';
 import ListAuthorIcon from 'material-ui/svg-icons/av/playlist-add';
 import ListMemberIcon from 'material-ui/svg-icons/av/playlist-add-check';
 import Avatar from 'material-ui/Avatar';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 
 const buttonStyles = {
   position: 'relative'
@@ -247,7 +248,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <div className="p-registration__page">
-        <div className="p-registration__content">
+        <div id="registration" className="p-registration__content">
           <div className="p-registration__left">
             <img
               className="c-registration__logo"
@@ -266,7 +267,11 @@ class HomePage extends React.Component {
               <span className="lila-color"> Just try it out! </span>{' '}
             </p>
             <p className="c-offer-text"> Check out what we offer </p>{' '}
-            <div className="c-registration__arrow bounce" />
+            <AnchorLink
+              offset={40}
+              href="#services"
+              className="c-registration__arrow bounce"
+            />
           </div>
           {this.state.registrationForm ? (
             <div className="p-registration__form">
@@ -383,7 +388,7 @@ class HomePage extends React.Component {
             </div>
           )}
         </div>
-        <div className="p-registration__services">
+        <div id="services" className="p-registration__services">
           <div className="p-registration__icons">
             <h2 className="p-registration__services-title"> Our services </h2>
             <div className="p-registration__icon-wrapper">
