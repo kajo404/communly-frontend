@@ -37,7 +37,7 @@ export default class TaskService {
   static assignTask(taskId, userId) {
     return new Promise((resolve, reject) => {
       APIService.post(
-        `${TaskService.URL()}/${taskId}/assign/${userId}`,
+        `${TaskService.URL()}/${taskId}/assignee/${userId}`,
         {},
         function(data) {
           resolve(data);
