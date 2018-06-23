@@ -239,7 +239,12 @@ class PageLayout extends React.Component {
                 nestedItems={this.state.users.map((user, key) => (
                   <ListItem
                     primaryText={user.firstname + ' ' + user.lastname}
-                    leftAvatar={<Avatar src={user.image} />}
+                    leftAvatar={
+                      <Avatar
+                        src={user.image}
+                        className="c-memberlist-avatarImg"
+                      />
+                    }
                     key={key}
                   />
                 ))}
