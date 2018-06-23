@@ -166,7 +166,38 @@ export default class UserService {
   }
 
   static getAllUsers() {
-    return APIService.get$(`${UserService.usersURL()}/`);
+    return new Promise((resolve, reject) => {
+      APIService.get$(`${UserService.usersURL()}/`)
+        .then(result => {
+          result.users.sort(function compare(a, b) {
+            var firstNameA = a.firstname.toUpperCase();
+            var firstNameB = b.firstname.toUpperCase();
+
+            if (firstNameA < firstNameB) {
+              return -1;
+            }
+            if (firstNameA > firstNameB) {
+              return 1;
+            }
+            //first name is equal
+            var nameA = a.lastname.toUpperCase();
+            var nameB = b.lastname.toUpperCase();
+
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            //full name is equal
+            return 0;
+          });
+          resolve(result);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
   }
 
   static getAllAsignedTasks() {
