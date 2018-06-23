@@ -137,6 +137,7 @@
   color: #314f81;
   align-self: flex-start;
   margin-bottom: 30px;
+  padding-left: 16px;
 }
 
 .p-registration__icons {
@@ -148,6 +149,7 @@
   flex-wrap: wrap;
   width: 100%;
   max-width: 900px;
+  padding: 0 16px;
 }
 
 .p-registration__icon-wrapper {
@@ -296,7 +298,7 @@
 }
 
 .margin-left {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .margin-right {
@@ -318,6 +320,7 @@
 .c-team-headline {
   display: block;
   color: #9ab1d9;
+  margin-left: 16px;
 }
 
 .c-bold-text {
@@ -325,7 +328,6 @@
 }
 
 .c-team-members {
-  margin: 3em 1em 0.5em;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -339,7 +341,7 @@
   justify-content: center;
   color: #c8d4ea;
   text-align: center;
-  padding-bottom: 10px;
+  padding: 30px 0;
 }
 
 .c-team-member-photo {

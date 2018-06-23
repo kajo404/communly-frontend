@@ -406,15 +406,6 @@ class HomePage extends React.Component {
               </div>
             </div>
             <div className="p-registration__icon-wrapper">
-              <div className="c-icon__description">
-                {' '}
-                <h3 className="c-bold-text">Task Lists</h3> <br />
-                Create Task Lists and share them with your fellow residents.
-                Assign responsibilities to let others know what they should be
-                doing. When a task has been completed you can let others know by
-                marking it as done. Sign up now and start organizing your next
-                event!
-              </div>
               <div className="margin-left">
                 <ListAuthorIcon
                   color="#314f81"
@@ -424,6 +415,15 @@ class HomePage extends React.Component {
                   color="#314f81"
                   className="p-registration__icon"
                 />
+              </div>
+              <div className="c-icon__description">
+                {' '}
+                <h3 className="c-bold-text">Task Lists</h3> <br />
+                Create Task Lists and share them with your fellow residents.
+                Assign responsibilities to let others know what they should be
+                doing. When a task has been completed you can let others know by
+                marking it as done. Sign up now and start organizing your next
+                event!
               </div>
             </div>
             <div className="p-registration__icon-wrapper wider-icons">
@@ -439,14 +439,14 @@ class HomePage extends React.Component {
               </div>
               <div className="c-icon__description">
                 {' '}
-                <h3 className="c-bold-text">Activity tracking</h3> <br /> Lorem
-                ipsum dolor sit amet, consetirmod tempor invidunt ut labore et
-                dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
-                amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-                sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                aliquyam erat{' '}
+                <h3 className="c-bold-text">Activity tracking</h3> <br />
+                Keep track of your own activities on the platform. You can see
+                how many announcements & tasklists you've already created and
+                keep track of your assigned tasks.
+                <br />
+                <br />
+                As an administrator you can even see how your hole community is
+                doing on the platform and which tools are mostly used.{' '}
               </div>
             </div>
           </div>
