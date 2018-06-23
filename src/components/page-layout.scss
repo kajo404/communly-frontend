@@ -16,6 +16,12 @@
     color: white;
 }
 
+.c-side-bar__text {
+    padding: 25px;
+    color: rgb(49, 79, 129);
+
+}
+
 .c-side-bar {
     width: 224px;
     position: fixed;
@@ -34,6 +40,10 @@
 
 .c-app-bar-avatarImg {
     border: 2px solid #c8d4ea;
+}
+
+.c-memberlist-avatarImg{
+    border: 2px solid rgb(49, 79, 129);
 }
 
 a {
@@ -159,6 +169,15 @@ a {
         border-bottom: 2px solid #0099cc;
         text-transform: uppercase;
     }
+}
+
+.c-community-name {
+    text-align: center;
+    color: rgb(49, 79, 129);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 25px;
 }
 
 //Profile
