@@ -249,12 +249,12 @@ class HomePage extends React.Component {
     return (
       <div className="p-registration__page">
         <div id="registration" className="p-registration__content">
-          <img
-            className="c-registration__logo"
-            src={logo}
-            alt="communly logo"
-          />
           <div className="p-registration__left">
+            <img
+              className="c-registration__logo"
+              src={logo}
+              alt="communly logo"
+            />
             <h1 className="p-registration__headline margin">
               This is{' '}
               <span className="c-registration__heading"> communly </span>
@@ -392,17 +392,20 @@ class HomePage extends React.Component {
           <div className="p-registration__icons">
             <h2 className="p-registration__services-title"> Our services </h2>
             <div className="p-registration__icon-wrapper">
-              <AnnouncementIcon
-                color="#314f81"
-                className="p-registration__icon margin-right"
-              />
+              <div className="c-icons flex-order-end-mobile">
+                <AnnouncementIcon
+                  color="#314f81"
+                  className="p-registration__icon"
+                />
+              </div>
               <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Announcements</h3> <br /> Easily
                 share important information with your residents. Get a feeling
                 about your residents opinion towards an announcement and make
-                decisions by using the vote functionality. Communicating
-                important information has never been so easy!
+                decisions by using the vote functionality. <br />
+                <br />Communicating important information has never been so
+                easy!
               </div>
             </div>
             <div className="p-registration__icon-wrapper">
@@ -412,10 +415,12 @@ class HomePage extends React.Component {
                 Create Task Lists and share them with your fellow residents.
                 Assign responsibilities to let others know what they should be
                 doing. When a task has been completed you can let others know by
-                marking it as done. Sign up now and start organizing your next
-                event!
+                marking it as done.
+                <br />
+                <br />
+                Sign up now and start organizing your next event!
               </div>
-              <div className="margin-left">
+              <div className="c-icons">
                 <ListAuthorIcon
                   color="#314f81"
                   className="p-registration__icon"
@@ -426,8 +431,8 @@ class HomePage extends React.Component {
                 />
               </div>
             </div>
-            <div className="p-registration__icon-wrapper wider-icons">
-              <div className="margin-right">
+            <div className="p-registration__icon-wrapper">
+              <div className="c-icons flex-order-end-mobile">
                 <TaskDoneIcon
                   color="#314f81"
                   className="p-registration__icon"
@@ -437,7 +442,7 @@ class HomePage extends React.Component {
                   className="p-registration__icon"
                 />
               </div>
-              <div className="c-icon__description">
+              <div className="c-icon__description margin-right">
                 {' '}
                 <h3 className="c-bold-text">Activity tracking</h3> <br />
                 Keep track of your own activities on the platform. You can see
