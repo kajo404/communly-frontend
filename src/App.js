@@ -13,6 +13,7 @@ import TaskBoardPage from './pages/task-boards-page/task-boards-page';
 import UserLogin from './pages/user-login';
 import PageLayout from './components/page-layout';
 import UserRegistration from './pages/user-registration';
+import AdminRegistration from './pages/admin-registration';
 import Announcements from './pages/announcements-page/announcements-page';
 import Profile from './pages/profile-pages/profile';
 
@@ -54,6 +55,10 @@ class App extends Component {
         {
           component: UserRegistration,
           path: '/registration'
+        },
+        {
+          component: AdminRegistration,
+          path: '/registrationAdmin'
         },
         {
           render: props => {
