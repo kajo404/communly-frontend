@@ -1,6 +1,6 @@
 import UserService from '../services/user-service';
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './home-page.scss';
 import logo from './../assets/logo.png';
 import eric from './../assets/eric.png';
