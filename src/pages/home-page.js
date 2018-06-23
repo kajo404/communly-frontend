@@ -406,6 +406,15 @@ class HomePage extends React.Component {
               </div>
             </div>
             <div className="p-registration__icon-wrapper">
+              <div className="c-icon__description">
+                {' '}
+                <h3 className="c-bold-text">Task Lists</h3> <br />
+                Create Task Lists and share them with your fellow residents.
+                Assign responsibilities to let others know what they should be
+                doing. When a task has been completed you can let others know by
+                marking it as done. Sign up now and start organizing your next
+                event!
+              </div>
               <div className="margin-left">
                 <ListAuthorIcon
                   color="#314f81"
@@ -415,15 +424,6 @@ class HomePage extends React.Component {
                   color="#314f81"
                   className="p-registration__icon"
                 />
-              </div>
-              <div className="c-icon__description">
-                {' '}
-                <h3 className="c-bold-text">Task Lists</h3> <br />
-                Create Task Lists and share them with your fellow residents.
-                Assign responsibilities to let others know what they should be
-                doing. When a task has been completed you can let others know by
-                marking it as done. Sign up now and start organizing your next
-                event!
               </div>
             </div>
             <div className="p-registration__icon-wrapper wider-icons">
