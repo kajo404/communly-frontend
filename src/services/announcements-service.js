@@ -34,6 +34,21 @@ export default class AnnouncementsService {
     });
   }
 
+  static deleteAnnouncement(announcementId) {
+    return new Promise((resolve, reject) => {
+      APIService.remove(
+        `${AnnouncementsService.URL()}/${announcementId}`,
+        null,
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static upvote(announcement) {
     return new Promise((resolve, reject) => {
       APIService.post(
