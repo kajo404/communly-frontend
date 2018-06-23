@@ -232,13 +232,18 @@ class PageLayout extends React.Component {
             </Menu>
             <Divider inset={true} />
             <List>
-              {this.state.users.map((user, key) => (
-                <ListItem
-                  primaryText={user.firstname + ' ' + user.lastname}
-                  leftAvatar={<Avatar src={user.image} />}
-                  key={key}
-                />
-              ))}
+              <ListItem
+                primaryText="Members"
+                initiallyOpen={true}
+                primaryTogglesNestedList={true}
+                nestedItems={this.state.users.map((user, key) => (
+                  <ListItem
+                    primaryText={user.firstname + ' ' + user.lastname}
+                    leftAvatar={<Avatar src={user.image} />}
+                    key={key}
+                  />
+                ))}
+              />
             </List>
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
