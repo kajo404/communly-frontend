@@ -249,12 +249,12 @@ class HomePage extends React.Component {
     return (
       <div className="p-registration__page">
         <div id="registration" className="p-registration__content">
+          <img
+            className="c-registration__logo"
+            src={logo}
+            alt="communly logo"
+          />
           <div className="p-registration__left">
-            <img
-              className="c-registration__logo"
-              src={logo}
-              alt="communly logo"
-            />
             <h1 className="p-registration__headline margin">
               This is{' '}
               <span className="c-registration__heading"> communly </span>
