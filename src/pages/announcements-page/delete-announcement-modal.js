@@ -5,7 +5,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const contentStyle = {
   maxWidth: '500px',
-  width: '90%'
+  width: '90%',
+  padding: 0
 };
 
 export default class DeleteAnnouncementConfirmation extends React.Component {
@@ -42,7 +43,6 @@ export default class DeleteAnnouncementConfirmation extends React.Component {
           contentStyle={contentStyle}
           actions={actions}
           modal={true}
-          style={{ padding: 0 }}
           open={this.props.open}
         >
           <div className="c-warning__content">

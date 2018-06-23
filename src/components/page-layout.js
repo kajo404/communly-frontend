@@ -178,6 +178,7 @@ class PageLayout extends React.Component {
             style={appBarStyle}
           />
           <div className="c-side-bar">
+            <div className="c-community-name">SEBA WG</div>
             <Menu
               selectedMenuItemStyle={selectedStyles}
               onItemClick={this.changeActivePage}
