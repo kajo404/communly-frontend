@@ -283,7 +283,7 @@ class HomePage extends React.Component {
               </div>
 
               <TextField
-                floatingLabelText="First Name"
+                floatingLabelText="First Name *"
                 required={true}
                 value={this.state.firstname}
                 onChange={this.onFirstNameChange}
@@ -291,7 +291,7 @@ class HomePage extends React.Component {
                 floatingLabelStyle={floatingLabelStyle}
               />
               <TextField
-                floatingLabelText="Last Name"
+                floatingLabelText="Last Name *"
                 required={true}
                 value={this.state.lastname}
                 onChange={this.onLastNameChange}
@@ -302,14 +302,14 @@ class HomePage extends React.Component {
                 required={true}
                 value={this.state.dateOfBirth}
                 onChange={this.onBirthDateChange}
-                floatingLabelText="Birth Date"
+                floatingLabelText="Birth Date *"
                 hintText="e.g 13.07.1995"
                 underlineStyle={underlineStyle}
                 floatingLabelStyle={floatingLabelStyle}
               />
               <TextField
                 type="email"
-                floatingLabelText="Email (Future username)"
+                floatingLabelText="Email *"
                 required={true}
                 value={this.state.email}
                 onChange={this.onEmailChange}
@@ -319,7 +319,7 @@ class HomePage extends React.Component {
               />
               <TextField
                 type="password"
-                floatingLabelText="Password"
+                floatingLabelText="Password* "
                 required={true}
                 value={this.state.password}
                 onChange={this.onPasswordChange}
@@ -442,7 +442,7 @@ class HomePage extends React.Component {
                   className="p-registration__icon"
                 />
               </div>
-              <div className="c-icon__description margin-right">
+              <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Activity tracking</h3> <br />
                 Keep track of your own activities on the platform. You can see
