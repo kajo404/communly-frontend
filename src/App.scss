@@ -1,20 +1,10 @@
-/* Suggestion: Each Component has css style file and we import them all here.
-   Otherwise it is gonna be really overcrowded */
-
-.p-user-login__content {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
+* {
+  font-weight: 300;
 }
 
-.c-login__button {
-  display: block;
-  margin-top: 30px;
+/* FIREFOX RESETS */
+input:invalid,
+input:required {
+  box-shadow: none;
+  outline: none;
 }
-
-.c-loginError {
-  color: red;
-}
-

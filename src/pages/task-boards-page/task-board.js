@@ -53,7 +53,10 @@ class TaskBoard extends Component {
     };
 
     TaskBoardService.createTask(newTask)
-      .then(response => this.updateTasks())
+      .then(response => {
+        this.updateTasks();
+        this.props.updateView();
+      })
       .catch(error => console.error(error));
   };
 
@@ -61,6 +64,15 @@ class TaskBoard extends Component {
     this.props.openAddMembersModal(
       this.props.board._id,
       this.props.board.members
+    );
+  };
+
+  openAssignMemberModal = taskId => {
+    this.props.openAssignMemberModal(
+      this.props.board._id,
+      this.props.board.members,
+      taskId,
+      this.updateTasks
     );
   };
 
@@ -149,6 +161,9 @@ class TaskBoard extends Component {
           </div>
           <TextField
             className="c-text-input-title"
+            multiLine={true}
+            rows={1}
+            rowsMax={3}
             id="title"
             ref={this.textInput}
             readOnly={!this.isUserAuthor()}
@@ -182,7 +197,9 @@ class TaskBoard extends Component {
               id={task._id}
               value={task.name}
               done={task.isDone}
+              assigned={task.assignee}
               updateView={this.updateTasks}
+              assignMember={this.openAssignMemberModal}
             />
           ))}
         </div>

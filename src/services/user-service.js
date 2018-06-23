@@ -1,18 +1,10 @@
 import APIService from './API-service';
 
 export default class UserService {
-  static listeners = {};
-  static receivedAnnouncements = false;
-  static receivedTasklistsAuthor = false;
-  static receivedTasklistsMember = false;
-  static receivedTasks = false;
+  //Authentication
 
   static URL() {
     return APIService.apiURL() + '/auth';
-  }
-
-  static usersURL() {
-    return APIService.apiURL() + '/users';
   }
 
   static register(firstname, lastname, email, pass, dateOfBirth) {
@@ -58,7 +50,23 @@ export default class UserService {
 
   static logout() {
     window.localStorage.removeItem('jwtToken');
-    window.location = 'login';
+    window.location = 'home';
+  }
+
+  static isAuthenticated() {
+    return !!window.localStorage['jwtToken'];
+  }
+
+  //User data
+
+  static listeners = {};
+  static receivedAnnouncements = false;
+  static receivedTasklistsAuthor = false;
+  static receivedTasklistsMember = false;
+  static receivedTasks = false;
+
+  static usersURL() {
+    return APIService.apiURL() + '/users';
   }
 
   static getCurrentUser() {
@@ -171,10 +179,6 @@ export default class UserService {
 
   static getAllUsers() {
     return APIService.get$(`${UserService.usersURL()}/`);
-  }
-
-  static isAuthenticated() {
-    return !!window.localStorage['jwtToken'];
   }
 
   static getAllAsignedTasks() {

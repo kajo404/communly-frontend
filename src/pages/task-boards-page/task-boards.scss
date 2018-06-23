@@ -2,6 +2,7 @@
 .c-list-item {
     list-style: none;
     position: relative;
+    word-break: break-word;
 }
 
 .c-checkbox--checked {
@@ -85,14 +86,6 @@
     pointer-events: none;
 }
 
-.c-task-board__close-icon {
-    position: absolute;
-    right: 13px;
-    top: 13px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
 .c-list-item:hover .c-close-icon,
 .c-list-item:hover .c-face-icon {
     opacity: 1;
@@ -148,49 +141,18 @@
     display: none;
 }
 
-.p-task-boards-add-button,
-.p-announcements-add-button {
-  position: fixed;
-  margin: 2em 2em 2em;
-  right: 0;
-  bottom: 0;
-}
-
-.c-close-icon {
+.c-task_face-icon {
+    right: 70px;
+    top: 2px;
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 30px;
-    opacity: 0;
-    transition: 0.13s opacity ease-in;
-    z-index: 20;
-    pointer-events: none;
 }
 
 .c-task-board__close-icon {
   position: absolute;
-  right: 13px;
-  top: 13px;
+  right: 7px;
+  top: 7px;
   cursor: pointer;
   font-size: 20px;
-}
-
-.c-list-item:hover .c-close-icon,
-.c-list-item:hover .c-face-icon {
-    opacity: 1;
-    cursor: pointer;
-    pointer-events: all;
-}
-
-.c-face-icon {
-  position: absolute;
-  right: 30px;
-  top: 0;
-  width: 30px;
-  opacity: 0;
-  transition: 0.13s opacity ease-in;
-  z-index: 20;
-  pointer-events: none;
 }
 
 .c-task-board__members-wrapper {

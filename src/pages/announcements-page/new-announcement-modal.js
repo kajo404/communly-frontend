@@ -45,7 +45,7 @@ export default class NewAnnouncementModal extends React.Component {
 
     AnnouncementsService.createAnnouncement(newAnnouncement)
       .then(data => {
-        this.props.savedNewAnnouncement();
+        this.props.updateAnnouncements();
 
         this.handleClose();
       })

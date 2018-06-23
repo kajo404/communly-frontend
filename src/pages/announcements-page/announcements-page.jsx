@@ -3,6 +3,7 @@ import './announcements.scss';
 import AnnouncementComponent from './announcement';
 import AnnouncementsService from '../../services/announcements-service';
 import NewAnnouncementModal from './new-announcement-modal';
+import DeleteAnnouncementModal from './delete-announcement-modal';
 import Divider from 'material-ui/Divider';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -24,6 +25,8 @@ class Announcements extends React.Component {
   announcementsSubscription;
   state = {
     modalOpen: false,
+    deleteAnnouncementOpen: false,
+    currentAnnouncement: '',
     adminAnnouncements: [],
     normalAnnouncements: [],
     selectedValue: 0
@@ -32,8 +35,6 @@ class Announcements extends React.Component {
   constructor(props) {
     super(props);
     this.updateAnnouncements();
-
-    this.savedNewAnnouncement = this.savedNewAnnouncement.bind(this);
   }
 
   // Getters
@@ -60,16 +61,19 @@ class Announcements extends React.Component {
     );
   }
 
+  get shouldShowPlaceholder() {
+    return (
+      this.state.normalAnnouncements.length <= 0 &&
+      this.state.adminAnnouncements.length <= 0
+    );
+  }
+
   // Functionality
-  updateAnnouncements() {
+  updateAnnouncements = () => {
     AnnouncementsService.getAnnouncements()
       .then(data => this.filterAnnouncements(data.announcements))
       .catch(error => console.error(error));
-  }
-
-  savedNewAnnouncement() {
-    this.updateAnnouncements();
-  }
+  };
 
   filterAnnouncements(announcements) {
     const adminAnnouncementsFiltered = announcements.filter(announcement => {
@@ -88,6 +92,27 @@ class Announcements extends React.Component {
 
   handleChange = (event, index, value) => {
     this.setState({ selectedValue: value });
+  };
+
+  handleDeleteAnnouncementClose = () => {
+    this.setState({ deleteAnnouncementOpen: false });
+  };
+
+  openDeleteAnnouncementModal = callingAnnouncement => {
+    this.setState({
+      deleteAnnouncementOpen: true,
+      currentAnnouncement: callingAnnouncement
+    });
+  };
+
+  deleteAnnouncement = () => {
+    AnnouncementsService.deleteAnnouncement(this.state.currentAnnouncement)
+      .then(() => {
+        this.updateAnnouncements();
+      })
+      .catch(error => console.error(error));
+
+    this.handleDeleteAnnouncementClose();
   };
 
   render() {
@@ -113,6 +138,8 @@ class Announcements extends React.Component {
                 {this.state.adminAnnouncements.map((announcement, index) => (
                   <AnnouncementComponent
                     announcement={announcement}
+                    updateAnnouncements={this.updateAnnouncements}
+                    deleteAnnouncement={this.openDeleteAnnouncementModal}
                     key={index}
                   />
                 ))}
@@ -130,18 +157,31 @@ class Announcements extends React.Component {
                 {this.state.normalAnnouncements.map((announcement, index) => (
                   <AnnouncementComponent
                     announcement={announcement}
+                    updateAnnouncements={this.updateAnnouncements}
+                    deleteAnnouncement={this.openDeleteAnnouncementModal}
                     key={index}
                   />
                 ))}
               </div>
             </div>
           ) : null}
+          {this.shouldShowPlaceholder ? (
+            <div className="p-announcements-placeholder">
+              No announcements available. <br />
+              Enjoy your day! <span>🎉</span>
+            </div>
+          ) : null}
         </div>
         <div className="p-announcements-add-button">
           <NewAnnouncementModal
-            savedNewAnnouncement={this.savedNewAnnouncement}
+            updateAnnouncements={this.updateAnnouncements}
           />
         </div>
+        <DeleteAnnouncementModal
+          open={this.state.deleteAnnouncementOpen}
+          close={this.handleDeleteAnnouncementClose}
+          deleteAnnouncement={this.deleteAnnouncement}
+        />
       </div>
     );
   }
