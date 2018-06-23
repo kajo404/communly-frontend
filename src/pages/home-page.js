@@ -442,10 +442,10 @@ class HomePage extends React.Component {
                 <h3 className="c-bold-text">Activity tracking</h3> <br />
                 Keep track of your own activities on the platform. You can see
                 how many announcements & tasklists you've already created and
-                keep track of your assigned tasks.
+                get an overview of your assigned tasks.
                 <br />
                 <br />
-                As an administrator you can even see how your hole community is
+                As an administrator you can even see how your whole community is
                 doing on the platform and which tools are mostly used.{' '}
               </div>
             </div>
