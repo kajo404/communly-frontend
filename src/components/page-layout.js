@@ -246,6 +246,7 @@ class PageLayout extends React.Component {
                       />
                     }
                     key={key}
+                    className="c-memberlist__user"
                   />
                 ))}
               />
