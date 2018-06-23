@@ -144,20 +144,40 @@ class TaskBoard extends Component {
       : 'c-edit-icon material-icons hidden';
   }
 
+  isAuthor(member) {
+    return member._id === UserService.getCurrentUser().id;
+  }
+
   render() {
     return (
       <Paper className="c-task-board" zDepth={1}>
         <div className="c-task-board__header">
           <div className="c-task-board__members-wrapper">
-            {this.props.board.members.map(member => (
-              <Avatar
-                key={member._id}
-                title={member.firstname + ' ' + member.lastname}
-                src={member.image}
-                size={20}
-                className="c-task-board-avatar"
-              />
-            ))}
+            {this.props.board.members
+              .filter(member => member._id === UserService.getCurrentUser().id)
+              .map(member => {
+                return (
+                  <Avatar
+                    key={member._id}
+                    title={member.firstname + ' ' + member.lastname}
+                    src={member.image}
+                    size={20}
+                    className="c-task-board-avatar author"
+                  />
+                );
+              })}
+            <div className="c-task-board__member-divider" />
+            {this.props.board.members.map(member => {
+              return !this.isAuthor(member) ? (
+                <Avatar
+                  key={member._id}
+                  title={member.firstname + ' ' + member.lastname}
+                  src={member.image}
+                  size={20}
+                  className="c-task-board-avatar"
+                />
+              ) : null;
+            })}
           </div>
           <TextField
             className="c-text-input-title"
