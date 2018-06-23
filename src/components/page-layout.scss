@@ -59,13 +59,14 @@ a {
 
 .c-layout--login-register {
     margin-left: 0px;
+    height: 100%;
 }
 
 .p-login__reg-link,
 .p-reg__login-link {
     text-align: center;
     color: rgb(49, 79, 129);
-    margin-top: 20px;
+    display: block;
 }
 
 .p-login__reg-link:hover,
@@ -75,6 +76,11 @@ a {
 
 .p-user-login__content {
     margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .c-layout {

@@ -74,7 +74,7 @@ class UserActivityComponent extends Component {
       var timer = setInterval(function() {
         current += 1;
         obj.innerHTML = current;
-        if (current == end) {
+        if (current === end) {
           clearInterval(timer);
         }
       }, stepTime);

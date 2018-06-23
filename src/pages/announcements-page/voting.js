@@ -59,7 +59,7 @@ class VotingComponent extends Component {
 
   currentUserVotesIndex(votes) {
     const object = votes.find(voter => {
-      return voter.user == this.user.id;
+      return voter.user === this.user.id;
     });
     return votes.indexOf(object);
   }

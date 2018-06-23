@@ -50,7 +50,7 @@ export default class UserService {
 
   static logout() {
     window.localStorage.removeItem('jwtToken');
-    window.location = 'login';
+    window.location = 'home';
   }
 
   static isAuthenticated() {
