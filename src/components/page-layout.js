@@ -9,6 +9,8 @@ import Menu from 'material-ui/Menu';
 import Avatar from 'material-ui/Avatar';
 import ListItem from 'material-ui/List/ListItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
+import List from 'material-ui/List';
 
 import logo from './../assets/logo.png';
 import UserService from '../services/user-service';
@@ -34,17 +36,21 @@ const logoutButtonStyle = {
   width: '220px'
 };
 class PageLayout extends React.Component {
+  _mounted = false;
   constructor(props) {
     super(props);
     this.state = {
       showUser: true,
       retrievedUser: false,
-      activePage: 0
+      activePage: 0,
+      users: []
     };
     this.updateUser();
+    this.getAllUsers();
   }
 
   componentDidMount = () => {
+    this._mounted = true;
     UserService.registerListener('userDataChanged', this.updateUser.bind(this));
     UserService.registerListener(
       'userPictureChanged',
@@ -54,7 +60,36 @@ class PageLayout extends React.Component {
       'userAuthenticated',
       this.updateUser.bind(this)
     );
+    UserService.registerListener(
+      'userDataChanged',
+      this.getAllUsers.bind(this)
+    );
+    UserService.registerListener(
+      'userPictureChanged',
+      this.getAllUsers.bind(this)
+    );
+    UserService.registerListener(
+      'userAuthenticated',
+      this.getAllUsers.bind(this)
+    );
   };
+
+  componentWillUnmount() {
+    this._mounted = false;
+  }
+
+  getAllUsers() {
+    if (UserService.isAuthenticated()) {
+      UserService.getAllUsers().then(result => {
+        if (this._mounted) {
+          this.setState({
+            users: result.users
+          });
+        }
+        console.log(this.state);
+      });
+    }
+  }
 
   updateUser() {
     if (UserService.isAuthenticated()) {
@@ -178,7 +213,7 @@ class PageLayout extends React.Component {
             style={appBarStyle}
           />
           <div className="c-side-bar">
-            <div className="c-community-name">SEBA WG</div>
+            <h2 className="c-side-bar__text">Wohnheim Communly</h2>
             <Menu
               selectedMenuItemStyle={selectedStyles}
               onItemClick={this.changeActivePage}
@@ -195,6 +230,26 @@ class PageLayout extends React.Component {
                 value={1}
               />
             </Menu>
+            <Divider inset={true} />
+            <List>
+              <ListItem
+                primaryText="Members"
+                initiallyOpen={true}
+                primaryTogglesNestedList={true}
+                nestedItems={this.state.users.map((user, key) => (
+                  <ListItem
+                    primaryText={user.firstname + ' ' + user.lastname}
+                    leftAvatar={
+                      <Avatar
+                        src={user.image}
+                        className="c-memberlist-avatarImg"
+                      />
+                    }
+                    key={key}
+                  />
+                ))}
+              />
+            </List>
           </div>
           <div className="c-profile-bar" id="profileMenuSlider">
             <Link to="/profile" onClick={this.showHideProfile}>
