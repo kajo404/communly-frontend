@@ -86,7 +86,6 @@ class PageLayout extends React.Component {
             users: result.users
           });
         }
-        console.log(this.state);
       });
     }
   }
