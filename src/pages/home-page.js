@@ -143,7 +143,7 @@ class HomePage extends React.Component {
     this.setState({ password: value.trim() });
     if (value.length < 8) {
       this.setState({
-        errorTextPW: 'Your password should be at least 8 characters!'
+        errorTextPW: 'Your password should have at least 8 characters!'
       });
     } else {
       this.setState({ errorTextPW: '' });

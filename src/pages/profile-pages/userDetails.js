@@ -67,6 +67,16 @@ class UserDetailComponent extends Component {
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
+  showID() {
+    var id = document.getElementById('showProfileId');
+    id.style.display = 'block';
+  }
+
+  hideID() {
+    var id = document.getElementById('showProfileId');
+    id.style.display = 'none';
+  }
+
   render() {
     return (
       <div className="c-userProfile-wrapper">
@@ -103,12 +113,18 @@ class UserDetailComponent extends Component {
                     <td />
                   </tr>
                   <tr>
-                    <td>ID:</td>
-                    <td>{this.state.userId}</td>
-                  </tr>
-                  <tr>
                     <td>Role:</td>
                     <td>{this.state.role}</td>
+                  </tr>
+                  <tr>
+                    <td
+                      id="profileId"
+                      onMouseEnter={this.showID}
+                      onMouseLeave={this.hideID}
+                    >
+                      ID
+                    </td>
+                    <td id="showProfileId">{this.state.userId}</td>
                   </tr>
                 </tbody>
               </table>

@@ -22,7 +22,8 @@ export default class NewEditModal extends React.Component {
       pwFieldType: 'password',
       password: '',
       passwordConfirmation: '',
-      pwEquals: ''
+      pwEquals: '',
+      pwLongEnoughMessage: ''
     };
 
     this.handleChangeShowPw = this.handleChangeShowPw.bind(this);
@@ -61,6 +62,47 @@ export default class NewEditModal extends React.Component {
     this.setState({
       password: event.target.value.trim()
     });
+
+    var $message = document.getElementById('pwLong');
+
+    if (event.target.value.trim() === '') {
+      this.setState({
+        pwLongEnoughMessage: ''
+      });
+    } else {
+      if (event.target.value.length > 7) {
+        $message.classList.remove('c-profile-message-error');
+        $message.classList.add('c-profile-message-ok');
+        this.setState({
+          pwLongEnoughMessage: 'Password is secure.'
+        });
+      } else {
+        $message.classList.remove('c-profile-message-ok');
+        $message.classList.add('c-profile-message-error');
+        this.setState({
+          pwLongEnoughMessage: 'Min. 8 characters required!'
+        });
+      }
+    }
+
+    if (this.state.passwordConfirmation !== '') {
+      $message = document.getElementById('pwEqualsMessage');
+      var equals =
+        this.state.passwordConfirmation === event.target.value.trim();
+      if (equals) {
+        $message.classList.remove('c-profile-message-error');
+        $message.classList.add('c-profile-message-ok');
+        this.setState({
+          pwEquals: 'Passwords match.'
+        });
+      } else {
+        $message.classList.remove('c-profile-message-ok');
+        $message.classList.add('c-profile-message-error');
+        this.setState({
+          pwEquals: 'Passwords do not match!'
+        });
+      }
+    }
   }
 
   onConfirmationPasswordChange(event) {
@@ -78,14 +120,14 @@ export default class NewEditModal extends React.Component {
       });
     } else {
       if (equals) {
-        $message.classList.remove('c-profile-changePw-message-error');
-        $message.classList.add('c-profile-changePw-message-ok');
+        $message.classList.remove('c-profile-message-error');
+        $message.classList.add('c-profile-message-ok');
         this.setState({
           pwEquals: 'Passwords match.'
         });
       } else {
-        $message.classList.remove('c-profile-changePw-message-ok');
-        $message.classList.add('c-profile-changePw-message-error');
+        $message.classList.remove('c-profile-message-ok');
+        $message.classList.add('c-profile-message-error');
         this.setState({
           pwEquals: 'Passwords do not match!'
         });
@@ -97,7 +139,8 @@ export default class NewEditModal extends React.Component {
     return (
       this.state.password === '' ||
       this.state.passwordConfirmation === '' ||
-      this.state.password !== this.state.passwordConfirmation
+      this.state.password !== this.state.passwordConfirmation ||
+      this.state.password.length < 8
     );
   }
 
@@ -140,7 +183,9 @@ export default class NewEditModal extends React.Component {
             onChange={this.onPasswordChange}
             // errorText={this.getNameErrorText}
           />
-
+          <div className="c-profileModal-message" id="pwLong">
+            {this.state.pwLongEnoughMessage}
+          </div>
           <TextField
             type={this.state.pwFieldType}
             floatingLabelText="Password Confirmation"
@@ -149,7 +194,9 @@ export default class NewEditModal extends React.Component {
             onChange={this.onConfirmationPasswordChange}
             // errorText={this.getNameErrorText}
           />
-          <div id="pwEqualsMessage">{this.state.pwEquals}</div>
+          <div className="c-profileModal-message" id="pwEqualsMessage">
+            {this.state.pwEquals}
+          </div>
         </Dialog>
       </div>
     );
