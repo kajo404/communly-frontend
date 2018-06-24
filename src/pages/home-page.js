@@ -1,6 +1,6 @@
 import UserService from '../services/user-service';
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './home-page.scss';
 import logo from './../assets/logo.png';
 import eric from './../assets/eric.png';
@@ -249,12 +249,12 @@ class HomePage extends React.Component {
     return (
       <div className="p-registration__page">
         <div id="registration" className="p-registration__content">
-          <img
-            className="c-registration__logo"
-            src={logo}
-            alt="communly logo"
-          />
           <div className="p-registration__left">
+            <img
+              className="c-registration__logo"
+              src={logo}
+              alt="communly logo"
+            />
             <h1 className="p-registration__headline margin">
               This is{' '}
               <span className="c-registration__heading"> communly </span>
@@ -283,7 +283,7 @@ class HomePage extends React.Component {
               </div>
 
               <TextField
-                floatingLabelText="First Name"
+                floatingLabelText="First Name *"
                 required={true}
                 value={this.state.firstname}
                 onChange={this.onFirstNameChange}
@@ -291,7 +291,7 @@ class HomePage extends React.Component {
                 floatingLabelStyle={floatingLabelStyle}
               />
               <TextField
-                floatingLabelText="Last Name"
+                floatingLabelText="Last Name *"
                 required={true}
                 value={this.state.lastname}
                 onChange={this.onLastNameChange}
@@ -302,14 +302,14 @@ class HomePage extends React.Component {
                 required={true}
                 value={this.state.dateOfBirth}
                 onChange={this.onBirthDateChange}
-                floatingLabelText="Birth Date"
+                floatingLabelText="Birth Date *"
                 hintText="e.g 13.07.1995"
                 underlineStyle={underlineStyle}
                 floatingLabelStyle={floatingLabelStyle}
               />
               <TextField
                 type="email"
-                floatingLabelText="Email (Future username)"
+                floatingLabelText="Email *"
                 required={true}
                 value={this.state.email}
                 onChange={this.onEmailChange}
@@ -319,7 +319,7 @@ class HomePage extends React.Component {
               />
               <TextField
                 type="password"
-                floatingLabelText="Password"
+                floatingLabelText="Password* "
                 required={true}
                 value={this.state.password}
                 onChange={this.onPasswordChange}
@@ -392,17 +392,20 @@ class HomePage extends React.Component {
           <div className="p-registration__icons">
             <h2 className="p-registration__services-title"> Our services </h2>
             <div className="p-registration__icon-wrapper">
-              <AnnouncementIcon
-                color="#314f81"
-                className="p-registration__icon margin-right"
-              />
+              <div className="c-icons flex-order-end-mobile">
+                <AnnouncementIcon
+                  color="#314f81"
+                  className="p-registration__icon"
+                />
+              </div>
               <div className="c-icon__description">
                 {' '}
                 <h3 className="c-bold-text">Announcements</h3> <br /> Easily
                 share important information with your residents. Get a feeling
                 about your residents opinion towards an announcement and make
-                decisions by using the vote functionality. Communicating
-                important information has never been so easy!
+                decisions by using the vote functionality. <br />
+                <br />Communicating important information has never been so
+                easy!
               </div>
             </div>
             <div className="p-registration__icon-wrapper">
@@ -412,10 +415,12 @@ class HomePage extends React.Component {
                 Create Task Lists and share them with your fellow residents.
                 Assign responsibilities to let others know what they should be
                 doing. When a task has been completed you can let others know by
-                marking it as done. Sign up now and start organizing your next
-                event!
+                marking it as done.
+                <br />
+                <br />
+                Sign up now and start organizing your next event!
               </div>
-              <div className="margin-left">
+              <div className="c-icons">
                 <ListAuthorIcon
                   color="#314f81"
                   className="p-registration__icon"
@@ -426,8 +431,8 @@ class HomePage extends React.Component {
                 />
               </div>
             </div>
-            <div className="p-registration__icon-wrapper wider-icons">
-              <div className="margin-right">
+            <div className="p-registration__icon-wrapper">
+              <div className="c-icons flex-order-end-mobile">
                 <TaskDoneIcon
                   color="#314f81"
                   className="p-registration__icon"

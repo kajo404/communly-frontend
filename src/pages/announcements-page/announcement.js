@@ -32,7 +32,7 @@ class AnnouncementComponent extends Component {
 
   get deleteIconClasses() {
     return this.state.user !== undefined &&
-      (this.state.user._id == this.props.announcement.author._id ||
+      (this.state.user._id === this.props.announcement.author._id ||
         this.state.user.roles.includes('admin'))
       ? 'c-announcements__close-icon material-icons'
       : 'c-announcements__close-icon material-icons disabled';
