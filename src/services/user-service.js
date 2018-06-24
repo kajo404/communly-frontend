@@ -69,6 +69,30 @@ export default class UserService {
     return APIService.apiURL() + '/users';
   }
 
+  static registerListener(event, fn) {
+    console.log('registered: ' + event);
+    if (!UserService.listeners.hasOwnProperty(event)) {
+      UserService.listeners[event] = [];
+    }
+    UserService.listeners[event].push(fn);
+  }
+
+  static notifyListeners(event) {
+    if (UserService.listeners.hasOwnProperty(event)) {
+      //use newest listener
+      UserService.listeners[event].forEach(fn => fn());
+    }
+  }
+
+  static notifyOnlyLastListener(event) {
+    if (UserService.listeners.hasOwnProperty(event)) {
+      //use newest listener
+      UserService.listeners[event][UserService.listeners[event].length - 1](
+        fn => fn()
+      );
+    }
+  }
+
   static getCurrentUser() {
     let token = window.localStorage['jwtToken'];
     if (!token) return {};
@@ -159,22 +183,6 @@ export default class UserService {
         }
       );
     });
-  }
-
-  static registerListener(event, fn) {
-    if (!UserService.listeners.hasOwnProperty(event)) {
-      UserService.listeners[event] = [];
-    }
-    UserService.listeners[event].push(fn);
-  }
-
-  static notifyListeners(event) {
-    if (UserService.listeners.hasOwnProperty(event)) {
-      //use newest listener
-      UserService.listeners[event][UserService.listeners[event].length - 1](
-        fn => fn()
-      );
-    }
   }
 
   static getAllUsers() {
@@ -279,7 +287,7 @@ export default class UserService {
       UserService.receivedTasklistsMember &&
       UserService.receivedTasks
     ) {
-      UserService.notifyListeners('receivedUserActivityData');
+      UserService.notifyOnlyLastListener('receivedUserActivityData');
       UserService.receivedAnnouncements = false;
       UserService.receivedTasklistsAuthor = false;
       UserService.receivedTasklistsMember = false;

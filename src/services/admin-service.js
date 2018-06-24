@@ -30,6 +30,14 @@ export default class AdminService {
 
   static notifyListeners(event) {
     if (AdminService.listeners.hasOwnProperty(event)) {
+      //use newest listener
+      AdminService.listeners[event].forEach(fn => fn());
+    }
+  }
+
+  static notifyOnlyLastListener(event) {
+    if (AdminService.listeners.hasOwnProperty(event)) {
+      //use newest listener
       AdminService.listeners[event][AdminService.listeners[event].length - 1](
         fn => fn()
       );
@@ -105,7 +113,7 @@ export default class AdminService {
       AdminService.receivedTasklistAmount &&
       AdminService.receivedTaskAmount
     ) {
-      AdminService.notifyListeners('receivedPlatformActivityData');
+      AdminService.notifyOnlyLastListener('receivedPlatformActivityData');
       AdminService.receivedUserAmount = false;
       AdminService.receivedAnnouncementAmount = false;
       AdminService.receivedTasklistAmount = false;
@@ -214,7 +222,7 @@ export default class AdminService {
       AdminService.receivedStatsDoneTasks &&
       AdminService.receivedStatsOpenTasks
     ) {
-      AdminService.notifyListeners('receivedUserStatsData');
+      AdminService.notifyOnlyLastListener('receivedUserStatsData');
       AdminService.receivedStatsAnnouncements = false;
       AdminService.receivedStatsUserTasklists = false;
       AdminService.receivedStatsMembersTasklists = false;

@@ -57,10 +57,7 @@ class PageLayout extends React.Component {
   componentDidMount = () => {
     this._mounted = true;
     UserService.registerListener('userDataChanged', this.updateUser.bind(this));
-    UserService.registerListener(
-      'userPictureChanged',
-      this.updateUser.bind(this)
-    );
+    UserService.registerListener('userPictureChanged', this.updateUser());
     UserService.registerListener(
       'userAuthenticated',
       this.updateUser.bind(this)
@@ -99,6 +96,7 @@ class PageLayout extends React.Component {
     if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
+          console.log('update user');
           this.setState({
             firstname: result.firstname,
             lastname: result.lastname,
