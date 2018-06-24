@@ -72,7 +72,7 @@ class VotingComponent extends Component {
         })
         .catch(error => console.error(error));
     } else {
-      AnnouncementsService.downvote(this.props.announcement)
+      AnnouncementsService.upvote(this.props.announcement)
         .then(() => {
           this.props.updateAnnouncements();
         })
