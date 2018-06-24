@@ -96,7 +96,6 @@ class PageLayout extends React.Component {
     if (UserService.isAuthenticated()) {
       UserService.getFullUser()
         .then(result => {
-          console.log('update user');
           this.setState({
             firstname: result.firstname,
             lastname: result.lastname,

@@ -70,7 +70,6 @@ export default class UserService {
   }
 
   static registerListener(event, fn) {
-    console.log('registered: ' + event);
     if (!UserService.listeners.hasOwnProperty(event)) {
       UserService.listeners[event] = [];
     }
