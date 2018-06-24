@@ -242,7 +242,9 @@ class HomePage extends React.Component {
   };
 
   get isLoginButtonDisabled() {
-    return this.state.loginUsername === '' || this.state.loginPassword < 8;
+    return (
+      this.state.loginUsername === '' || this.state.loginPassword.length < 8
+    );
   }
 
   render() {
