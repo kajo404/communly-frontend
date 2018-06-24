@@ -3,6 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserService from '../../services/user-service';
+import { validateEmail } from '../../services/email-validator';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import EditIcon from 'material-ui/svg-icons/image/edit';
@@ -18,7 +19,8 @@ export default class NewEditModal extends React.Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      emailmessage: ''
     };
 
     this.getProfileData();
@@ -101,6 +103,18 @@ export default class NewEditModal extends React.Component {
   }
 
   onEmailChange(event) {
+    var $message = document.getElementById('emailValidMessage');
+
+    if (!validateEmail(event.target.value)) {
+      this.state.emailmessage = 'Please enter a valid email!';
+      $message.classList.add('c-profile-changePw-message-error');
+      $message.classList.remove('c-profile-changePw-message-ok');
+    } else {
+      this.state.emailmessage = 'Email ok';
+      $message.classList.remove('c-profile-changePw-message-error');
+      $message.classList.add('c-profile-changePw-message-ok');
+    }
+
     this.setState({
       email: event.target.value.trim()
     });
@@ -137,7 +151,8 @@ export default class NewEditModal extends React.Component {
       this.state.lastname === '' ||
       this.state.email === '' ||
       this.state.password === '' ||
-      !this.dataChanged()
+      !this.dataChanged() ||
+      !validateEmail(this.state.email)
     );
   }
 
@@ -195,6 +210,7 @@ export default class NewEditModal extends React.Component {
             onChange={this.onEmailChange}
             // errorText={this.getEmailErrorText}
           />
+          <div id="emailValidMessage">{this.state.emailmessage}</div>
         </Dialog>
       </div>
     );
