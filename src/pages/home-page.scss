@@ -78,12 +78,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  justify-content: center;
   max-width: 400px;
   color: #f5f5f5;
+  height: 100%;
   font-weight: 300;
-  height: 25%;
   margin-right: 40px;
   text-align: right;
+  position: relative;
   @media (max-width: 387px) {
     margin-right: 0;
     margin-bottom: 30px;
@@ -111,9 +113,15 @@
 
 .c-registration__logo {
   position: absolute;
-  left: 16px;
-  top:16px;
-  width:180px;
+  left: -200px;
+  top: 0;
+  padding-top: 20px;
+
+  width: 200px;
+   @media (max-width: 387px) {
+     left: 0;
+     top: -90px;
+    }
 }
 
 .c-registration__button-wrapper {
@@ -147,7 +155,7 @@
   margin-top: 40px;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   padding: 0 16px;
 }
 
@@ -283,6 +291,7 @@
 }
 
 .p-registration__services {
+  padding-bottom: 20px;
 
   &:after {
     content: '';
@@ -296,14 +305,6 @@
   }
 }
 
-.margin-left {
-  margin-left: 10px;
-}
-
-.margin-right {
-  margin-right: 20px;
-}
-
 .p-registration__team {
   background: #445677;
   padding: 40px 0px;
@@ -311,9 +312,9 @@
 
 .p-registration__team-wrapper {
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 40px 0;
+  padding-bottom: 10px;
 }
 
 .c-team-headline {
@@ -323,7 +324,7 @@
 }
 
 .c-bold-text {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .c-team-members {
@@ -340,10 +341,27 @@
   justify-content: center;
   color: #c8d4ea;
   text-align: center;
-  padding: 30px 0;
+  padding: 40px 0 30px 0;
 }
 
 .c-team-member-photo {
   border: 2px solid #c8d4ea;
   margin-bottom: 0.15em;
+}
+
+.c-icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+  @media (max-width: 387px) {
+    flex-direction: row;
+    }
+}
+
+.flex-order-end-mobile {
+  @media (max-width: 387px) {
+    order: 2;
+  }
 }
