@@ -235,7 +235,7 @@ class PageLayout extends React.Component {
               />
             </Menu>
             <Divider inset={true} />
-            <List style={{ padding: 0 }}>
+            <List>
               <ListItem
                 primaryText="Members"
                 initiallyOpen={true}
