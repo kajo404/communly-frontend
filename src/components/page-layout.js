@@ -35,6 +35,11 @@ const logoutButtonStyle = {
   marginTop: '10px',
   width: '220px'
 };
+
+const memberListItemStyles = {
+  margin: 0,
+  padding: 0
+};
 class PageLayout extends React.Component {
   _mounted = false;
   constructor(props) {
@@ -236,13 +241,18 @@ class PageLayout extends React.Component {
                 initiallyOpen={true}
                 primaryTogglesNestedList={true}
                 nestedItems={this.state.users.map((user, key) => (
-                  <ListItem
-                    primaryText={user.firstname + ' ' + user.lastname}
-                    leftAvatar={<Avatar src={user.image} />}
-                    key={key}
-                    innerDivStyle={{ marginLeft: '1px' }}
-                    className="c-memberlist__user"
-                  />
+                  <ListItem innerDivStyle={memberListItemStyles} key={key}>
+                    <div className="c-memberlist__item">
+                      <Avatar
+                        style={{ marginRight: '16px' }}
+                        size={32}
+                        src={user.image}
+                      />
+                      <div className="c-memberlist__username">
+                        {user.firstname + ' ' + user.lastname}
+                      </div>
+                    </div>
+                  </ListItem>
                 ))}
               />
             </List>
