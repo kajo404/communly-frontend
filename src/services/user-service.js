@@ -78,7 +78,6 @@ export default class UserService {
 
   static notifyListeners(event) {
     if (UserService.listeners.hasOwnProperty(event)) {
-      //use newest listener
       UserService.listeners[event].forEach(fn => fn());
     }
   }
