@@ -82,6 +82,15 @@ export default class UserService {
     };
   }
 
+  static isUserAdmin() {
+    let token = window.localStorage['jwtToken'];
+    if (!token) return {};
+
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64)).isAdmin;
+  }
+
   static getFullUser() {
     return new Promise((resolve, reject) => {
       APIService.get(
@@ -161,7 +170,10 @@ export default class UserService {
 
   static notifyListeners(event) {
     if (UserService.listeners.hasOwnProperty(event)) {
-      UserService.listeners[event].forEach(fn => fn());
+      //use newest listener
+      UserService.listeners[event][UserService.listeners[event].length - 1](
+        fn => fn()
+      );
     }
   }
 
@@ -206,8 +218,6 @@ export default class UserService {
         `${UserService.usersURL()}/tasks`,
 
         function(data) {
-          UserService.receivedTasks = true;
-          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -223,8 +233,6 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/author`,
 
         function(data) {
-          UserService.receivedTasklistsAuthor = true;
-          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -240,8 +248,6 @@ export default class UserService {
         `${UserService.usersURL()}/tasklists/member`,
 
         function(data) {
-          UserService.receivedTasklistsMember = true;
-          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -257,8 +263,6 @@ export default class UserService {
         `${UserService.usersURL()}/annoncements`,
 
         function(data) {
-          UserService.receivedAnnouncements = true;
-          UserService.receivedUserActivityData();
           resolve(data);
         },
         function(textStatus) {
@@ -276,6 +280,30 @@ export default class UserService {
       UserService.receivedTasks
     ) {
       UserService.notifyListeners('receivedUserActivityData');
+      UserService.receivedAnnouncements = false;
+      UserService.receivedTasklistsAuthor = false;
+      UserService.receivedTasklistsMember = false;
+      UserService.receivedTasks = false;
+    }
+  }
+
+  static animateValue(id, start, end) {
+    var obj = document.getElementById(id);
+    if (end > 0 && end > start) {
+      var range = end - start;
+      var current = start;
+      var stepTime = Math.abs(Math.floor(500 / range));
+      var timer = setInterval(function() {
+        obj.innerHTML = current;
+
+        if (current === Math.floor(end)) {
+          clearInterval(timer);
+          obj.innerHTML = end;
+        }
+        current += 1;
+      }, stepTime);
+    } else {
+      obj.innerHTML = 0;
     }
   }
 }
