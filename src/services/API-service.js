@@ -24,7 +24,7 @@ export default class APIService {
         if (resp.ok) {
           return resp.json();
         } else if (this.checkIfUnauthorized(resp)) {
-          window.location = '/#login';
+          window.location = '/home';
         } else {
           resp.json().then(json => {
             onError(json.error);
@@ -53,7 +53,7 @@ export default class APIService {
           if (resp.ok) {
             return resp.json();
           } else if (this.checkIfUnauthorized(resp)) {
-            window.location = '/#login';
+            window.location = '/home';
           } else {
             resp.json().then(json => {
               console.error(json);
@@ -82,7 +82,7 @@ export default class APIService {
         if (resp.ok) {
           return resp.json();
         } else if (this.checkIfUnauthorized(resp)) {
-          window.location = '/#login';
+          window.location = '/home';
         } else {
           resp.json().then(json => {
             onError(json.error);
@@ -114,7 +114,7 @@ export default class APIService {
         if (resp.ok) {
           return resp.json();
           // } else if (this.checkIfUnauthorized(resp)) {
-          //   window.location = '/#login';
+          //   window.location = '/home';
         } else {
           resp.json().then(json => {
             onError(resp.status);
@@ -141,7 +141,7 @@ export default class APIService {
         if (resp.ok) {
           return resp.json();
         } else if (this.checkIfUnauthorized(resp)) {
-          window.location = '/#login';
+          window.location = '/home';
         } else {
           resp.json().then(json => {
             onError(json.error);
