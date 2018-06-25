@@ -54,7 +54,8 @@ export default class UserService {
   }
 
   static isAuthenticated() {
-    return !!window.localStorage['jwtToken'];
+    const user = this.getCurrentUser();
+    return user && new Date(user.exp * 1000) > new Date();
   }
 
   //User data
@@ -100,7 +101,8 @@ export default class UserService {
     return {
       id: JSON.parse(window.atob(base64)).id,
       firstname: JSON.parse(window.atob(base64)).firstname,
-      lastname: JSON.parse(window.atob(base64)).lastname
+      lastname: JSON.parse(window.atob(base64)).lastname,
+      exp: JSON.parse(window.atob(base64)).exp
     };
   }
 

@@ -55,7 +55,7 @@ class App extends Component {
             if (UserService.isAuthenticated()) {
               return <TaskBoardPage />;
             } else {
-              return <Redirect to={'/login'} />;
+              return <Redirect to={'/home'} />;
             }
           },
           path: '/task-boards'
@@ -65,7 +65,7 @@ class App extends Component {
             if (UserService.isAuthenticated()) {
               return <Announcements />;
             } else {
-              return <Redirect to={'/login'} />;
+              return <Redirect to={'/home'} />;
             }
           },
           path: '/announcements'
@@ -75,7 +75,7 @@ class App extends Component {
             if (UserService.isAuthenticated()) {
               return <Profile />;
             } else {
-              return <Redirect to={'/login'} />;
+              return <Redirect to={'/home'} />;
             }
           },
           path: '/profile'
