@@ -103,10 +103,6 @@ class UserDetailComponent extends Component {
                     <td />
                   </tr>
                   <tr>
-                    <td>ID:</td>
-                    <td>{this.state.userId}</td>
-                  </tr>
-                  <tr>
                     <td>Role:</td>
                     <td>{this.state.role}</td>
                   </tr>

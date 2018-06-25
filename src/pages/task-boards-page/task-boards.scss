@@ -147,6 +147,11 @@
     position: absolute;
 }
 
+.c-task-board-avatar{
+    margin-right: 3px;
+}
+    
+
 .c-task-board__close-icon {
   position: absolute;
   right: 7px;
@@ -159,11 +164,6 @@
     padding-top: 7px;
     display: flex;
     flex-direction: row;
-}
-
-.c-task-board-avatar {
-    border: 1px solid #314f81;
-    margin-right: 3px;
 }
 
 .author {

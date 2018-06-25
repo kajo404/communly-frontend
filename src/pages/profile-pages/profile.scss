@@ -12,6 +12,9 @@
   margin-left: 14px;
   margin-right: 10px;
   margin-top: 10px;
+  @media (max-width: 605px) {
+        margin-left: 10px;
+    }
 }
 
 .c-userDetails-paper{
@@ -21,9 +24,9 @@
 .c-profile-img-wrapper{
   display: inline-block;
   width: 30%;
-  min-width: 220px;
+  min-width: 250px;
   height: 100%;
-  @media (max-width: 768px) {
+  @media (max-width: 605px) {
         width: 100%;
         text-align: center;
     }
@@ -44,7 +47,7 @@
   margin-left: 90px;
   margin-bottom: 20px;
   vertical-align: bottom;
-  @media (max-width: 768px) {
+  @media (max-width: 605px) {
         margin-left: 0px;
         margin-bottom: 0px;
     }
@@ -58,11 +61,11 @@
 .c-userDetails-content{
   position: relative;
   display: inline-block;
-  margin: 10px 30px 40px;
+  margin: 10px 20px 40px;
   height: auto;
   width: auto;
   vertical-align: top;
-  @media (max-width: 768px) {
+  @media (max-width: 605px) {
         margin: 20px;
           
       }
@@ -72,7 +75,7 @@
   margin-top: 20px;
   line-height: 30px;
   font-size: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 605px) {
         min-width: 65px;
         font-size: 16px;
         line-height: 24px;
@@ -82,19 +85,25 @@
 
 .c-userDetails-content-table td{
   min-width: 100px;
-  @media (max-width: 768px) {
+  @media (max-width: 605px) {
         min-width: 65px;
     }
 }
 
+#profileId{
+  padding-top: 10px;
+}
+
+#showProfileId{
+  padding-top: 10px;
+  display: none;
+}
+
 .p-profile-editButton{
   display: inline-block;
-  margin-left: 30px;
+  margin-left: 20px;
   margin-bottom: 20px;
   vertical-align: bottom;
-  @media (max-width: 768px) {
-        margin-left: 20px;
-    }
 }
 
 .p-profile-changePwButton{
@@ -149,11 +158,15 @@
   margin-top: -15px;
 }
 
-.c-profile-changePw-message-ok{
+.c-profileModal-message{
+  font-size: 14px;
+}
+
+.c-profile-message-ok{
   color: green;
 }
 
-.c-profile-changePw-message-error{
+.c-profile-message-error{
   color: red;
 }
 

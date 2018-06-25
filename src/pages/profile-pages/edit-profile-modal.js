@@ -107,12 +107,12 @@ export default class NewEditModal extends React.Component {
 
     if (!validateEmail(event.target.value)) {
       this.state.emailmessage = 'Please enter a valid email!';
-      $message.classList.add('c-profile-changePw-message-error');
-      $message.classList.remove('c-profile-changePw-message-ok');
+      $message.classList.add('c-profile-message-error');
+      $message.classList.remove('c-profile-message-ok');
     } else {
       this.state.emailmessage = 'Email ok';
-      $message.classList.remove('c-profile-changePw-message-error');
-      $message.classList.add('c-profile-changePw-message-ok');
+      $message.classList.remove('c-profile-message-error');
+      $message.classList.add('c-profile-message-ok');
     }
 
     this.setState({
@@ -210,7 +210,9 @@ export default class NewEditModal extends React.Component {
             onChange={this.onEmailChange}
             // errorText={this.getEmailErrorText}
           />
-          <div id="emailValidMessage">{this.state.emailmessage}</div>
+          <div className="c-profileModal-message" id="emailValidMessage">
+            {this.state.emailmessage}
+          </div>
         </Dialog>
       </div>
     );
