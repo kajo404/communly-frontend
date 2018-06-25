@@ -132,9 +132,24 @@ class TaskBoardPage extends Component {
     this.updateBoards();
   };
 
+  get shouldShowPlaceholder() {
+    return this.state.boards.length === 0;
+  }
+
   render() {
     return (
       <div className="p-task-boards">
+        {this.shouldShowPlaceholder ? (
+          <div className="p-taskboards-placeholder">
+            You don't have any task boards yet. <br />Why not{' '}
+            <button
+              onClick={this.handleOpen}
+              className="p-taskboards__placeholder-button"
+            >
+              create one?
+            </button>
+          </div>
+        ) : null}
         <div className="p-task-boards__boards-wrapper">
           {this.state.boards.map((item, index) => (
             <TaskBoard
