@@ -145,7 +145,7 @@ class TaskBoard extends Component {
   }
 
   isAuthor(member) {
-    return member._id === UserService.getCurrentUser().id;
+    return member._id === this.props.board.author._id;
   }
 
   render() {
@@ -154,7 +154,7 @@ class TaskBoard extends Component {
         <div className="c-task-board__header">
           <div className="c-task-board__members-wrapper">
             {this.props.board.members
-              .filter(member => member._id === this.props.board.author._id)
+              .filter(member => this.isAuthor(member))
               .map(member => {
                 return (
                   <Avatar
