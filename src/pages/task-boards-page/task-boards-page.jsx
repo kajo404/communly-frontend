@@ -68,12 +68,14 @@ class TaskBoardPage extends Component {
   ) => {
     this.setState({ currentBoardMembers: currentMembers });
     this.setState({ currentBoardOpening: callingBoard });
-    this.state.boards.map(tasklist => {
+
+    this.state.boards.forEach(tasklist => {
       const task = tasklist.tasks.find(task => task._id === taskId);
       if (typeof task !== 'undefined') {
         this.setState({ currentTask: task });
       }
     });
+
     this.setState({ taskToBeAssigned: taskId });
     this.setState({ assignMemberOpen: true });
     this.updateTasks = updateTasks;

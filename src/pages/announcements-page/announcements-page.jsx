@@ -168,7 +168,10 @@ class Announcements extends React.Component {
           {this.shouldShowPlaceholder ? (
             <div className="p-announcements-placeholder">
               No announcements available. <br />
-              Enjoy your day! <span role="img">🎉</span>
+              Enjoy your day!{' '}
+              <span role="img" aria-label="emoji-icon">
+                🎉
+              </span>
             </div>
           ) : null}
         </div>
