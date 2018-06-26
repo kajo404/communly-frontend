@@ -106,11 +106,11 @@ export default class NewEditModal extends React.Component {
     var $message = document.getElementById('emailValidMessage');
 
     if (!validateEmail(event.target.value)) {
-      this.state.emailmessage = 'Please enter a valid email!';
+      this.setState({ emailmessage: 'Please enter a valid email!' });
       $message.classList.add('c-profile-message-error');
       $message.classList.remove('c-profile-message-ok');
     } else {
-      this.state.emailmessage = 'Email ok';
+      this.setState({ emailmessage: 'Email ok' });
       $message.classList.remove('c-profile-message-error');
       $message.classList.add('c-profile-message-ok');
     }
