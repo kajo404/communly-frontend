@@ -295,6 +295,21 @@ export default class UserService {
     }
   }
 
+  static getOtherUser(externalUserId) {
+    return new Promise((resolve, reject) => {
+      APIService.get(
+        `${UserService.usersURL()}/otherUser/${externalUserId}`,
+
+        function(data) {
+          resolve(data);
+        },
+        function(textStatus) {
+          reject(textStatus);
+        }
+      );
+    });
+  }
+
   static animateValue(id, start, end) {
     var obj = document.getElementById(id);
     if (end > 0 && end > start) {

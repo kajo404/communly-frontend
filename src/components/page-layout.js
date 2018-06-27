@@ -48,6 +48,7 @@ class PageLayout extends React.Component {
       showUser: true,
       retrievedUser: false,
       activePage: 0,
+      externalUserId: 're',
       users: []
     };
     this.updateUser();
@@ -155,6 +156,16 @@ class PageLayout extends React.Component {
     this.props.history.push(newRoute);
   };
 
+  showOtherUser(externaluserId) {
+    this.setState({
+      externaluserId: externaluserId
+    });
+    this.props.history.push({
+      pathname: '/externalProfile',
+      state: { externalUserId: externaluserId }
+    });
+  }
+
   render() {
     if (UserService.isAuthenticated()) {
       return (
@@ -241,7 +252,11 @@ class PageLayout extends React.Component {
                 initiallyOpen={true}
                 primaryTogglesNestedList={true}
                 nestedItems={this.state.users.map((user, key) => (
-                  <ListItem innerDivStyle={memberListItemStyles} key={key}>
+                  <ListItem
+                    innerDivStyle={memberListItemStyles}
+                    key={key}
+                    onClick={() => this.showOtherUser(user._id)}
+                  >
                     <div className="c-memberlist__item">
                       <Avatar
                         style={{ marginRight: '16px' }}

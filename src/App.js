@@ -14,6 +14,7 @@ import PageLayout from './components/page-layout';
 import HomePage from './pages/home-page';
 import Announcements from './pages/announcements-page/announcements-page';
 import Profile from './pages/profile-pages/profile';
+import ExternalProfile from './pages/profile-pages/externalProfile/externalProfile';
 
 import UserService from './services/user-service';
 
@@ -79,6 +80,20 @@ class App extends Component {
             }
           },
           path: '/profile'
+        },
+        {
+          render: props => {
+            if (UserService.isAuthenticated()) {
+              return (
+                <ExternalProfile
+                  externalUserId={props.history.location.state.externalUserId}
+                />
+              );
+            } else {
+              return <Redirect to={'/home'} />;
+            }
+          },
+          path: '/externalProfile/'
         }
       ]
     };
