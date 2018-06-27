@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-import NewUploadModal from './upload-img-modal';
-import NewEditModal from './edit-profile-modal';
-import NewChangePwModal from './change-password-modal';
-import UserService from '../../services/user-service';
+import UserService from '../../../services/user-service';
 
-import './profile.scss';
+import '../profile.scss';
 
-class UserDetailComponent extends Component {
+class ExternalUserDetailComponent extends Component {
   constructor(props) {
     super(props);
-    this.getProfile();
+    this.getExternalProfile(props.externalUserId);
     this.state = {
       image: ''
     };
   }
 
-  componentDidMount = () => {
-    UserService.registerListener(
-      'userPictureChanged',
-      this.getProfile.bind(this)
-    );
-    UserService.registerListener('userDataChanged', this.getProfile.bind(this));
-  };
+  componentWillReceiveProps(nextProps) {
+    this.getExternalProfile(nextProps.externalUserId);
+  }
 
-  getProfile() {
-    UserService.getFullUser()
+  getExternalProfile(externalUserId) {
+    UserService.getOtherUser(externalUserId)
       .then(result => {
         this.setState({
           lastname: result.lastname,
@@ -35,9 +28,10 @@ class UserDetailComponent extends Component {
           role: result.roles[0],
           image: result.image
         });
+        this.render();
       })
       .catch(e => {
-        this.setState({ errorMessage: 'Username or password is wrong!' });
+        this.setState({ errorMessage: 'Other was not found User!' });
         this.setState({ error: e });
       });
   }
@@ -77,9 +71,6 @@ class UserDetailComponent extends Component {
               src={this.state.image}
               alt="Profile"
             />
-            <div className="p-profile-uploadButton">
-              <NewUploadModal />
-            </div>
           </div>
           <div className="c-profile-content-wrapper">
             <div className="c-userDetails-content">
@@ -107,20 +98,8 @@ class UserDetailComponent extends Component {
                   </tr>
                 </tbody>
               </table>
-
-              {/* <h3> # created Announcements: {this.state.numberAnnouncements}</h3>
-                <h3> # created Tasklists: {this.state.numberTasklistsAuthor}</h3>
-                <h3> # atended Tasklists: {this.state.numberTasklistsMember}</h3>
-                <h3> # assigned Tasks: {this.state.numberAssignedTasks}</h3> */}
             </div>
             <br />
-
-            <div className="p-profile-editButton">
-              <NewEditModal />
-            </div>
-            <div className="p-profile-changePwButton">
-              <NewChangePwModal />
-            </div>
           </div>
         </Paper>
       </div>
@@ -128,4 +107,4 @@ class UserDetailComponent extends Component {
   }
 }
 
-export default UserDetailComponent;
+export default ExternalUserDetailComponent;
