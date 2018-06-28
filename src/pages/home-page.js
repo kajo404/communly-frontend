@@ -3,10 +3,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import './home-page.scss';
 import logo from './../assets/logo.png';
-import eric from './../assets/eric.png';
-import yasna from './../assets/yasna.png';
-import lara from './../assets/lara.jpeg';
-import jonas from './../assets/jonas.png';
 
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
@@ -464,24 +460,40 @@ class HomePage extends React.Component {
             <h2 className="c-team-headline"> Our Team </h2>
             <div className="c-team-members">
               <div className="c-team-member">
-                <Avatar src={eric} size={200} className="c-team-member-photo" />
+                <Avatar
+                  src={
+                    'https://s3.eu-central-1.amazonaws.com/communly-images/eric.png'
+                  }
+                  size={200}
+                  className="c-team-member-photo"
+                />
                 Eric Luyken
               </div>
               <div className="c-team-member">
                 <Avatar
-                  src={yasna}
+                  src={
+                    'https://s3.eu-central-1.amazonaws.com/communly-images/yasna.png'
+                  }
                   size={200}
                   className="c-team-member-photo"
                 />
                 Yasna Mindilikova
               </div>
               <div className="c-team-member">
-                <Avatar src={lara} size={200} className="c-team-member-photo" />
+                <Avatar
+                  src={
+                    'https://s3.eu-central-1.amazonaws.com/communly-images/lara.png'
+                  }
+                  size={200}
+                  className="c-team-member-photo"
+                />
                 Lara Marie Reimer
               </div>
               <div className="c-team-member">
                 <Avatar
-                  src={jonas}
+                  src={
+                    'https://s3.eu-central-1.amazonaws.com/communly-images/jonas.png'
+                  }
                   size={200}
                   className="c-team-member-photo"
                 />
