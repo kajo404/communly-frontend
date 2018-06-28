@@ -241,7 +241,11 @@ class PageLayout extends React.Component {
                 initiallyOpen={true}
                 primaryTogglesNestedList={true}
                 nestedItems={this.state.users.map((user, key) => (
-                  <ListItem innerDivStyle={memberListItemStyles} key={key}>
+                  <ListItem
+                    innerDivStyle={memberListItemStyles}
+                    key={key}
+                    disabled={true}
+                  >
                     <div className="c-memberlist__item">
                       <Avatar
                         style={{ marginRight: '16px' }}
