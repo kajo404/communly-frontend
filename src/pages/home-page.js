@@ -275,8 +275,8 @@ class HomePage extends React.Component {
             <div className="p-registration__form">
               <div className="dark-form-text">
                 {' '}
-                <h4 className="c-bold-text">
-                  Register now - it's <span className="uppercase">free</span>!
+                <h4>
+                  Register now - it's <span className="c-bold-text">free</span>!
                 </h4>
               </div>
 

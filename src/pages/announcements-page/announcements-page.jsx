@@ -18,7 +18,8 @@ const dividerStyles = {
   backgroundColor: '#314f81',
   height: 2,
   width: '100%',
-  margin: 30
+  marginTop: '30px',
+  marginBottom: '30px'
 };
 
 class Announcements extends React.Component {
