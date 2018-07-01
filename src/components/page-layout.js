@@ -42,7 +42,7 @@ const memberListItemStyles = {
 };
 
 const nestedListStyle = {
-  height: 'calc(100vh - 350px)',
+  height: 'calc(100vh - 320px)',
   overflowY: 'auto'
 };
 class PageLayout extends React.Component {
