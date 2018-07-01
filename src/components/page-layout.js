@@ -40,6 +40,11 @@ const memberListItemStyles = {
   margin: 0,
   padding: 0
 };
+
+const nestedListStyle = {
+  height: 'calc(100vh - 350px)',
+  overflowY: 'auto'
+};
 class PageLayout extends React.Component {
   _mounted = false;
   constructor(props) {
@@ -240,6 +245,7 @@ class PageLayout extends React.Component {
                 primaryText="Members"
                 initiallyOpen={true}
                 primaryTogglesNestedList={true}
+                nestedListStyle={nestedListStyle}
                 nestedItems={this.state.users.map((user, key) => (
                   <ListItem
                     innerDivStyle={memberListItemStyles}
