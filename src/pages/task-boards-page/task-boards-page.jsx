@@ -89,7 +89,6 @@ class TaskBoardPage extends Component {
 
     TaskBoardService.addMembers(this.state.currentBoardOpening, members)
       .then(response => {
-        //TODO backend call for getting only one board again
         this.updateBoards();
         this.handleAddMembersClose();
       })

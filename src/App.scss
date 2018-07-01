@@ -8,3 +8,38 @@ input:required {
   box-shadow: none;
   outline: none;
 }
+
+// global scrollbar styles
+::-webkit-scrollbar {
+  width: 4px;
+  height: 2px;
+ }
+ ::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+ }
+ ::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+ }
+ ::-webkit-scrollbar-thumb:hover {
+  background: #314f81;
+ }
+ ::-webkit-scrollbar-thumb:active {
+  background: #314f81;
+ }
+ ::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+ }
+ ::-webkit-scrollbar-track:hover {
+  background: #e0e0e0;
+ }
+ ::-webkit-scrollbar-track:active {
+  background: #e0e0e0;
+ }
+ ::-webkit-scrollbar-corner {
+  background: transparent;
+ }
