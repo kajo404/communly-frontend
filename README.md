@@ -1,9 +1,7 @@
-# Communly
+## Communly
 This is the frontend part of the project communly.
 The boiler plate of this project was generated with [create-react-app](https://github.com/facebook/create-react-app).
 It uses [material-ui](https://v0.material-ui.com/) v0 as a component library.
-
-## Start the project
 
 ### Prerequisites
 This project requirs npm as package manager, so make sure to have npm installed.
