@@ -1,5 +1,7 @@
 ## Communly
-This is the frontend part of the project communly.
+This is the frontend part of the project communly, created in collaboration with [@EricssonX](https://github.com/EricssonX),[@laramarie](https://github.com/laramarie) and [@yasna13](https://github.com/yasna13).
+
+
 The boiler plate of this project was generated with [create-react-app](https://github.com/facebook/create-react-app).
 It uses [material-ui](https://v0.material-ui.com/) v0 as a component library.
 
